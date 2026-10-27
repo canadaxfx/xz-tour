@@ -272,7 +272,7 @@
 
   <div class="grid">
     <section class="player" aria-live="polite">
-      <div class="now" id="now"><span class="num" id="num"></span><span class="title" id="title"></span><span class="tag" id="tag"></span><span class="caret" aria-hidden="true">歌单 ▾</span></div>
+      <div class="now" id="now"><span class="num" id="num"></span><span class="title" id="title"></span><span class="tag" id="tag"></span><span class="caret" aria-hidden="true">选歌 ▾</span></div>
       <div class="stage" id="stage"></div>
       <div class="clips" id="clips" role="group" aria-label="机位 Clips"></div>
       <p class="credit" id="credit"></p>
@@ -399,7 +399,7 @@
     const lab = el("span", "lab");
     if (c.top) lab.append(el("span", "tag-top", "推荐"));
     lab.append(el("b", null, `机位 ${clipIdx + 1}/${n}`), ` · ${c.by} `, el("small", null, [desc(c), fmtDur(c.duration)].filter(Boolean).join(" · ")));
-    cur.append(lab, el("span", "caret", `切换 ${n} 个 ▾`));
+    cur.append(lab, el("span", "caret", `换机位 ${n} 个 ▾`));
     const list = el("ol", "vlist"); list.hidden = true; list.setAttribute("role", "listbox");
     song.clips.forEach((k, j) => {
       const b = el("button"); b.setAttribute("aria-current", j === clipIdx);
