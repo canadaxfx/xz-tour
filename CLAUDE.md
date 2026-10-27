@@ -1,10 +1,14 @@
-# XZ Tour Videos · 出口·我们 · 现场视频 (prototype)
+# XZ Tour Videos · 出口·我们 · 现场视频
 
 Static page that plays fan-shot videos of Xiao Zhan's 「出口·我们」 tour in setlist order: pick a show, then
 Prev / Next through the songs, with a 机位 (camera) switch when a song has several clips. Videos are only
 **embedded or linked**, never re-hosted (they belong to the people who filmed them).
 
-- **Status (2026-10-25):** local prototype only. No git repo, no GitHub, no Cloudflare project, no GA stream yet.
+- **Live (2026-10-27):** https://xz-tour.pages.dev/ — public repo `canadaxfx/xz-tour` → Cloudflare Pages project `xz-tour`
+  (connected to Git: every push to `main` deploys in ~30 s). No GA stream yet (add one later: head snippet in `_shared`).
+- **Publishing:** the admin only edits the local files. To publish, commit and push this folder (push with autosync's
+  token as a one-off `http.extraheader`, never stored). `_redirects` keeps `CLAUDE.md`, `tools/`, `run_admin.*`,
+  `.gitignore` off the site; `_backup/` and `*.tmp` are git-ignored.
 - **Preview:** `.claude/launch.json` → `xz-tour-videos` (`python -m http.server 8888`), or the admin's `/site/`.
 
 ## Files
