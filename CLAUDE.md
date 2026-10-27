@@ -5,7 +5,7 @@ Prev / Next through the songs, with a 机位 (camera) switch when a song has sev
 **embedded or linked**, never re-hosted (they belong to the people who filmed them).
 
 - **Live (2026-10-27):** https://xz-tour.pages.dev/ — public repo `canadaxfx/xz-tour` → Cloudflare Pages project `xz-tour`
-  (connected to Git: every push to `main` deploys in ~30 s). No GA stream yet (add one later: head snippet in `_shared`).
+  (connected to Git: every push to `main` deploys in ~30 s). Google Analytics GA4 `G-D462LSL414` (added 2026-10-27).
 - **Publishing:** the admin's **发布 Publish (N)** button (red when data is waiting): `/api/publish` commits only the
   changed files under `data/` ("Publish from admin: …") and pushes with autosync's `github_token` as a one-off
   `http.extraheader` (never stored); it refuses if origin/main is ahead. Then the page polls `/api/publish/live`
