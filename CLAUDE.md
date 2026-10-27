@@ -6,8 +6,11 @@ Prev / Next through the songs, with a 机位 (camera) switch when a song has sev
 
 - **Live (2026-10-27):** https://xz-tour.pages.dev/ — public repo `canadaxfx/xz-tour` → Cloudflare Pages project `xz-tour`
   (connected to Git: every push to `main` deploys in ~30 s). No GA stream yet (add one later: head snippet in `_shared`).
-- **Publishing:** the admin only edits the local files. To publish, commit and push this folder (push with autosync's
-  token as a one-off `http.extraheader`, never stored). `_redirects` keeps `CLAUDE.md`, `tools/`, `run_admin.*`,
+- **Publishing:** the admin's **发布 Publish (N)** button (red when data is waiting): `/api/publish` commits only the
+  changed files under `data/` ("Publish from admin: …") and pushes with autosync's `github_token` as a one-off
+  `http.extraheader` (never stored); it refuses if origin/main is ahead. Then the page polls `/api/publish/live`
+  (compares the live JSON with the local file) and says 已上线 when Cloudflare serves it (~30–60 s). Code changes
+  (`index.html`, `tools/`, …) are NOT published by the button — commit and push those by hand. `_redirects` keeps `CLAUDE.md`, `tools/`, `run_admin.*`,
   `.gitignore` off the site; `_backup/` and `*.tmp` are git-ignored.
 - **Preview:** `.claude/launch.json` → `xz-tour-videos` (`python -m http.server 8888`), or the admin's `/site/`.
 

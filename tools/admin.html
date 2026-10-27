@@ -69,6 +69,7 @@
   .song .n { font-family: var(--mono); color: var(--dim); width: 24px; text-align: right; flex: none; }
   .song.combo .n, .song.special .n { width: auto; min-width: 24px; }
   header button[aria-pressed="true"] { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+  #publishBtn.due { background: var(--red); color: var(--red-ink); border-color: var(--red); font-weight: 700; }
   .form2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 10px; }
   .form2 label, .infoform label { display: grid; gap: 3px; font-size: 12px; color: var(--dim); }
   .form2 .wide { grid-column: 1 / -1; }
@@ -119,6 +120,7 @@
     <a id="siteLink" target="_blank" rel="noopener">打开网站 Open site ↗</a>
     <button id="newStopBtn" title="新增一站：复制已有歌单或粘贴歌单文字 · Add a tour stop">＋新增一站</button>
     <button id="editBtn" aria-pressed="false" title="编辑歌单：改歌名、原唱、顺序，插入或删除歌曲 · Edit the setlist">编辑歌单</button>
+    <button id="publishBtn" disabled title="把改动发布到网站 · Publish to xz-tour.pages.dev">发布 Publish</button>
     <button id="restart" title="重启后台，让改过的代码生效 · Restart the server to load code changes">重启 Restart</button>
   </header>
 
@@ -203,7 +205,9 @@
   async function api(path, body) {
     const r = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
     if (!r.ok) throw new Error(`${r.status} ${await r.text()}`.slice(0, 300));
-    return r.json();
+    const j = await r.json();
+    if (body && !/^\/api\/(publish|resolve|setlist\/parse|restart)/.test(path)) refreshPublish();   // a save: more to publish
+    return j;
   }
   function status(msg, kind = "") { const s = $("status"); s.textContent = msg; s.className = "status " + kind; }
 
@@ -532,6 +536,41 @@ Delete this talk?`)) return;
     status("重启没成功：请双击 run_admin.vbs · Restart failed, run run_admin.vbs", "err");
   };
 
+  // ------------------------------------------------------------ 发布 (publish: commit + push the data → Cloudflare)
+  let pendingData = [];
+  async function refreshPublish() {
+    try {
+      const r = await (await fetch("/api/publish/status")).json();
+      const b = $("publishBtn");
+      if (!r.ok) { b.disabled = true; b.textContent = "发布 ⚠"; b.title = r.error; return; }
+      pendingData = r.data;
+      b.disabled = !r.data.length;
+      b.classList.toggle("due", r.data.length > 0);
+      b.textContent = r.data.length ? `发布 Publish (${r.data.length})` : "已发布 · Up to date";
+      b.title = r.data.length ? "待发布 · waiting: " + r.data.join(", ") : "网站已是最新 · nothing to publish";
+    } catch (e) { /* server restarting */ }
+  }
+
+  $("publishBtn").onclick = async () => {
+    if (!pendingData.length) return;
+    if (!confirm(`把这些改动发布到 xz-tour.pages.dev？\n\n${pendingData.join("\n")}\n\n约 30 秒后网站更新。Publish now?`)) return;
+    const b = $("publishBtn"); b.disabled = true; b.textContent = "发布中…";
+    try {
+      const r = await api("/api/publish", {});
+      if (!r.ok) { status("发布失败 · " + r.error, "err"); return refreshPublish(); }
+      if (!r.published.length) { status(r.message, "ok"); return refreshPublish(); }
+      const extra = r.other.length ? `（另有 ${r.other.length} 个程序文件有改动，没有发布）` : "";
+      status(`已推送（${r.commit}），网站约 30 秒后更新…${extra}`, "ok");
+      refreshPublish();
+      for (let i = 0; i < 18; i++) {                  // check the live site for up to ~3 minutes
+        await new Promise(res => setTimeout(res, 10000));
+        const live = await api("/api/publish/live", { files: r.published });
+        if (live.live) { status(`已上线 ✓ xz-tour.pages.dev 已更新（${r.commit}）· Live`, "ok"); return; }
+      }
+      status(`已推送（${r.commit}），但 3 分钟内还没在网站上看到新内容。稍后刷新网站看看，或看 Cloudflare 的部署记录。`, "err");
+    } catch (e) { status("发布失败 · " + e.message, "err"); refreshPublish(); }
+  };
+
   // ------------------------------------------------------------ 编辑歌单 (edit the setlist)
   let editing = false;
   $("editBtn").onclick = () => {
@@ -664,6 +703,7 @@ Delete this talk?`)) return;
     $("show").value = first.id;
     show = await api("/api/show/" + first.id);
     renderSetlist();
+    refreshPublish();
     $("url").focus();
   })().catch(e => status("加载失败 · " + e.message, "err"));
 })();

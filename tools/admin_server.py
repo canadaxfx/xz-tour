@@ -984,6 +984,96 @@ def api_setlist():
     return jsonify(ok=True, show=show, renamed={k: v for k, v in mapping.items() if k != v})
 
 
+# ---------------------------------------------------------------- publish (git commit + push → Cloudflare Pages)
+
+GITHUB_CONFIG = Path(r"C:\AI Tools\xz-autosync\config.json")   # autosync's GitHub token (main PC); never stored in git
+LIVE_SITE = "https://xz-tour.pages.dev"
+PUBLISH_PATHS = ["data"]                         # what the admin edits; other files are code, published by hand
+
+
+def git(*args, check=True, extra=()):
+    exe = shutil.which("git")
+    if not exe:
+        raise RuntimeError("找不到 git · git not found")
+    r = subprocess.run([exe, *extra, *args], cwd=str(ROOT), capture_output=True, text=True, encoding="utf-8",
+                       timeout=120, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    if check and r.returncode != 0:
+        raise RuntimeError((r.stderr or r.stdout).strip()[-400:])
+    return r.stdout
+
+
+def pending_changes():
+    """(data files waiting to be published, other changed files that the button leaves alone)"""
+    rows = [l for l in git("status", "--porcelain", "--untracked-files=all").splitlines() if l.strip()]
+    paths = [l[3:].strip().strip('"') for l in rows]
+    data = [p for p in paths if any(p == d or p.startswith(d + "/") for d in PUBLISH_PATHS) and not p.endswith(".tmp")]
+    return data, [p for p in paths if p not in data]
+
+
+def auth_header():
+    tok = json.loads(GITHUB_CONFIG.read_text(encoding="utf-8")).get("github_token", "")
+    if not tok:
+        raise RuntimeError("autosync 的 config.json 里没有 github_token")
+    import base64
+    return "Authorization: Basic " + base64.b64encode(f"x-access-token:{tok}".encode()).decode()
+
+
+@app.get("/api/publish/status")
+def api_publish_status():
+    try:
+        data, other = pending_changes()
+        return jsonify(ok=True, data=data, other=other)
+    except (RuntimeError, subprocess.SubprocessError) as e:
+        return jsonify(ok=False, error=str(e))
+
+
+@app.post("/api/publish")
+def api_publish():
+    """Commit the changed data files and push; Cloudflare Pages deploys the push in ~30 s."""
+    try:
+        data, other = pending_changes()
+        if not data:
+            return jsonify(ok=True, published=[], other=other, message="没有要发布的改动 · nothing to publish")
+        header = auth_header()
+        git("fetch", "-q", "origin", extra=("-c", f"http.extraheader={header}"))
+        behind = int(git("rev-list", "--count", "HEAD..origin/main").strip() or 0)
+        if behind:
+            return jsonify(ok=False, error=f"GitHub 上有 {behind} 个本地没有的提交，先同步再发布 · origin/main is ahead, pull first")
+        git("add", "--", *data)
+        names = sorted({Path(p).stem for p in data})
+        git("commit", "-q", "-m", f"Publish from admin: {', '.join(names)}\n\nUpdated: {', '.join(data)}")
+        git("push", "-q", "origin", "main", extra=("-c", f"http.extraheader={header}"))
+        sha = git("rev-parse", "--short", "HEAD").strip()
+        return jsonify(ok=True, published=data, other=other, commit=sha)
+    except (RuntimeError, subprocess.SubprocessError, OSError, ValueError) as e:
+        return jsonify(ok=False, error=str(e).replace(auth_header_mask(), "***"))
+
+
+def auth_header_mask():
+    try:
+        return auth_header().split(" ", 2)[2]
+    except Exception:
+        return "\0"
+
+
+@app.post("/api/publish/live")
+def api_publish_live():
+    """Is the live site serving our published data files yet? (compares the parsed JSON, so line endings don't matter)"""
+    files = request.get_json(force=True).get("files") or []
+    waiting = []
+    for f in files:
+        if not f.endswith(".json"):
+            continue
+        try:
+            live = requests.get(f"{LIVE_SITE}/{f}", params={"t": int(time.time())}, headers={"User-Agent": UA,
+                                "Cache-Control": "no-cache"}, timeout=15).json()
+            if live != json.loads((ROOT / f).read_text(encoding="utf-8")):
+                waiting.append(f)
+        except (requests.RequestException, ValueError):
+            waiting.append(f)
+    return jsonify(ok=True, live=not waiting, waiting=waiting)
+
+
 @app.post("/api/restart")
 def api_restart():
     """Start a fresh copy of this server (so code changes take effect) and exit this one.
