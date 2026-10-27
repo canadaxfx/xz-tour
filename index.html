@@ -211,7 +211,9 @@
   @media (max-width: 919px) {
     .now { cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 12px; -webkit-tap-highlight-color: transparent; }
     .now .tag { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .now .caret { display: inline; margin-left: auto; flex: none; color: var(--dim); font-size: 13px; white-space: nowrap; }
+    .now .caret { display: inline; margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap;
+      align-self: center; border: 1px solid var(--red); border-radius: 999px; padding: 2px 10px; background: rgba(216, 16, 42, .18); }
+    .now[aria-expanded="true"] .caret { background: var(--red); color: var(--red-ink); }
     .now[aria-expanded="true"] { border-color: var(--red); }
     .setlist { display: none; }
     .setlist.open { display: block; position: fixed; left: 16px; right: 16px; z-index: 20; overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 18px 44px rgba(0, 0, 0, .65); }
