@@ -47,6 +47,12 @@ Stage photos with gold/yellow light (STU-22, 29, 31, 36) were deliberately not u
 The admin page (`tools/admin.html`) uses the same tokens, plus `--ok #FFB3B9` (rose: saved), `--warn #C3A6FF` (lilac:
 missing length, no video, hidden clip, date warnings — yellow before) and `--bad #FF5A68` (errors).
 
+**Douyin wide player = 16:9 video + a 35 px control bar (measured 2026-10-27).** So a plain 16:9 box always showed
+inner scrollbars: desktop now sets the box to `width × 9/16 + 36` (+ the box border); phone landscape uses the player's
+natural 800 × 486 scaled to fit the screen (centred, a bit narrower than the column). Checked inside the frame at
+1280/1600/930/375 px and 740×360 / 844×390: no overflow, controls fully visible. (An older note below said "frame
+height + 35 whatever the size" — that was a misreading of the same thing.)
+
 **Douyin player size (2026-10-25):** the official embed picks its layout from the frame width. From **768 px** it's a
 wide player that fills the frame, so on desktop (player column ≈790 px) it gets the normal 16:9 box, unscaled. Below
 768 px it uses a fixed phone layout (672 px player + 48 px bar = 720 px, whatever the frame height; ~750 px is a
