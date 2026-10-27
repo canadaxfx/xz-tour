@@ -141,7 +141,7 @@
   .stage.dyfit iframe { inset: auto; top: 0; left: 0; width: 360px; height: 720px; transform-origin: 0 0; }
   /* Phone held sideways (.dyland): full column width, as tall as the screen; fitDouyin() sets the box height and a
      frame of at least 800px wide (so Douyin picks its wide layout) scaled down to the column. */
-  .stage.dyland { aspect-ratio: auto; width: 100%; }
+  .stage.dyland { aspect-ratio: auto; width: 100%; margin: 0 auto; }
   .stage.dyland iframe { inset: auto; top: 0; left: 0; transform-origin: 0 0; }
   .card {
     position: absolute; inset: 0; display: flex; flex-direction: column;
@@ -497,9 +497,11 @@
     const mode = douyinMode(stage), col = stage.parentElement.clientWidth;
     stage.classList.toggle("dyfit", mode === "fit");
     stage.classList.toggle("dyland", mode === "land");
-    stage.style.height = "";
+    stage.style.height = stage.style.width = "";
     if (!f) return;
     f.style.width = f.style.height = f.style.transform = "";
+    // Douyin's wide player is a 16:9 video plus a 35 px control bar below it, so a plain 16:9 box shows scrollbars.
+    const wideH = w => Math.round(w * 9 / 16) + 36;
     if (mode === "fit") {
       // As tall as the screen allows below the box's top edge (page scrolled to the top), within Douyin's
       // natural 720px and the column width (the box is 1:2); never below 60% of the screen.
@@ -508,9 +510,14 @@
       stage.style.height = Math.floor(h) + "px";
       f.style.transform = `scale(${stage.clientHeight / 720})`;
     } else if (mode === "land") {
-      const h = innerHeight - 16, s = Math.min(1, col / 800);
-      stage.style.height = h + "px";
-      Object.assign(f.style, { width: col / s + "px", height: h / s + "px", transform: `scale(${s})` });
+      // Phone held sideways: the wide player at its natural 800 × (450 + 36), scaled to fit the screen height
+      // (and the column width), centred.
+      const F = 800, s = Math.min(1, col / F, (innerHeight - 16) / wideH(F));
+      Object.assign(stage.style, { width: Math.floor(F * s) + "px", height: Math.floor(wideH(F) * s) + "px" });
+      Object.assign(f.style, { width: F + "px", height: wideH(F) + "px", transform: `scale(${s})` });
+    } else if (mode === "wide") {
+      const border = stage.offsetWidth - stage.clientWidth;      // the box's border sits around the frame
+      stage.style.height = wideH(stage.clientWidth) + border + "px";   // desktop: full width, tall enough for the controls
     }
     // Douyin picks its layout when it loads, so reload the player if it now needs the other one (e.g. on rotation).
     const layout = mode === "fit" ? "phone" : "wide";
