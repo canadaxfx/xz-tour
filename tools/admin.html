@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>添加视频 · XZ Tour 管理</title>
+<style>
+  :root {
+    /* Same colours as the site (tour red · white · warm black). No green, no yellow. */
+    --bg: #0B0708; --panel: #170D0F; --line: #33191D; --text: #F3ECEC; --dim: #A8979A; --field: #120A0C;
+    --red: #D8102A; --red-ink: #FFFFFF;
+    --ok: #FFB3B9;    /* rose: saved / done */
+    --warn: #C3A6FF;  /* lilac: needs a look (missing length, no video, hidden, date warnings) */
+    --bad: #FF5A68;   /* light red: errors */
+    --link: #FFB3B9;
+    --body: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    --mono: ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 var(--body); }
+  a { color: var(--link); }
+  .en { color: var(--dim); font-size: .85em; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 16px; }
+  header #restart { margin-left: auto; }
+  header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  h1 { font-size: 20px; margin: 0; }
+  select, input, button { font: inherit; color: var(--text); }
+  select, input[type=text] { background: var(--field); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; min-width: 0; }
+  button { cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; }
+  button.primary { background: var(--red); color: var(--red-ink); border: 0; font-weight: 700; }
+  button:disabled { opacity: .4; cursor: default; }
+  .grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 1000px) { .grid { grid-template-columns: minmax(0, 1fr) 380px; align-items: start; } .side { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; } }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+  .box h2 { margin: 0 0 10px; font-size: 15px; }
+  .paste { display: flex; gap: 8px; }
+  .paste input { flex: 1; }
+  .hint { color: var(--dim); font-size: 12px; margin: 8px 0 0; }
+  .status { margin: 10px 0 0; min-height: 1.5em; }
+  .status.err { color: var(--bad); } .status.ok { color: var(--ok); }
+
+  .meta { display: grid; grid-template-columns: 70px 1fr; gap: 2px 10px; font-size: 13px; margin-bottom: 10px; }
+  .meta dt { color: var(--dim); } .meta dd { margin: 0; overflow-wrap: anywhere; }
+  .warn { color: var(--warn); font-size: 13px; margin: 4px 0; }
+  .preview { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin: 10px 0; }
+  .stage { position: relative; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; max-width: 560px; }
+  .stage.vertical { aspect-ratio: 9/16; max-width: 300px; }
+  .stage video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
+  .stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .stage.flat { aspect-ratio: auto; background: none; }
+  .stage .none { color: var(--dim); font-size: 13px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: var(--dim); font-weight: 600; padding: 4px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  td.lbl { max-width: 260px; }
+  td.lbl .t { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  td.lbl small { color: var(--dim); font-family: var(--mono); }
+  td input[type=text] { width: 100%; }
+  td select { width: 100%; max-width: 190px; }
+  tr.done td { opacity: .45; }
+  tr.focus td { background: #2A1218; }
+  .badge { font-size: 11px; color: var(--ok); white-space: nowrap; }
+  .tbl-wrap { overflow-x: auto; }
+  .save { display: flex; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+
+  .song { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .song .h { display: flex; gap: 8px; align-items: baseline; }
+  .song .n { font-family: var(--mono); color: var(--dim); width: 24px; text-align: right; flex: none; }
+  .song.combo .n, .song.special .n { width: auto; min-width: 24px; }
+  header button[aria-pressed="true"] { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+  .form2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 10px; }
+  .form2 label, .infoform label { display: grid; gap: 3px; font-size: 12px; color: var(--dim); }
+  .form2 .wide { grid-column: 1 / -1; }
+  .srcpick { display: grid; gap: 6px; margin: 6px 0 10px; font-size: 13px; }
+  #nsText { width: 100%; background: var(--field); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: inherit; }
+  .nsprev { margin: 8px 0 0; padding-left: 0; list-style: none; max-height: 320px; overflow-y: auto; font-size: 13px; }
+  .nsprev li { padding: 2px 0; } .nsprev .talk { color: var(--dim); padding-left: 22px; } .nsprev small { color: var(--dim); margin-left: 6px; }
+  #setlist.editing .clip, #setlist.editing .edit { display: none; }
+  .infoform { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; padding: 8px; margin-bottom: 8px; border: 1px dashed var(--line); border-radius: 8px; }
+  .infoform .wide, .infoform .bar { grid-column: 1 / -1; }
+  .infoform input { width: 100%; }
+  .sedit { margin: 6px 0 6px 32px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--field); display: grid; gap: 6px; font-size: 12px; }
+  .sedit label { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 6px; align-items: center; color: var(--dim); }
+  .sedit label.chk { display: flex; gap: 6px; }
+  .sedit input[type=text], .sedit select { width: 100%; padding: 4px 6px; }
+  .song .cnt { margin-left: auto; color: var(--dim); font-size: 12px; }
+  .song.empty .t { color: var(--warn); }
+  .song.talk .h .t { color: var(--dim); font-size: 13px; }
+  .h .hbtn { padding: 0 6px; font-size: 11px; flex: none; }
+  .song.flash { animation: flash 1.6s; }
+  @keyframes flash { from { background: #5A1622; } to { background: transparent; } }
+  .clip { display: flex; gap: 6px; align-items: center; font-size: 12px; margin: 3px 0 0 32px; color: var(--dim); }
+  .clip .pl { font-family: var(--mono); color: var(--text); background: var(--field); border-radius: 4px; padding: 0 5px; flex: none; }
+  .clip .w { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clip button { padding: 0 6px; font-size: 12px; }
+  .clip.main .pl { box-shadow: inset 0 0 0 1px var(--red); }
+  .clip .len { font-family: var(--mono); font-size: 11px; color: var(--dim); flex: none; }
+  .clip .len.none { color: var(--warn); }
+  .sethead { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .sethead button { padding: 2px 10px; font-size: 12px; flex: none; }
+  .clip.off .pl, .clip.off .w { opacity: .45; text-decoration: line-through; }
+  .clip button.on { border-color: var(--warn); color: var(--warn); }
+  .clip button.pin { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+  .clip a.muted { opacity: .4; }
+  .edit { margin: 6px 0 6px 32px; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--field); display: grid; gap: 6px; font-size: 12px; }
+  .edit label { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 6px; align-items: center; color: var(--dim); }
+  .edit label.chk { display: flex; gap: 6px; }
+  .edit input[type=text], .edit select { width: 100%; padding: 4px 6px; }
+  .edit .bar { display: flex; gap: 6px; }
+  .edit .bar button { padding: 3px 10px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>添加视频 <span class="en">Add a clip</span></h1>
+    <select id="show" aria-label="场次 Show"></select>
+    <a id="siteLink" target="_blank" rel="noopener">打开网站 Open site ↗</a>
+    <button id="newStopBtn" title="新增一站：复制已有歌单或粘贴歌单文字 · Add a tour stop">＋新增一站</button>
+    <button id="editBtn" aria-pressed="false" title="编辑歌单：改歌名、原唱、顺序，插入或删除歌曲 · Edit the setlist">编辑歌单</button>
+    <button id="restart" title="重启后台，让改过的代码生效 · Restart the server to load code changes">重启 Restart</button>
+  </header>
+
+  <div class="grid">
+    <main>
+      <section class="box" id="newStop" hidden>
+        <h2>新增一站 <span class="en">Add a tour stop</span></h2>
+        <div class="form2">
+          <label>城市 <input type="text" id="nsCity" placeholder="上海"></label>
+          <label>英文名 <input type="text" id="nsCityEn" placeholder="Shanghai（用于网址）"></label>
+          <label>日期 <input type="text" id="nsDates" placeholder="11.08 11.09（几场就写几个日期）"></label>
+          <label>场馆 <input type="text" id="nsVenue" placeholder="可不填"></label>
+          <label class="wide">歌单来源 <input type="text" id="nsSource" placeholder="歌单微博链接，可不填"></label>
+        </div>
+        <div class="srcpick">
+          <label><input type="radio" name="nsFrom" value="copy" checked> 复制歌单自 <select id="nsCopy"></select> <span class="hint">（歌曲、原唱、讲话；不带视频）</span></label>
+          <label><input type="radio" name="nsFrom" value="paste"> 粘贴歌单文字</label>
+        </div>
+        <div id="nsPasteBox" hidden>
+          <textarea id="nsText" rows="8" placeholder="把微博歌单整段粘贴进来，例如：&#10;01.《我们》 原唱：肖战&#10;04.《克卜勒》 原唱：孙燕姿&#10;……&#10;24.《最幸运的幸运》（安可）"></textarea>
+          <button type="button" id="nsParse">解析 Read</button>
+          <ol id="nsPreview" class="nsprev"></ol>
+        </div>
+        <div class="save">
+          <button class="primary" id="nsCreate">创建 Create</button>
+          <button type="button" id="nsCancel">取消</button>
+          <span class="hint" style="margin:0">创建后可以用「编辑歌单」修改。</span>
+        </div>
+      </section>
+
+      <section class="box">
+        <h2>1 · 粘贴链接 <span class="en">Paste a link</span></h2>
+        <form class="paste" id="pasteForm">
+          <input type="text" id="url" placeholder="B站 / 抖音 / 微博 / YouTube / R2 链接或整段分享文字" autocomplete="off">
+          <button class="primary" id="go">解析 Read</button>
+        </form>
+        <p class="hint">支持：bilibili.com/video/BV…、b23.tv、douyin.com/video/…、v.douyin.com、weibo.com/…、m.weibo.cn/detail/…、weibo.com/tv/show/1034:…、YouTube、R2 视频（assets.xz-studio-gallery.com/….mp4，在网站上直接播放）。可以直接粘贴 App 里复制的整段分享文字。<br><span class="en">The whole share text from an app works too.</span></p>
+        <p class="status" id="status"></p>
+      </section>
+
+      <section class="box" id="result" hidden>
+        <h2>2 · 确认并选歌 <span class="en">Check and pick the song</span></h2>
+        <dl class="meta" id="meta"></dl>
+        <div id="warnings"></div>
+        <div class="preview"><div class="stage" id="stage"></div></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th></th><th>视频 Clip</th><th>歌曲 Song</th><th>拍摄 Filmer</th><th>搬运 Via</th><th>备注 Note</th><th title="竖屏视频">竖 9:16</th><th></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="save">
+          <button class="primary" id="save">保存 Save</button>
+          <span class="hint" id="saveHint" style="margin:0"></span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="side box">
+      <div class="sethead"><h2 id="setTitle">歌单 Setlist</h2><button id="fillDur" title="查出还没有时长的视频的时长（B站、微博）· Look up missing lengths">补时长</button></div>
+      <div id="setlist"></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const PLAT = { bilibili: "B站", douyin: "抖音", weibo: "微博", youtube: "YouTube", r2: "R2" };
+  const fmtDur = s => { s = Math.round(s || 0); return s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}` : ""; };
+  // "3:49" / "1:02:05" / "229" → seconds; "" → 0 (removes it); anything else → null
+  function parseDur(v) {
+    v = (v || "").trim().replace("：", ":");
+    if (!v) return 0;
+    if (!/^\d+(:\d{1,2}){0,2}$/.test(v)) return null;
+    return v.split(":").reduce((a, x) => a * 60 + +x, 0);
+  }
+
+  let tour, show, res = null;
+
+  async function api(path, body) {
+    const r = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+    if (!r.ok) throw new Error(`${r.status} ${await r.text()}`.slice(0, 300));
+    return r.json();
+  }
+  function status(msg, kind = "") { const s = $("status"); s.textContent = msg; s.className = "status " + kind; }
+
+  // Same embed addresses as the site's index.html.
+  function embedUrl(c) {
+    switch (c.platform) {
+      case "bilibili": return `https://player.bilibili.com/player.html?isOutside=true&bvid=${c.bvid}&p=${c.p || 1}&autoplay=0&danmaku=0`;
+      case "douyin":   return `https://open.douyin.com/player/video?vid=${c.vid}&autoplay=0`;
+      case "youtube":  return `https://www.youtube-nocookie.com/embed/${c.id}` + (c.start ? `?start=${c.start}` : "");
+    }
+    return null;
+  }
+  // Same as the site: a city's merged shows ("dates": [...]) read "南京站 10.23 + 10.25".
+  const showTitle = s => s.dates ? `${s.city}站 ${s.label}` : `${s.city} ${s.date} ${s.label}`;
+  function songLabel(s) { return s.talk ? `　— ${s.title}（讲话）` : s.combo || s.num ? `${s.n} ${s.title}` : `${s.encore ? s.n : s.n.padStart(2, "0")} ${s.title}`; }
+
+  // ------------------------------------------------------------ setlist (right)
+  function renderSetlist(flashN = []) {
+    $("setTitle").textContent = `歌单 ${showTitle(show)}`;
+    $("siteLink").href = `/site/?show=${show.id}`;
+    const box = $("setlist"); box.replaceChildren();
+    box.classList.toggle("editing", editing);
+    if (editing) box.append(infoForm());
+    for (const s of show.songs) {
+      // Hidden clips stay in the file as backups; the site skips them, so "visible" decides what the site shows.
+      const visible = siteOrder(s.clips.filter(c => !c.hidden));   // in the site's order (pinned, 全景 longest, rest longest)
+      const nHidden = s.clips.length - visible.length;
+      // Talks and combined entries (E1+E2) are optional: no video is fine, so they're never flagged as missing.
+      const d = el("div", "song" + (s.talk ? " talk" : s.combo ? " combo" : visible.length ? "" : " empty") + (s.num ? " special" : "") + (flashN.includes(s.n) ? " flash" : ""));
+      d.dataset.n = s.n;
+      const h = el("div", "h");
+      const none = s.talk ? "讲话 · 视频可选" : s.combo ? "连唱 · 视频可选" : "网站上没有 · none shown";
+      h.append(el("span", "n", s.talk ? "—" : s.combo || s.num || s.encore ? s.n : s.n.padStart(2, "0")), el("span", "t", s.title),
+               el("span", "cnt", (visible.length ? `${visible.length} 个` : none) + (nHidden ? ` · ${nHidden} 藏` : "")));
+      const hb = (txt, title, fn) => { const b = el("button", "hbtn", txt); b.title = title; b.onclick = fn; return b; };
+      if (editing && !s.talk && !s.combo) {             // 编辑歌单: song details, order, insert, delete
+        const inCombo = show.songs.some(x => (x.combo || []).includes(s.n));
+        h.append(hb("✎", "修改歌名、原唱、备注、安可 Edit song", () => songEdit(d, s)),
+                 hb("↑", "上移 Move up", () => setlistOp({ op: "move", n: s.n, dir: -1 })),
+                 hb("↓", "下移 Move down", () => setlistOp({ op: "move", n: s.n, dir: 1 })),
+                 hb("＋上", "在上面插入一首 Insert above", () => insertSong(s, "before")),
+                 hb("＋下", "在下面插入一首 Insert below", () => insertSong(s, "after")));
+        const later = show.songs.slice(show.songs.indexOf(s) + 1).find(x => !x.talk && !x.combo);
+        if (later) h.append(hb("＋合并", `和下一首合成一条（一个视频包含两首）Combine with ${later.title}`, () => talkOp(s, "combo")));
+        if (!s.clips.length && !inCombo) h.append(hb("删", "删除这首歌（只能删没有视频的）Delete song", () => {
+          if (confirm(`删除「${s.title}」？后面的歌会重新编号。\nDelete this song? Later songs are renumbered.`)) setlistOp({ op: "delete", n: s.n });
+        }));
+      } else if (s.talk || s.combo) {
+        h.append(hb("改名", "修改标题 Rename", () => talkOp(s, "rename")));
+        if (!s.clips.length) h.append(hb("删", "删除这一条 Delete (only without videos)", () => talkOp(s, "delete")));
+      } else {
+        h.append(hb("＋讲话", "在这首歌后面加一段讲话 Add a talk after this song", () => talkOp(s, "add")));
+      }
+      d.append(h);
+      [...visible, ...s.clips.filter(c => c.hidden)].forEach(c => {   // listed as the site shows them, hidden ones last
+        const vi = visible.indexOf(c);                     // position on the site, -1 if hidden
+        const row = el("div", "clip" + (vi === 0 && visible.length > 1 ? " main" : "") + (c.hidden ? " off" : ""));
+        row.title = c.hidden ? "已隐藏：网站上不显示，留作备用 · hidden backup" : vi === 0 ? "第一个＝网站默认播放 · plays first on the site" : "";
+        if (c.top) row.classList.add("pinned");
+        row.append(el("span", "pl", PLAT[c.platform] || c.platform));
+        row.append(el("span", "w", [(c.hidden ? "【藏】" : "") + c.by, c.p ? "P" + c.p : "", c.note, c.vertical ? "竖屏" : "", c.via ? "via " + c.via : ""].filter(Boolean).join(" · ")));
+        const len = el("span", "len" + (c.duration ? "" : " none"), c.duration ? fmtDur(c.duration) : "?:??");
+        len.title = c.duration ? "视频时长 Length" : "没有时长：点「补时长」，抖音请在「改」里填 · no length yet";
+        row.append(len);
+        const btn = (txt, title, fn, off) => { const b = el("button", null, txt); b.title = title; b.disabled = !!off; b.onclick = fn; return b; };
+        // Order is automatic; 顶 pins a version to the top (shown as 推荐 on the site).
+        const top = btn("顶", c.top ? "取消置顶 Unpin" : "置顶：网站上排第一，显示「推荐」· Pin to the top", () => setTop(s, c, !c.top), c.hidden);
+        if (c.top) top.className = "pin";
+        const edit = btn("改", "修改 Edit", () => openEdit(d, row, s, c));
+        const hide = btn(c.hidden ? "显" : "藏", c.hidden ? "在网站上显示 Show on the site" : "隐藏，留作备用 Hide (keep as backup)", () => setHidden(s, c, !c.hidden));
+        if (c.hidden) hide.className = "on";
+        const view = el("a", null, "看 ↗");
+        view.href = `/site/?show=${show.id}&song=${encodeURIComponent(s.n)}` + (vi >= 0 ? `&clip=${vi + 1}` : ""); view.target = "_blank";
+        if (c.hidden) { view.title = "隐藏的视频在网站上看不到 · hidden clips aren't on the site"; view.classList.add("muted"); }
+        const del = btn("删", "删除这个视频 Delete", async () => {
+          if (!confirm(`删除「${s.title}」里 ${c.by} 的视频？\nDelete this clip?`)) return;
+          try { show = (await api("/api/delete", { show: show.id, n: s.n, clip: c })).show; renderSetlist([s.n]); if (res) renderRows(); status("已删除 · Deleted", "ok"); }
+          catch (e) { status("删除失败 · " + e.message, "err"); }
+        });
+        row.append(top, edit, hide, view, del);
+        d.append(row);
+      });
+      box.append(d);
+    }
+  }
+
+  // Keep the setlist panel where it was after a re-render (moving a clip shouldn't jump the list).
+  function keepScroll(fn) {
+    const side = document.querySelector(".side"), top = side.scrollTop, win = scrollY;
+    fn(); side.scrollTop = top; scrollTo(0, win);
+  }
+
+  async function talkOp(s, op) {
+    let title = "";
+    if (op === "add" || op === "rename") {
+      title = (prompt(op === "add" ? `在「${s.title}」后面加一段讲话，标题：
+Talk title (e.g. 谈下一个十年)` : "讲话标题 Talk title：", op === "rename" ? s.title : "") || "").trim();
+      if (!title) return;
+    } else if (op === "combo") {
+      const later = show.songs.slice(show.songs.indexOf(s) + 1).find(x => !x.talk && !x.combo);
+      title = (prompt(`把「${s.title}」和「${later.title}」合成一条（放在 ${later.n} 后面），标题：
+Combined entry title`, `${s.title} + ${later.title}`) || "").trim();
+      if (!title) return;
+    } else if (!confirm(`删除「${s.title}」？
+Delete this talk?`)) return;
+    try {
+      const r = await api("/api/talk", { show: show.id, op, title, ...(op === "add" ? { after: s.n } : op === "combo" ? { from: s.n } : { n: s.n }) });
+      show = r.show; keepScroll(() => renderSetlist(op === "add" || op === "combo" ? [] : [s.n])); if (res) renderRows();
+      status(op === "add" ? `已添加讲话「${title}」· Talk added` : op === "combo" ? `已添加「${title}」· Combined entry added`
+             : op === "rename" ? "已改名 · Renamed" : "已删除 · Deleted", "ok");
+    } catch (e) { status("操作失败 · " + e.message, "err"); }
+  }
+
+  async function setTop(s, c, top) {
+    try {
+      const r = await api("/api/update", { show: show.id, n: s.n, clip: c, changes: { top } });
+      show = r.show; keepScroll(() => renderSetlist([s.n]));
+      status(top ? `已置顶 ${c.by} · Pinned` : `已取消置顶 ${c.by} · Unpinned`, "ok");
+    } catch (e) { status("操作失败 · " + e.message, "err"); }
+  }
+
+  // Same order as the site (index.html siteOrder): 官摄 first, then pinned, then 全景, then the rest (longest first).
+  function siteOrder(clips) {
+    // 官摄 (official footage, note contains 官摄) always first, then pinned (顶), then 全景, then the rest;
+    // longest first within each group (pinned ones keep their admin order).
+    const rank = c => /官摄/.test(c.note || "") ? 0 : c.top ? 1 : /全景/.test(c.note || "") ? 2 : 3;
+    return clips.map((c, i) => [c, i])
+      .sort((a, b) => rank(a[0]) - rank(b[0]) || (rank(a[0]) === 1 ? 0 : (b[0].duration || -1) - (a[0].duration || -1)) || a[1] - b[1])
+      .map(x => x[0]);
+  }
+
+  async function setHidden(s, c, hidden) {
+    try {
+      const r = await api("/api/update", { show: show.id, n: s.n, clip: c, changes: { hidden } });
+      show = r.show; keepScroll(() => renderSetlist());
+      status(hidden ? `已隐藏 ${c.by}（留作备用）· Hidden` : `已恢复显示 ${c.by} · Shown again`, "ok");
+    } catch (e) { status("操作失败 · " + e.message, "err"); }
+  }
+
+  async function move(s, c, dir) {
+    try {
+      const r = await api("/api/move", { show: show.id, n: s.n, clip: c, dir });
+      show = r.show; keepScroll(() => renderSetlist());
+    } catch (e) { status("移动失败 · " + e.message, "err"); }
+  }
+
+  function openEdit(songDiv, row, s, c) {
+    songDiv.querySelector(".edit")?.remove();
+    const f = el("form", "edit");
+    const field = (label, input) => { const l = el("label"); l.append(el("span", null, label), input); f.append(l); return input; };
+    const txt = (v, ph) => { const x = el("input"); x.type = "text"; x.value = v || ""; x.placeholder = ph || ""; return x; };
+    const by = field("拍摄", txt(c.by, "必填 required"));
+    const via = field("搬运", txt(c.via));
+    const note = field("备注", txt(c.note, "全景 / 4K 直拍 …"));
+    const dur = field("时长", txt(c.duration ? fmtDur(c.duration) : "", "如 3:49"));
+    const src = c.platform === "r2" ? field("原帖", txt(c.source, "原视频的链接（微博等）")) : null;
+    const to = el("select");
+    show.songs.forEach(x => to.append(new Option(songLabel(x), x.n)));
+    to.value = s.n;
+    field("歌曲", to);
+    const vert = el("input"); vert.type = "checkbox"; vert.checked = !!c.vertical;
+    const vl = el("label", "chk"); vl.append(vert, " 竖屏 9:16"); f.append(vl);
+    const bar = el("div", "bar");
+    const save = el("button", "primary", "保存 Save"); save.type = "submit";
+    const cancel = el("button", null, "取消"); cancel.type = "button"; cancel.onclick = () => f.remove();
+    bar.append(save, cancel); f.append(bar);
+    f.onsubmit = async e => {
+      e.preventDefault();
+      if (!by.value.trim()) { by.focus(); return; }
+      const secs = parseDur(dur.value);
+      if (secs === null) { dur.focus(); status("时长格式：分:秒，如 3:49 · Length as m:ss", "err"); return; }
+      try {
+        const r = await api("/api/update", { show: show.id, n: s.n, clip: c, to: to.value,
+          changes: { by: by.value, via: via.value, note: note.value, vertical: vert.checked, duration: secs, ...(src ? { source: src.value } : {}) } });
+        show = r.show;
+        keepScroll(() => renderSetlist([...new Set([s.n, r.n])]));
+        if (res) renderRows();
+        status(r.n === s.n ? "已修改 · Updated" : `已移到 ${r.n} · Moved to song ${r.n}`, "ok");
+      } catch (err) { status("修改失败 · " + err.message, "err"); }
+    };
+    row.after(f);
+    by.focus();
+  }
+
+  // ------------------------------------------------------------ result (left)
+  function preview(item) {
+    const stage = $("stage"); stage.replaceChildren();
+    stage.classList.toggle("vertical", !!item?.vertical);
+    const src = item && embedUrl(item.clip);
+    const r2 = item?.clip.platform === "r2";
+    stage.classList.toggle("flat", !src && !r2);
+    if (r2) {                                        // our own file: a plain video player, as on the site
+      const v = el("video"); v.src = item.clip.url; v.controls = true; v.preload = "metadata"; v.playsInline = true;
+      stage.append(v);
+    } else if (src) {
+      const f = el("iframe"); f.src = src; f.allow = "fullscreen; encrypted-media"; f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin"; stage.append(f);
+    } else {
+      stage.append(el("div", "none", item?.clip.platform === "weibo" ? "微博视频不能嵌入，网站上会显示「在微博打开」卡片 · Weibo shows as a link card on the site" : "没有预览 · No preview"));
+    }
+  }
+
+  function renderMeta() {
+    const m = $("meta"); m.replaceChildren();
+    const add = (k, v) => { if (v) m.append(el("dt", null, k), el("dd", null, v)); };
+    add("平台", PLAT[res.platform]);
+    add("标题", res.title);
+    add("发布者", res.uploader);
+    add("发布时间", res.published && res.published + "（北京时间）");
+    add("时长", fmtDur(res.duration));
+    if (res.multi) add(res.platform === "bilibili" ? "分P" : "视频", `${res.items.length} 个 · 每个可以分别选歌`);
+    const w = $("warnings"); w.replaceChildren();
+    for (const t of [...(res.warnings || []), res.manual].filter(Boolean)) w.append(el("p", "warn", "⚠ " + t));
+  }
+
+  function renderRows() {
+    const have = new Map();
+    show.songs.forEach(s => s.clips.forEach(c => have.set(JSON.stringify(keyOf(c)), s.n)));
+    const tb = $("rows"); tb.replaceChildren();
+    res.items.forEach((it, i) => {
+      it.already = have.get(JSON.stringify(keyOf(it.clip))) || null;
+      const tr = el("tr", it.already ? "done" : "");
+      tr.dataset.i = i;
+      if (res.focusP && it.clip.p === res.focusP) tr.classList.add("focus");
+
+      const ck = el("input"); ck.type = "checkbox";
+      ck.checked = !it.already && (it.pick ?? (!res.multi || !!it.song));
+      ck.disabled = !!it.already;
+      ck.onchange = () => { it.pick = ck.checked; updateSave(); };
+
+      const lbl = el("td", "lbl");
+      lbl.append(el("span", "t", it.label));
+      lbl.append(el("small", null, fmtDur(it.duration)));
+      if (it.already) lbl.append(" ", el("span", "badge", `已在 ${it.already}`));
+      lbl.title = it.label;
+
+      const sel = el("select");
+      sel.append(new Option("— 选歌 —", ""));
+      show.songs.forEach(s => sel.append(new Option(songLabel(s), s.n)));
+      sel.value = it.song || "";
+      sel.onchange = () => { it.song = sel.value || null; if (it.song && !it.already) { ck.checked = true; it.pick = true; } updateSave(); };
+
+      const inp = (key, ph) => { const x = el("input"); x.type = "text"; x.value = it[key] || ""; x.placeholder = ph; x.oninput = () => { it[key] = x.value.trim(); updateSave(); }; return x; };
+      const vert = el("input"); vert.type = "checkbox"; vert.checked = !!it.vertical;
+      vert.onchange = () => { it.vertical = vert.checked; preview(it); };
+
+      const pv = el("button", null, "预览");
+      pv.type = "button";
+      pv.onclick = () => { tb.querySelectorAll("tr").forEach(r => r.classList.remove("focus")); tr.classList.add("focus"); preview(it); };
+
+      const td = c => { const t = el("td"); t.append(c); return t; };
+      tr.append(td(ck), lbl, td(sel), td(inp("by", "必填 required")), td(inp("via", "")), td(inp("note", "全景 / 4K 直拍 …")), td(vert), td(pv));
+      tb.append(tr);
+    });
+    updateSave();
+  }
+
+  // Mirrors clip_key() in admin_server.py.
+  function keyOf(c) { return [c.platform, c.bvid || c.vid || c.id || c.mid || c.bid || c.url, c.platform === "bilibili" ? (c.p || 1) : c.platform === "weibo" ? (c.objectId || "") : ""]; }
+
+  function chosen() { return res.items.filter((it, i) => { const ck = $("rows").querySelector(`tr[data-i="${i}"] input[type=checkbox]`); return ck && ck.checked; }); }
+
+  function updateSave() {
+    const list = chosen();
+    const bad = list.filter(it => !it.song || !it.by);
+    $("save").disabled = !list.length || bad.length > 0;
+    $("save").textContent = `保存 ${list.length} 个 · Save`;
+    $("saveHint").textContent = bad.length ? `有 ${bad.length} 个还没选歌或没填拍摄者 · pick a song and fill in the filmer` : "";
+  }
+
+  // ------------------------------------------------------------ actions
+  $("pasteForm").onsubmit = async e => {
+    e.preventDefault();
+    const url = $("url").value.trim();
+    if (!url) return;
+    $("go").disabled = true; status("解析中… Reading…");
+    try {
+      const r = await api("/api/resolve", { url, show: show.id });
+      if (!r.ok) { status(r.error, "err"); $("result").hidden = true; res = null; return; }
+      res = r;
+      status("");
+      $("result").hidden = false;
+      renderMeta(); renderRows();
+      const focus = res.items.find(it => res.focusP && it.clip.p === res.focusP) || res.items.find(it => !it.already) || res.items[0];
+      preview(focus);
+    } catch (err) { status("出错了 · " + err.message, "err"); }
+    finally { $("go").disabled = false; }
+  };
+
+  $("save").onclick = async () => {
+    const items = chosen().map(it => ({ n: it.song, clip: { ...it.clip, by: it.by, via: it.via, note: it.note, ...(it.vertical ? { vertical: true } : {}), ...(it.duration ? { duration: Math.round(it.duration) } : {}) } }));
+    $("save").disabled = true;
+    try {
+      const r = await api("/api/add", { show: show.id, items });
+      show = r.show;
+      renderSetlist(r.added);
+      renderRows();
+      const skip = r.skipped.length ? `，跳过 ${r.skipped.length} 个（${r.skipped.map(s => s.why).join("；")}）` : "";
+      status(`已保存 ${r.added.length} 个 · Saved${skip}`, r.added.length ? "ok" : "err");
+      if (r.added.length) document.querySelector(`.song[data-n="${r.added[0]}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+      if (r.added.length && !res.multi) { $("url").value = ""; $("url").focus(); }
+    } catch (e) { status("保存失败 · " + e.message, "err"); updateSave(); }
+  };
+
+  $("fillDur").onclick = async () => {
+    const b = $("fillDur"); b.disabled = true; b.textContent = "查询中…";
+    try {
+      const r = await api("/api/fill-durations", { show: show.id });
+      show = r.show; keepScroll(() => renderSetlist());
+      const extra = [r.manual.length ? `${r.manual.length} 个抖音/YouTube 要在「改」里手动填` : "", r.failed.length ? `${r.failed.length} 个查不到：${r.failed.join("、")}` : ""].filter(Boolean).join("；");
+      status(`补上 ${r.filled} 个时长` + (extra ? `；${extra}` : "") + " · Lengths filled", r.failed.length ? "err" : "ok");
+    } catch (e) { status("补时长失败 · " + e.message, "err"); }
+    finally { b.disabled = false; b.textContent = "补时长"; }
+  };
+
+  $("restart").onclick = async () => {
+    if (!confirm("重启后台？未保存的输入会丢失。\nRestart the admin server?")) return;
+    const b = $("restart"); b.disabled = true; b.textContent = "重启中…";
+    let oldPid = null;
+    try { oldPid = (await api("/api/restart", {})).pid; } catch (e) { /* the server may drop the connection as it exits */ }
+    for (let i = 0; i < 60; i++) {                     // wait up to ~30 s for the new process
+      await new Promise(r => setTimeout(r, 500));
+      try { const p = await api("/api/ping"); if (p.pid !== oldPid) { location.reload(); return; } } catch (e) { /* not up yet */ }
+    }
+    b.disabled = false; b.textContent = "重启 Restart";
+    status("重启没成功：请双击 run_admin.vbs · Restart failed, run run_admin.vbs", "err");
+  };
+
+  // ------------------------------------------------------------ 编辑歌单 (edit the setlist)
+  let editing = false;
+  $("editBtn").onclick = () => {
+    editing = !editing;
+    $("editBtn").setAttribute("aria-pressed", editing);
+    renderSetlist();
+    status(editing ? "编辑歌单：改动立即保存（会自动备份），歌曲会自动重新编号 · Changes save immediately" : "");
+  };
+
+  async function setlistOp(body) {
+    try {
+      const r = await api("/api/setlist", { show: show.id, ...body });
+      show = r.show; keepScroll(() => renderSetlist()); if (res) renderRows();
+      const moved = Object.keys(r.renamed || {}).length;
+      status("已保存 · Saved" + (moved ? `（${moved} 首歌重新编号）` : ""), "ok");
+      if (body.op === "info") await reloadShows(show.id);
+      return r;
+    } catch (e) { status("保存失败 · " + e.message, "err"); }
+  }
+
+  function insertSong(s, where) {
+    const title = (prompt(`在「${s.title}」${where === "before" ? "上面" : "下面"}插入一首歌，歌名：\nSong title`) || "").trim();
+    if (title) setlistOp({ op: "insert", n: s.n, where, title });
+  }
+
+  function songEdit(d, s) {
+    d.querySelector(".sedit")?.remove();
+    const f = el("form", "sedit");
+    const field = (label, input) => { const l = el("label"); l.append(el("span", null, label), input); f.append(l); return input; };
+    const txt = (v, ph) => { const x = el("input"); x.type = "text"; x.value = v || ""; x.placeholder = ph || ""; return x; };
+    const title = field("歌名", txt(s.title));
+    const num = field("编号", txt(s.num, "空着＝自动；特别条目填 ★ 或 E1+E2"));
+    const cover = field("原唱", txt(s.cover, "肖战自己的歌就空着"));
+    const note = field("备注", txt(s.note, "如 唱跳"));
+    const only = el("select");
+    only.append(new Option("—（每场都唱）", ""));
+    (show.dates || [show.date]).forEach(dt => only.append(new Option("仅 " + dt.slice(5).replace("-", "."), dt)));
+    only.value = s.only || "";
+    if ((show.dates || []).length > 1) field("场次", only);
+    const enc = el("input"); enc.type = "checkbox"; enc.checked = !!s.encore;
+    const el2 = el("label", "chk"); el2.append(enc, " 安可 Encore"); f.append(el2);
+    const bar = el("div", "bar");
+    const save = el("button", "primary", "保存 Save"); save.type = "submit";
+    const cancel = el("button", null, "取消"); cancel.type = "button"; cancel.onclick = () => f.remove();
+    bar.append(save, cancel); f.append(bar);
+    f.onsubmit = e => {
+      e.preventDefault();
+      if (!title.value.trim()) { title.focus(); return; }
+      setlistOp({ op: "update", n: s.n, fields: { title: title.value, num: num.value, cover: cover.value, note: note.value, only: only.value, encore: enc.checked } });
+    };
+    d.querySelector(".h").after(f);
+    title.focus();
+  }
+
+  function infoForm() {
+    const f = el("form", "infoform");
+    const field = (label, v, ph, wide) => { const l = el("label", wide ? "wide" : null); const x = el("input"); x.type = "text"; x.value = v || ""; x.placeholder = ph || ""; l.append(label, x); f.append(l); return x; };
+    const city = field("城市", show.city), cityEn = field("英文名", show.cityEn);
+    const dates = field("日期", (show.dates || [show.date]).map(d => d.slice(5).replace("-", ".")).join(" "), "11.08 11.09");
+    const venue = field("场馆", show.venue);
+    const src = field("歌单来源", (show.setlistSource || {}).url, "链接，可不填", true);
+    const bar = el("div", "bar"); const b = el("button", "primary", "保存这一站的信息 Save stop info"); b.type = "submit"; bar.append(b); f.append(bar);
+    f.onsubmit = e => { e.preventDefault(); setlistOp({ op: "info", city: city.value, cityEn: cityEn.value, dates: dates.value, venue: venue.value, sourceUrl: src.value }); };
+    return f;
+  }
+
+  async function reloadShows(selectId) {
+    tour = await api("/api/tour");
+    $("show").replaceChildren();
+    for (const s of tour.shows) {
+      const o = new Option(showTitle(s) + (s.file ? "" : "（还没有歌单）"), s.id);
+      o.disabled = !s.file; $("show").append(o);
+    }
+    $("show").value = selectId;
+  }
+
+  // ------------------------------------------------------------ 新增一站 (add a tour stop)
+  let nsEntries = [];
+  $("newStopBtn").onclick = () => {
+    $("newStop").hidden = !$("newStop").hidden;
+    $("nsCopy").replaceChildren(...tour.shows.filter(s => s.file).map(s => new Option(showTitle(s), s.id)));
+    $("nsCopy").value = tour.shows.filter(s => s.file).at(-1)?.id || "";
+    if (!$("newStop").hidden) $("nsCity").focus();
+  };
+  $("nsCancel").onclick = () => { $("newStop").hidden = true; };
+  document.querySelectorAll('input[name="nsFrom"]').forEach(r => r.onchange = () => {
+    $("nsPasteBox").hidden = document.querySelector('input[name="nsFrom"]:checked').value !== "paste";
+  });
+  $("nsParse").onclick = async () => {
+    const r = await api("/api/setlist/parse", { text: $("nsText").value });
+    nsEntries = r.entries.map(e => ({ ...e, use: true }));
+    const ol = $("nsPreview"); ol.replaceChildren();
+    let k = 0, e = 0;
+    nsEntries.forEach(x => {
+      const li = el("li", x.talk ? "talk" : null);
+      const ck = el("input"); ck.type = "checkbox"; ck.checked = true; ck.onchange = () => { x.use = ck.checked; };
+      const num = x.talk ? "— " : x.encore ? `E${++e} ` : `${String(++k).padStart(2, "0")} `;
+      li.append(ck, " " + num + x.title);
+      if (x.cover) li.append(el("small", null, "原唱 " + x.cover));
+      if (x.note) li.append(el("small", null, x.note));
+      if (x.talk) li.append(el("small", null, "讲话（不是的话取消勾选）"));
+      ol.append(li);
+    });
+    status(`读到 ${k + e} 首歌` + (e ? `（${e} 首安可）` : "") + `，${nsEntries.filter(x => x.talk).length} 段讲话 · 请检查后创建`, k + e ? "ok" : "err");
+  };
+  $("nsCreate").onclick = async () => {
+    const paste = document.querySelector('input[name="nsFrom"]:checked').value === "paste";
+    if (paste && !nsEntries.length) { status("先点「解析」看看读到的歌单 · Read the setlist first", "err"); return; }
+    const body = { city: $("nsCity").value, cityEn: $("nsCityEn").value, dates: $("nsDates").value, venue: $("nsVenue").value, sourceUrl: $("nsSource").value,
+                   ...(paste ? { entries: nsEntries.filter(x => x.use) } : { copyFrom: $("nsCopy").value }) };
+    try {
+      const r = await api("/api/show/new", body);
+      await reloadShows(r.id);
+      show = await api("/api/show/" + r.id);
+      $("newStop").hidden = true; nsEntries = []; $("nsPreview").replaceChildren();
+      renderSetlist();
+      status(`已创建「${showTitle(show)}」，${show.songs.filter(s => !s.talk && !s.combo).length} 首歌 · Stop created`, "ok");
+    } catch (e) { status("创建失败 · " + e.message, "err"); }
+  };
+
+  $("show").onchange = async () => { show = await api("/api/show/" + $("show").value); renderSetlist(); if (res) { $("result").hidden = true; res = null; } };
+
+  (async () => {
+    tour = await api("/api/tour");
+    for (const s of tour.shows) {
+      const o = new Option(showTitle(s) + (s.file ? "" : "（还没有歌单）"), s.id);
+      o.disabled = !s.file; $("show").append(o);
+    }
+    const first = tour.shows.find(s => s.file);
+    $("show").value = first.id;
+    show = await api("/api/show/" + first.id);
+    renderSetlist();
+    $("url").focus();
+  })().catch(e => status("加载失败 · " + e.message, "err"));
+})();
+</script>
+</body>
+</html>

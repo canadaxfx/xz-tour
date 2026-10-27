@@ -1,0 +1,10 @@
+# Copy into the site's root as ".gitignore"
+_backup/
+*.bak*
+*.backup
+__pycache__/
+*.pyc
+tests/output/
+secrets.json
+config.json
+*.tmp

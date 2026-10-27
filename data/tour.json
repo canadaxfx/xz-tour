@@ -1,0 +1,23 @@
+{
+  "tour": "出口·我们",
+  "tourEn": "HERE COMES OUR EXIT",
+  "shows": [
+    {
+      "id": "nanjing",
+      "city": "南京",
+      "cityEn": "Nanjing",
+      "date": "2026-10-23",
+      "dates": [
+        "2026-10-23",
+        "2026-10-25"
+      ],
+      "label": "10.23 + 10.25",
+      "labelEn": "2 shows",
+      "aliases": [
+        "nanjing-1",
+        "nanjing-2"
+      ],
+      "file": "shows/nanjing.json"
+    }
+  ]
+}

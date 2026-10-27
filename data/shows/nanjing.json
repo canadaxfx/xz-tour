@@ -1,0 +1,215 @@
+{
+  "id": "nanjing",
+  "city": "南京",
+  "cityEn": "Nanjing",
+  "venue": "梦之蓝青奥体育公园体育馆",
+  "date": "2026-10-23",
+  "dates": ["2026-10-23", "2026-10-25"],
+  "label": "10.23 + 10.25",
+  "labelEn": "2 shows",
+  "setlistSource": {"label": "歌单 cr. 微博", "url": "https://weibo.com/7301377434/RosTattEc"},
+  "songs": [
+    {"n": "1", "title": "我们", "clips": [
+      {"platform": "douyin", "vid": "7699888815472708069", "duration": 301, "by": "张小年", "note": "幕后视角直拍"},
+      {"platform": "douyin", "vid": "7700026956499385531", "duration": 228, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7700421910652567397", "duration": 289, "by": "小🐰乖乖（见过肖战版）", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 1, "duration": 300, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "2", "title": "归零", "clips": [
+      {"platform": "douyin", "vid": "7700574489083769721", "duration": 242, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700148146743054458", "duration": 237, "by": "麻咪麻咪轰", "note": "全景直拍", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 2, "duration": 233, "by": "iris", "via": "纪渺JM", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 2, "duration": 238, "by": "心晴雨亦晴的兔兔", "note": "全景4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700649133975871667", "duration": 212, "by": "桃之以橙.（看过南京演唱会版）", "note": "直拍"}
+    ]},
+    {"n": "3", "title": "还原", "clips": [
+      {"platform": "douyin", "vid": "7700556858440004345", "duration": 259, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 3, "duration": 227, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 3, "duration": 233, "by": "戒糖咩", "via": "纪渺JM", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "4", "title": "克卜勒", "cover": "孙燕姿", "clips": [
+      {"platform": "douyin", "vid": "7700634643574012067", "duration": 286, "by": "张小年", "note": "幕后直拍"},
+      {"platform": "douyin", "vid": "7700536773243758843", "duration": 294, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700145557927064741", "duration": 266, "by": "麻咪麻咪轰", "note": "全景直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700028980753949689", "duration": 236, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7700183833123956735", "duration": 226, "by": "1005无名之辈888", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700618026119359909", "duration": 249, "by": ".🧸半熟芝士1005", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700060650579578150", "duration": 238, "by": "星姐", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 4, "duration": 267, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 5, "duration": 237, "by": "碱基一圈", "via": "纪渺JM", "note": "内场直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 6, "duration": 236, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1bjHA6yEeW", "duration": 239, "by": "星闻揭秘", "note": "4K 直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700955727712443855", "duration": 237, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "5", "title": "荧", "clips": [
+      {"platform": "douyin", "vid": "7700560279189672699", "duration": 218, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700147044871431153", "duration": 250, "by": "麻咪麻咪轰", "note": "全景直拍", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 7, "duration": 204, "by": "蜀红", "via": "纪渺JM", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 5, "duration": 250, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "6", "title": "不合时宜", "clips": [
+      {"platform": "douyin", "vid": "7700564685314352634", "duration": 281, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700177898636702116", "duration": 230, "by": "1005无名之辈888", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700531362759795450", "duration": 238, "by": "麻咪麻咪轰", "note": "全景直拍", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 8, "duration": 219, "by": "碱基一圈", "via": "纪渺JM", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 6, "duration": 233, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "7", "title": "不要爱我", "cover": "莫文蔚", "clips": [
+      {"platform": "douyin", "vid": "7700635979300305151", "duration": 404, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700457029316392539", "duration": 404, "by": "朱砂痣", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700030045713431729", "duration": 136, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 9, "duration": 317, "by": "莫易辞", "via": "纪渺JM", "note": "全景"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 10, "duration": 137, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV13ZHT6AERw", "duration": 314, "by": "安河DAYTOY", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 7, "duration": 325, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "8", "title": "不要回头", "clips": [
+      {"platform": "douyin", "vid": "7700436177350981051", "duration": 251, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700235788563231931", "duration": 190, "by": "1005号特工🐰【唯】", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700098619533583049", "duration": 203, "by": "半斤八两、", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 11, "duration": 204, "by": "不眠飞行", "via": "纪渺JM"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 8, "duration": 255, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "9", "title": "漂流", "clips": [
+      {"platform": "douyin", "vid": "7700638484835053925", "duration": 286, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700556316776134591", "duration": 270, "by": "1005号特工🐰【唯】", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700220337120969062", "duration": 182, "by": "蜀红", "via": "朱砂痣", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 12, "duration": 182, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1pgHK6jEyM", "duration": 255, "by": "菡夜雪"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 9, "duration": 275, "by": "心晴雨亦晴的兔兔", "note": "全集 / 4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700958403489903168", "duration": 232, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "10", "title": "Allez, aimez!", "clips": [
+      {"platform": "douyin", "vid": "7700618992247035323", "duration": 203, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700657884733251961", "duration": 198, "by": "星禹念三旬", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7699882895738201978", "duration": 235, "by": "小🐰乖乖（见过肖战版）", "note": "高清直拍"},
+      {"platform": "douyin", "vid": "7700218004890198705", "duration": 200, "by": "陈酱酱🌙", "note": "高清直拍"},
+      {"platform": "douyin", "vid": "7700066393824533609", "duration": 179, "by": "玄兔.肖战", "note": "高清直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 13, "duration": 205, "by": "朱砂痣", "via": "纪渺JM"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 10, "duration": 194, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "11", "title": "逃亡", "cover": "孙燕姿", "clips": [
+      {"platform": "douyin", "vid": "7700642288057364837", "duration": 393, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7699896486478056040", "duration": 280, "by": "不眠丨飞行", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700039450927048890", "duration": 263, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 14, "duration": 264, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 11, "duration": 297, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "12", "title": "异想天开", "note": "唱跳", "clips": [
+      {"platform": "douyin", "vid": "7699878441685375153", "duration": 258, "by": "小🐰乖乖（见过肖战版）", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700816856798399723", "duration": 250, "by": "1005无名之辈888", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700585165119422715", "duration": 270, "by": "拾柒俊", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700628102095760339", "duration": 262, "by": "nb姐", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 15, "duration": 269, "by": "碱基一圈", "via": "纪渺JM", "note": "全景", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 16, "duration": 193, "by": "玄兔", "via": "纪渺JM"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 12, "duration": 274, "by": "心晴雨亦晴的兔兔", "note": "全景直拍", "hidden": true}
+    ]},
+    {"n": "13", "title": "晚安", "clips": [
+      {"platform": "douyin", "vid": "7700669183126467493", "duration": 161, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700049545589962683", "duration": 234, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 18, "duration": 254, "by": "hdlq0", "via": "纪渺JM"}
+    ]},
+    {"n": "14", "title": "夜行人的自白", "clips": [
+      {"platform": "douyin", "vid": "7700668695316885669", "duration": 220, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700309621214726771", "duration": 219, "by": "有钱肖肖.x.z.（看过肖战演唱会版）", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700963674119190863", "duration": 219, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "15", "title": "灯塔", "clips": [
+      {"platform": "douyin", "vid": "7700492505728566651", "duration": 266, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700419594050083569", "duration": 251, "by": "小🐰乖乖（见过肖战版）", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 19, "duration": 256, "by": "朱砂痣", "via": "纪渺JM"}
+    ]},
+    {"n": "16", "title": "余年", "clips": [
+      {"platform": "douyin", "vid": "7700423005923475314", "duration": 311, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700024988367354277", "duration": 242, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7700038940158738417", "duration": 245, "by": "小🐰乖乖（见过肖战版）", "note": "高清直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 20, "duration": 242, "by": "蜀红", "via": "纪渺JM"},
+      {"platform": "douyin", "vid": "7700953480940670376", "duration": 397, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "T16", "talk": true, "title": "谈下一个十年", "clips": [
+      {"platform": "douyin", "vid": "7699845954811569481", "duration": 91, "by": "小飞侠🦐", "note": "直拍"}
+    ]},
+    {"n": "17", "title": "是什么让我遇见这样的你", "cover": "白安", "clips": [
+      {"platform": "douyin", "vid": "7700654134999401317", "duration": 249, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7699887664393118322", "duration": 239, "by": "朱砂痣", "note": "高清直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 21, "duration": 250, "by": "hdlq0", "via": "纪渺JM"},
+      {"platform": "douyin", "vid": "7700957170699145954", "duration": 250, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "18", "title": "都一样", "clips": [
+      {"platform": "douyin", "vid": "7700662387065610361", "duration": 297, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7699933586807621093", "duration": 286, "by": "战点糖儿", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700187569812233125", "duration": 256, "by": "Linda💜", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 22, "duration": 264, "by": "碱基一圈", "via": "纪渺JM", "note": "全景"},
+      {"platform": "douyin", "vid": "7700949149936481615", "duration": 265, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "19", "title": "曲尽陈情", "clips": [
+      {"platform": "douyin", "vid": "7699886551299736315", "duration": 259, "by": "小🐰乖乖（见过肖战版）", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700940923400437184", "duration": 302, "by": "无敌小兔叽1005", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7700642821451636987", "duration": 262, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700010568510517434", "duration": 220, "by": "蜀红", "note": "直拍"},
+      {"platform": "douyin", "vid": "7699869318738155878", "duration": 232, "by": "朱砂痣", "note": "高清直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 23, "duration": 221, "by": "蜀红", "via": "纪渺JM", "hidden": true}
+    ]},
+    {"n": "20", "title": "竹石", "clips": [
+      {"platform": "r2", "url": "https://assets.xz-studio-gallery.com/full/20261024_%E6%BC%94%E5%94%B1%E4%BC%9A%E7%AB%B9%E7%9F%B3_XZ-MISC-1.mp4", "source": "https://weibo.com/6643123988/RoaJFvzgQ", "duration": 239, "by": "央视新闻", "note": "官摄"},
+      {"platform": "douyin", "vid": "7700645073885312379", "duration": 233, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700216924965749467", "duration": 224, "by": "朱砂痣", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700052405655771835", "duration": 162, "by": "蜀红", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700961878075933922", "duration": 242, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "21", "title": "轻轻", "clips": [
+      {"platform": "r2", "url": "https://assets.xz-studio-gallery.com/full/20261025_%E6%BC%94%E5%94%B1%E4%BC%9A_XZ-MISC-1.mp4", "source": "https://weibo.com/6643123988/RojM5hAuP", "duration": 215, "by": "新华社", "note": "官摄", "top": true},
+      {"platform": "douyin", "vid": "7700648358020532139", "duration": 361, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 20, "duration": 311, "by": "心晴雨亦晴的兔兔", "note": "全集 / 4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700944269960340608", "duration": 311, "by": "无敌小兔叽1005", "note": "全景4K直拍"}
+    ]},
+    {"n": "T21", "talk": true, "title": "拍照合影 + 感谢主办方", "clips": [
+      {"platform": "douyin", "vid": "7700604881762474826", "duration": 77, "by": "朱砂痣", "note": "直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7699858067475802586", "duration": 183, "by": "小飞侠🦐", "note": "直拍"}
+    ]},
+    {"n": "22", "title": "用尽我的一切奔向你", "cover": "周笔畅", "clips": [
+      {"platform": "douyin", "vid": "7700991280586997627", "duration": 244, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700066699630509989", "duration": 265, "by": "小🐰乖乖（见过肖战版）", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700572016727192811", "duration": 220, "by": "1005无名之辈888", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700023854533861626", "duration": 215, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 26, "duration": 216, "by": "蜀红", "via": "纪渺JM", "hidden": true}
+    ]},
+    {"n": "23", "title": "光点", "clips": [
+      {"platform": "douyin", "vid": "7700667190001570041", "duration": 441, "by": "拂水应如是", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7700062910748115318", "duration": 230, "by": "1005无名之辈888", "note": "直拍 / 大合唱 / N2"},
+      {"platform": "douyin", "vid": "7700570468881794554", "duration": 233, "by": "陈酱酱🌙", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700025842853254329", "duration": 238, "by": "小🐰乖乖（见过肖战版）", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700777048540849009", "duration": 282, "by": "星禹念三旬", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7699998933272255219", "duration": 233, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 27, "duration": 234, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 22, "duration": 431, "by": "心晴雨亦晴的兔兔", "note": "全集 / 4K直拍", "hidden": true}
+    ]},
+    {"n": "T23", "talk": true, "title": "安可", "clips": [
+      {"platform": "douyin", "vid": "7700631607070301878", "duration": 99, "by": "无名指尖", "note": "直拍"}
+    ]},
+    {"n": "E1", "encore": true, "title": "最幸运的幸运", "clips": [
+      {"platform": "douyin", "vid": "7700004289201254075", "duration": 211, "by": "蜀红", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700638041820236201", "duration": 226, "by": "无名指尖", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700642854822403179", "duration": 217, "by": "手可摘星辰💞", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700478271453394865", "duration": 192, "by": "夷陵小师妹", "note": "直拍"},
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 28, "duration": 212, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV195Hu6gEd7", "p": 24, "duration": 566, "by": "心晴雨亦晴的兔兔", "note": "全集 / 4K直拍", "hidden": true}
+    ]},
+    {"n": "E2", "encore": true, "title": "满足", "clips": [
+      {"platform": "bilibili", "bvid": "BV1KYnU6qEQU", "p": 29, "duration": 241, "by": "蜀红", "via": "纪渺JM", "hidden": true},
+      {"platform": "bilibili", "bvid": "BV11Una6pEdz", "duration": 300, "by": "星闻揭秘", "note": "4K 直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7700883705812135354", "duration": 285, "by": "摘星甜心兔🐰", "note": "直拍"},
+      {"platform": "douyin", "vid": "7700026047567295333", "duration": 240, "by": "蜀红", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7699896288099192083", "duration": 300, "by": "星姐", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7700654712542281929", "duration": 260, "by": "桃之以橙.（看过南京演唱会版）", "note": "直拍"},
+      {"platform": "douyin", "vid": "7699982887948680561", "duration": 304, "by": "X.（看过肖战首场演唱会版）", "note": "直拍"}
+    ]},
+    {"n": "★", "title": "E1+E2+退场", "encore": true, "num": "★", "clips": [
+      {"platform": "douyin", "vid": "7700937217845301839", "duration": 566, "by": "无敌小兔叽1005", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7700430747610120571", "duration": 552, "by": "拂水应如是", "note": "全景直拍"}
+    ]},
+    {"n": "★2", "title": "Talking", "encore": true, "num": "★", "clips": [
+      {"platform": "douyin", "vid": "7700836100022056561", "duration": 539, "by": "X.（看过肖战首场演唱会版）", "note": "直拍"}
+    ]}
+  ]
+}

@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noai, noimageai">
+<meta name="description" content="肖战「出口·我们」巡回演唱会现场视频，按歌单顺序观看。Xiao Zhan HERE COMES OUR EXIT tour — fan-shot live videos in setlist order.">
+<meta name="copyright" content="Content curation and organization © 2026 CanadaXFX. Videos © their filmers. Unauthorized AI training prohibited.">
+<meta name="theme-color" content="#0B0708">
+<title>出口·我们 · 现场视频</title>
+<style>
+  :root {
+    /* Colours from the tour's key visuals (red · white · black) and the red doorway stage. No green, no yellow. */
+    --night:  #0B0708;   /* warm black, the arena before the lights */
+    --panel:  #170D0F;
+    --hover:  #24131A;
+    --line:   #33191D;
+    --text:   #F3ECEC;
+    --dim:    #A8979A;
+    --red:    #D8102A;   /* tour red: the song playing now, its clip, the logo chevrons */
+    --red-deep: #9E0E1E;
+    --red-text: #FF5A68; /* the same red, lighter, for small text on black */
+    --red-ink: #FFFFFF;
+    --link:   #FFB3B9;
+
+    --body: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--night);
+    position: relative; isolation: isolate;
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  a { color: var(--link); }
+
+  /* Background: the red doorway stage (肖战工作室 photo, 2026-10-25) fading into black, plus a red corner band
+     like the tour key visual. Both sit behind everything (z-index -1). */
+  body::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: min(80vh, 780px); z-index: -1; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(11, 7, 8, .30) 0%, rgba(11, 7, 8, .70) 45%, var(--night) 100%),
+      url("img/stage-exit-1600.jpg") 50% 78% / cover no-repeat;
+  }
+  body::after {
+    content: ""; position: absolute; top: 0; right: 0; z-index: -1; pointer-events: none;
+    width: min(30vw, 320px); height: min(20vw, 210px);
+    background: var(--red-deep); clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+  @media (max-width: 600px) {
+    body::before {
+      height: 62vh;
+      background:
+        linear-gradient(180deg, rgba(11, 7, 8, .10) 0%, rgba(11, 7, 8, .55) 45%, var(--night) 100%),
+        url("img/stage-exit-800.jpg") 50% 78% / cover no-repeat;
+    }
+  }
+  .en { color: var(--dim); font-size: .82em; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: max(14px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+  }
+
+  /* ---------- header ---------- */
+  header { margin: 4px 0 14px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  /* Logo after the tour's: HERE / COMES / OUR stacked in heavy type, and the EXIT shown as a doorway ‹ ›. */
+  .logo { display: inline-flex; flex-direction: column; align-items: flex-start; flex: none; color: #fff; text-decoration: none; }
+  .logo .lt { font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 900;
+    font-size: 13px; line-height: .92; letter-spacing: -.02em; }
+  .logo svg { width: 46px; height: 12px; margin-top: 3px; fill: none; stroke: var(--red); stroke-width: 3.2; stroke-linecap: square; }
+  h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: .02em; }
+  h1 .en { font-weight: 600; letter-spacing: .12em; margin-left: 4px; }
+
+  .shows { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
+  .shows::-webkit-scrollbar { display: none; }
+  /* Phones: one compact header line, so the player gets the room. */
+  @media (max-width: 600px) {
+    header { margin: 0 0 10px; }
+    .brand { flex-wrap: nowrap; gap: 8px; min-width: 0; }
+    .logo .lt { font-size: 10px; }
+    .logo svg { width: 36px; height: 9px; margin-top: 2px; }
+    h1 { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    h1 .en { display: none; }   /* the logo already says HERE COMES OUR; keeps the title clear of the red corner */
+    .shows { margin-top: 8px; }
+    .show { font-size: 13px; padding: 5px 12px; }
+    .now { padding: 6px 12px; margin-bottom: 6px; }
+  }
+  .show {
+    flex: none; font: inherit; font-size: 14px; color: var(--text); cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px;
+  }
+  .show[aria-pressed="true"] { background: var(--text); color: var(--night); border-color: var(--text); font-weight: 700; }
+  .show:disabled { color: var(--dim); cursor: default; border-style: dashed; }
+
+  /* ---------- layout ---------- */
+  .grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 920px) {
+    .grid { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; }
+    .player { position: sticky; top: 14px; }
+    .setlist { max-height: calc(100vh - 150px); overflow-y: auto; }
+  }
+
+  /* ---------- player ---------- */
+  .now { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; min-width: 0; }
+  .now .num { font-family: var(--mono); color: var(--red-text); font-weight: 700; font-size: 14px; flex: none; }
+  .now .title { font-size: 20px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .now .tag { color: var(--dim); font-size: 13px; flex: none; }
+
+  .stage {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .stage.vertical { aspect-ratio: 9 / 16; max-height: 78vh; width: auto; margin: 0 auto; }
+  .stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .stage video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; object-fit: contain; }
+  /* Douyin's embed picks its layout from the frame width: from 768px it's a wide player that fills the frame (used
+     as is, like Bilibili); below that it's a fixed 360x720 phone layout that a 16:9 box crops. Only then (.dyfit) the
+     frame stays 360x720 and is scaled into a 1:2 box; fitDouyin() decides and sets the scale. */
+  .stage.dyfit { height: min(64vh, 640px, calc((100vw - 32px) * 2));   /* fallback; fitDouyin() sets the real height */ width: auto; aspect-ratio: 1 / 2; margin: 0 auto; }
+  .stage.dyfit iframe { inset: auto; top: 0; left: 0; width: 360px; height: 720px; transform-origin: 0 0; }
+  /* Phone held sideways (.dyland): full column width, as tall as the screen; fitDouyin() sets the box height and a
+     frame of at least 800px wide (so Douyin picks its wide layout) scaled down to the column. */
+  .stage.dyland { aspect-ratio: auto; width: 100%; }
+  .stage.dyland iframe { inset: auto; top: 0; left: 0; transform-origin: 0 0; }
+  .card {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px; padding: 20px; text-align: center;
+    background: linear-gradient(160deg, #22101A, #0E0809);
+  }
+  .card .plat { font-size: 13px; color: var(--dim); letter-spacing: .1em; }
+  .card .who { font-size: 18px; font-weight: 700; }
+  .card .why { font-size: 13px; color: var(--dim); max-width: 34em; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font: inherit; font-weight: 700; cursor: pointer;
+    background: var(--text); color: var(--night); border: 0; border-radius: 999px; padding: 9px 18px;
+  }
+  .empty { color: var(--dim); }
+
+  /* Versions (机位): one line "‹ 机位 2/5 · 拂水应如是 · 抖音 · 全景直拍 · 7:21 ▾ ›" opening a list. */
+  .clips { position: relative; display: flex; gap: 6px; margin-top: 10px; }
+  .clips[hidden] { display: none; }
+  .clips .vstep { flex: none; width: 40px; font: inherit; font-size: 20px; line-height: 1; color: var(--text); cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+  .clips .vstep:disabled { opacity: .3; cursor: default; }
+  .clips .vcur { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; text-align: left; cursor: pointer;
+    font: inherit; font-size: 13px; color: var(--text); background: var(--panel); border: 1px solid var(--red); border-radius: 8px; padding: 7px 10px; }
+  .clips .vcur .lab { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clips .vcur small { color: var(--dim); }
+  /* A visible "切换 ▾" pill, so people notice the line opens a list */
+  .clips .vcur .caret { flex: none; font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap;
+    border: 1px solid var(--red); border-radius: 999px; padding: 2px 9px; background: rgba(216, 16, 42, .18); }
+  .clips .vcur[aria-expanded="true"] .caret { background: var(--red); color: var(--red-ink); }
+  .tag-top { display: inline-block; font-size: 11px; line-height: 1.4; color: var(--red-text); border: 1px solid currentColor; border-radius: 4px; padding: 0 4px; margin-right: 4px; vertical-align: 1px; }
+  .vlist { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 15; margin: 0; padding: 4px; list-style: none;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 18px 44px rgba(0, 0, 0, .65);
+    max-height: min(60vh, 440px); overflow-y: auto; overscroll-behavior: contain; }
+  .vlist[hidden] { display: none; }
+  .vlist button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: baseline; width: 100%;
+    font: inherit; font-size: 13px; color: var(--text); text-align: left; cursor: pointer; background: none; border: 0; border-radius: 7px; padding: 8px 10px; }
+  .vlist button:hover { background: var(--hover); }
+  .vlist .w { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vlist small, .vlist .len { color: var(--dim); }
+  .vlist .len { font-family: var(--mono); font-size: 12px; }
+  .vlist button[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
+  .vlist button[aria-current="true"] small, .vlist button[aria-current="true"] .len, .vlist button[aria-current="true"] .tag-top { color: var(--red-ink); }
+
+  .credit { margin: 8px 0 0; font-size: 13px; color: var(--dim); }
+  .credit a { white-space: nowrap; }
+
+  .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .step {
+    font: inherit; cursor: pointer; text-align: left; min-width: 0;
+    background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 10px 14px;
+  }
+  .step.next { text-align: right; }
+  .step .dir { display: block; font-size: 12px; color: var(--dim); }
+  .step .to { display: block; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .step:disabled { opacity: .35; cursor: default; }
+
+  /* ---------- setlist ---------- */
+  .setlist { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px; }
+  .setlist h2 { margin: 6px 8px 8px; font-size: 14px; color: var(--dim); font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+  .setlist h2 a { font-weight: 400; font-size: 12px; }
+
+  /* Phones (one column): the setlist becomes a dropdown opened from the song line above the player.
+     Same list as the desktop sidebar; fixed under the song line, positioned by openList(). */
+  .now .caret { display: none; }
+  @media (max-width: 919px) {
+    .now { cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 12px; -webkit-tap-highlight-color: transparent; }
+    .now .tag { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .now .caret { display: inline; margin-left: auto; flex: none; color: var(--dim); font-size: 13px; white-space: nowrap; }
+    .now[aria-expanded="true"] { border-color: var(--red); }
+    .setlist { display: none; }
+    .setlist.open { display: block; position: fixed; left: 16px; right: 16px; z-index: 20; overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 18px 44px rgba(0, 0, 0, .65); }
+  }
+  .setlist ol { list-style: none; margin: 0; padding: 0; }
+  .song {
+    display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 8px; align-items: center;
+    width: 100%; font: inherit; color: var(--text); text-align: left; cursor: pointer;
+    background: none; border: 0; border-radius: 7px; padding: 7px 8px;
+  }
+  .song:hover { background: var(--hover); }
+  .song .n { font-family: var(--mono); font-size: 13px; color: var(--dim); text-align: right; }
+  .song .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .song .t small { color: var(--dim); margin-left: 6px; }
+  .song .c { font-size: 12px; color: var(--dim); font-family: var(--mono); }
+  .song[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
+  .song[aria-current="true"] .n, .song[aria-current="true"] .c, .song[aria-current="true"] small { color: var(--red-ink); }
+  .song.none .t { color: var(--dim); }
+  .between { margin: 2px 8px 2px 46px; font-size: 12px; color: var(--dim); }
+  /* A talk with a video: a lighter line in the setlist, still clickable */
+  .song.talk { padding-top: 4px; padding-bottom: 4px; font-size: 13px; color: var(--dim); }
+  .song.talk .t::before { content: "— "; }
+  .song.talk[aria-current="true"] { color: var(--red-ink); }
+  .song.combo { grid-template-columns: auto minmax(0, 1fr) auto; }   /* "E1+E2" needs a wider number column */
+  .between::before { content: "— "; }
+  .encore { margin: 10px 8px 4px; font-size: 12px; letter-spacing: .14em; color: var(--dim); border-top: 1px dashed var(--line); padding-top: 10px; }
+
+  .help { font-size: 12px; color: var(--dim); margin: 10px 2px 0; }
+  .help.bigscreen { color: var(--text); }
+  @media (min-width: 768px) { .help.bigscreen { display: none; } }   /* only worth saying on a phone */
+
+  /* ---------- footer (shared kit) ---------- */
+  .foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
+  .foot p { margin: 0 0 8px; }
+  .foot .more { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .foot .links { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .foot a { color: var(--link); text-decoration: none; }
+  .terms summary { cursor: pointer; color: var(--link); }
+  .terms ul { margin: 8px 0 0; padding-left: 18px; }
+  .terms li { margin-bottom: 4px; }
+  .terms .en { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="logo" role="img" aria-label="HERE COMES OUR EXIT">
+        <span class="lt" aria-hidden="true">HERE<br>COMES<br>OUR</span>
+        <svg viewBox="0 0 48 12" aria-hidden="true"><path d="M9 1 3 6l6 5"/><path d="M39 1l6 5-6 5"/></svg>
+      </span>
+      <h1>出口·我们 · 现场视频<span class="en">HERE COMES OUR EXIT · LIVE</span></h1>
+    </div>
+    <div class="shows" id="shows" role="group" aria-label="场次 Shows"></div>
+  </header>
+
+  <div class="grid">
+    <section class="player" aria-live="polite">
+      <div class="now" id="now"><span class="num" id="num"></span><span class="title" id="title"></span><span class="tag" id="tag"></span><span class="caret" aria-hidden="true">歌单 ▾</span></div>
+      <div class="stage" id="stage"></div>
+      <div class="clips" id="clips" role="group" aria-label="机位 Clips"></div>
+      <p class="credit" id="credit"></p>
+      <div class="nav">
+        <button class="step prev" id="prev"><span class="dir">← 上一首 Prev</span><span class="to" id="prevTo"></span></button>
+        <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
+      </div>
+      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。<span class="en">Best viewed on a tablet or computer.</span></p>
+      <p class="help">视频均为观众拍摄，嵌入自原平台。喜欢就去原视频点赞、转发 ❤ <span class="en">Fan-shot videos, embedded from their original platforms. Like &amp; share the originals.</span></p>
+    </section>
+
+    <nav class="setlist" aria-label="歌单 Setlist">
+      <h2><span id="showName"></span><a id="setSrc" target="_blank" rel="noopener"></a></h2>
+      <ol id="songs"></ol>
+    </nav>
+  </div>
+
+  <footer class="foot">
+    <p class="more"><span>更多肖战作品 <span class="en">More Xiao Zhan</span></span>
+      <span class="links">
+        <a href="https://xzworks.pages.dev/" target="_blank" rel="noopener">肖战银幕艺术 <span class="en">Screen Arts</span> ↗</a>
+        <a href="https://xzyt.pages.dev/" target="_blank" rel="noopener">肖战 YouTube 合集 <span class="en">XZYT</span> ↗</a>
+        <a href="https://xz-dance-room.pages.dev/" target="_blank" rel="noopener">舞蹈练习室 <span class="en">Dance Room</span> ↗</a>
+      </span></p>
+    <p class="owner">&copy; 2026 CanadaXFX. All rights reserved. · 背景照片 cr. 肖战工作室 <span class="en">Background photo © XZ Studio</span></p>
+    <details class="terms">
+      <summary>使用条款 <span class="en">Terms of Use</span></summary>
+      <ul>
+        <li>所有与肖战相关的内容归各自版权所有者所有；现场视频归拍摄者所有。<span class="en">All content related to Xiao Zhan belongs to its respective copyright owners; live videos belong to the people who filmed them.</span></li>
+        <li>本站只做歌单整理与嵌入，不存储视频。本站内容的整理与编排版权归 © 2026 CanadaXFX 所有。<span class="en">This site only organizes and embeds; it stores no videos. The curation and organization are © 2026 CanadaXFX.</span></li>
+        <li>拍摄者如不希望被收录，联系后即删除。<span class="en">Filmers who prefer not to be listed will be removed on request.</span></li>
+        <li>仅限个人及非商业用途。<span class="en">Personal and non-commercial use only.</span></li>
+        <li>严禁将本站内容用于 AI 训练。<span class="en">AI training is strictly prohibited.</span></li>
+        <li>未经明确授权，本站的原创内容、设计及代码不得被复制、传播或使用。<span class="en">The original content, design and code of this website may not be reproduced, distributed or used without explicit permission.</span></li>
+        <li>欢迎链接本站，但禁止以框架嵌入或镜像本站。<span class="en">Links to this website are permitted, but framing or mirroring is prohibited.</span></li>
+      </ul>
+    </details>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  const PLATFORM = {
+    bilibili: { name: "B站", en: "Bilibili" },
+    douyin:   { name: "抖音", en: "Douyin" },
+    youtube:  { name: "YouTube", en: "YouTube" },
+    weibo:    { name: "微博", en: "Weibo" },
+    xhs:      { name: "小红书", en: "RedNote" },
+    r2:       { name: "本站", en: "On this site" },   // our own copy on R2, played in a plain <video>
+  };
+
+  // Where "open the original" goes.
+  function originalUrl(c) {
+    switch (c.platform) {
+      case "bilibili": return `https://www.bilibili.com/video/${c.bvid}/` + (c.p ? `?p=${c.p}` : "");
+      case "douyin":   return `https://www.douyin.com/video/${c.vid}`;
+      case "youtube":  return `https://www.youtube.com/watch?v=${c.id}` + (c.start ? `&t=${c.start}s` : "");
+      case "weibo":    return `https://m.weibo.cn/detail/${c.bid}`;
+      case "r2":       return c.source || null;   // the original post, if known
+      default:         return c.url;
+    }
+  }
+
+  // Official embeds only. Weibo and RedNote have none, so they get a link card.
+  function embedUrl(c, autoplay) {
+    const a = autoplay ? 1 : 0;
+    switch (c.platform) {
+      case "bilibili": return `https://player.bilibili.com/player.html?isOutside=true&bvid=${c.bvid}&p=${c.p || 1}&autoplay=${a}&danmaku=0`;
+      case "douyin":   return `https://open.douyin.com/player/video?vid=${c.vid}&autoplay=${a}`;
+      case "youtube":  return `https://www.youtube-nocookie.com/embed/${c.id}?autoplay=${a}&playsinline=1` + (c.start ? `&start=${c.start}` : "");
+      default:         return null;
+    }
+  }
+
+  const fmtDur = s => { s = Math.round(s || 0); return s ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}` : ""; };
+
+  // "10-23" style dates → "10.23". A city's shows with the same setlist share one entry ("dates": [...]);
+  // a song performed on only one of those nights has "only": "<date>".
+  const mmdd = d => d.slice(5).replace("-", ".");
+  const showTitle = s => s.dates ? `${s.city}站 ${s.label}` : `${s.city} ${mmdd(s.date)} ${s.label}`;
+
+  function sourceSite(url) {
+    const h = (() => { try { return new URL(url).hostname; } catch (e) { return ""; } })();
+    return /weibo/.test(h) ? "微博" : /douyin/.test(h) ? "抖音" : /bilibili|b23/.test(h) ? "B站"
+         : /xiaohongshu|xhslink/.test(h) ? "小红书" : /youtu/.test(h) ? "YouTube" : "原网站";
+  }
+
+  // Talks (spoken parts between songs) are entries with "talk": true. Without a video they're a plain note and
+  // Prev/Next skip them; with one they play like a song. Song numbers and counts leave them out.
+  // Combined entries ("n": "E1+E2", "combo": [...]) hold videos covering two songs in one go; listed after the
+  // second song, not counted as songs, and hidden while they have no video.
+  // An entry with its own "num" (★, E1+E2+退场 …) is shown with that mark and isn't counted as a song.
+  const songCount = () => show.songs.filter(s => !s.talk && !s.combo && !s.num).length;
+  const extra = s => s.talk || s.combo;
+  function stepFrom(i, dir) {
+    let j = i + dir;
+    while (show.songs[j] && extra(show.songs[j]) && !show.songs[j].clips.length) j += dir;
+    return j;
+  }
+
+  // Order of a song's versions on the site: 官摄 first, then pinned by the editor ("top"), then 全景, then the rest;
+  // versions without a length go last in their group. Same function in the admin.
+  function siteOrder(clips) {
+    // 官摄 (official footage, note contains 官摄) always first, then pinned (顶), then 全景, then the rest;
+    // longest first within each group (pinned ones keep their admin order).
+    const rank = c => /官摄/.test(c.note || "") ? 0 : c.top ? 1 : /全景/.test(c.note || "") ? 2 : 3;
+    return clips.map((c, i) => [c, i])
+      .sort((a, b) => rank(a[0]) - rank(b[0]) || (rank(a[0]) === 1 ? 0 : (b[0].duration || -1) - (a[0].duration || -1)) || a[1] - b[1])
+      .map(x => x[0]);
+  }
+
+  function renderVersions(song, c) {
+    const box = $("clips"); box.replaceChildren();
+    const n = song.clips.length;
+    box.hidden = n < 2;
+    if (n < 2) return;
+    const desc = k => [PLATFORM[k.platform]?.name, k.note].filter(Boolean).join(" · ");
+    const step = (txt, title, j) => { const b = el("button", "vstep", txt); b.title = title; b.disabled = j < 0 || j >= n; b.onclick = () => go(songIdx, j, true); return b; };
+    const cur = el("button", "vcur");
+    cur.setAttribute("aria-haspopup", "listbox"); cur.setAttribute("aria-expanded", "false");
+    const lab = el("span", "lab");
+    if (c.top) lab.append(el("span", "tag-top", "推荐"));
+    lab.append(el("b", null, `机位 ${clipIdx + 1}/${n}`), ` · ${c.by} `, el("small", null, [desc(c), fmtDur(c.duration)].filter(Boolean).join(" · ")));
+    cur.append(lab, el("span", "caret", `切换 ${n} 个 ▾`));
+    const list = el("ol", "vlist"); list.hidden = true; list.setAttribute("role", "listbox");
+    song.clips.forEach((k, j) => {
+      const b = el("button"); b.setAttribute("aria-current", j === clipIdx);
+      const w = el("span", "w");
+      if (k.top) w.append(el("span", "tag-top", "推荐"));
+      w.append(k.by + " ", el("small", null, desc(k)));
+      b.append(el("b", null, `机位 ${j + 1}`), w, el("span", "len", fmtDur(k.duration)));
+      b.onclick = () => { closeVersions(); go(songIdx, j, true); };
+      const li = el("li"); li.append(b); list.append(li);
+    });
+    cur.onclick = e => {
+      e.stopPropagation();
+      if (!list.hidden) return closeVersions();
+      closeList();
+      list.hidden = false; cur.setAttribute("aria-expanded", "true");
+      list.querySelector('[aria-current="true"]')?.scrollIntoView({ block: "nearest" });
+    };
+    box.append(step("‹", "上一个机位 Previous version", clipIdx - 1), cur, step("›", "下一个机位 Next version", clipIdx + 1), list);
+  }
+  function closeVersions() {
+    const list = document.querySelector("#clips .vlist");
+    if (list && !list.hidden) { list.hidden = true; document.querySelector("#clips .vcur")?.setAttribute("aria-expanded", "false"); }
+  }
+
+  let tour, show, songIdx = 0, clipIdx = 0;
+
+  async function getJSON(path) {
+    const r = await fetch(path, { cache: "no-cache" });
+    if (!r.ok) throw new Error(path + " " + r.status);
+    return r.json();
+  }
+
+  function writeUrl() {
+    const q = new URLSearchParams({ show: show.id, song: show.songs[songIdx].n });
+    if (clipIdx) q.set("clip", clipIdx + 1);
+    history.replaceState(null, "", "?" + q);
+  }
+
+  function renderShows(activeId) {
+    const box = $("shows"); box.replaceChildren();
+    for (const s of tour.shows) {
+      const b = el("button", "show");
+      b.append(showTitle(s));
+      if (!s.file) { b.disabled = true; b.append(el("span", "en", " · 整理中")); }
+      b.setAttribute("aria-pressed", s.id === activeId);
+      b.onclick = () => loadShow(s.id);
+      box.append(b);
+    }
+  }
+
+  function renderSetlist() {
+    $("showName").textContent = `${showTitle(show)} · ${songCount()} 首`;
+    const src = $("setSrc");
+    if (show.setlistSource) { src.href = show.setlistSource.url; src.textContent = show.setlistSource.label + " ↗"; }
+    const ol = $("songs"); ol.replaceChildren();
+    let encoreShown = false;
+    show.songs.forEach((s, i) => {
+      if (s.encore && !encoreShown) { ol.append(el("li", "encore", "安可 ENCORE")); encoreShown = true; }
+      if (s.talk && !s.clips.length) { ol.append(el("li", "between", s.title)); return; }   // talk without video: a plain note
+      if (s.combo && !s.clips.length) return;                                               // empty combined entry: not shown
+      const li = el("li");
+      const b = el("button", "song" + (s.clips.length ? "" : " none") + (s.talk ? " talk" : "") + (s.combo || s.num ? " combo" : ""));
+      b.dataset.i = i;
+      b.append(el("span", "n", s.talk ? "" : s.combo || s.num || s.encore ? s.n : s.n.padStart(2, "0")));
+      const t = el("span", "t", s.title);
+      if (s.note) t.append(el("small", null, s.note));
+      if (s.cover) t.append(el("small", null, "原唱 " + s.cover));
+      if (s.only) t.append(el("small", null, "仅 " + mmdd(s.only)));
+      b.append(t);
+      b.append(el("span", "c", s.clips.length ? (s.clips.length > 1 ? `${s.clips.length} 机位` : s.talk ? "▶" : "") : "待补充"));
+      b.onclick = () => {
+        go(i, 0, true);
+        closeList();
+        // Phones: the setlist sits under the player, so bring the player back into view.
+        const p = document.querySelector(".player");
+        if (p.getBoundingClientRect().top < 0) p.scrollIntoView({ block: "start" });   // not smooth: the new iframe loading interrupts a smooth scroll
+      };
+      li.append(b);
+      ol.append(li);
+      if (s.after) ol.append(el("li", "between", s.after));
+    });
+  }
+
+  const DOUYIN_WIDE = 768;   // frame width where Douyin's embed switches from its phone layout to the wide one
+
+  // "land": phone held sideways · "fit": narrow portrait (scaled 360x720 phone layout) · "wide": 16:9 box as is
+  function douyinMode(stage) {
+    if (!stage.classList.contains("douyin")) return null;
+    if (innerWidth > innerHeight && innerHeight <= 500) return "land";
+    return stage.parentElement.clientWidth < DOUYIN_WIDE ? "fit" : "wide";
+  }
+
+  function fitDouyin() {
+    const stage = $("stage"), f = stage.querySelector("iframe");
+    const mode = douyinMode(stage), col = stage.parentElement.clientWidth;
+    stage.classList.toggle("dyfit", mode === "fit");
+    stage.classList.toggle("dyland", mode === "land");
+    stage.style.height = "";
+    if (!f) return;
+    f.style.width = f.style.height = f.style.transform = "";
+    if (mode === "fit") {
+      // As tall as the screen allows below the box's top edge (page scrolled to the top), within Douyin's
+      // natural 720px and the column width (the box is 1:2); never below 60% of the screen.
+      const top = stage.getBoundingClientRect().top + scrollY;
+      const h = Math.min(720, col * 2, Math.max(innerHeight * 0.6, innerHeight - top - 10));
+      stage.style.height = Math.floor(h) + "px";
+      f.style.transform = `scale(${stage.clientHeight / 720})`;
+    } else if (mode === "land") {
+      const h = innerHeight - 16, s = Math.min(1, col / 800);
+      stage.style.height = h + "px";
+      Object.assign(f.style, { width: col / s + "px", height: h / s + "px", transform: `scale(${s})` });
+    }
+    // Douyin picks its layout when it loads, so reload the player if it now needs the other one (e.g. on rotation).
+    const layout = mode === "fit" ? "phone" : "wide";
+    if (mode && f.dataset.layout && f.dataset.layout !== layout) f.src = f.src;
+    if (mode) f.dataset.layout = layout;
+  }
+  new ResizeObserver(fitDouyin).observe(document.querySelector(".player"));
+  addEventListener("resize", fitDouyin);   // a height-only change (rotation) doesn't resize .player
+
+  function renderStage(c, autoplay) {
+    const stage = $("stage");
+    stage.classList.toggle("douyin", c?.platform === "douyin");
+    stage.classList.toggle("vertical", !!c?.vertical && c?.platform !== "douyin");
+    fitDouyin();   // every clip change: also clears the portrait box when switching away from Douyin
+    stage.replaceChildren();
+    if (!c) { const card = el("div", "card"); card.append(el("div", "empty", "这首歌还没有视频，欢迎推荐 · No video yet")); stage.append(card); return; }
+    const src = embedUrl(c, autoplay);
+    if (c.platform === "r2") {
+      const v = el("video");
+      v.src = c.url; v.controls = true; v.playsInline = true; v.preload = "metadata"; v.autoplay = !!autoplay;
+      v.title = `${show.songs[songIdx].title} · ${c.by}`;
+      stage.append(v);
+    } else if (src) {
+      const f = el("iframe");
+      f.src = src;
+      f.allow = "autoplay; fullscreen; encrypted-media; picture-in-picture";
+      f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      f.title = `${show.songs[songIdx].title} · ${c.by}`;
+      stage.append(f);
+      fitDouyin();   // now that the frame exists, set its scale
+    } else {
+      const p = PLATFORM[c.platform] || { name: c.platform, en: "" };
+      const card = el("div", "card");
+      card.append(el("div", "plat", `${p.name} ${p.en}`.toUpperCase()));
+      card.append(el("div", "who", `cr. ${c.by}`));
+      card.append(el("div", "why", `${p.name}不支持嵌入播放，请到原平台观看，顺手点个赞 · ${p.en} videos can't be embedded — watch (and like) it there.`));
+      const a = el("a", "btn", `在${p.name}打开 ↗`);
+      a.href = originalUrl(c); a.target = "_blank"; a.rel = "noopener";
+      card.append(a);
+      stage.append(card);
+    }
+  }
+
+  function go(i, ci = 0, autoplay = false) {
+    songIdx = Math.max(0, Math.min(show.songs.length - 1, i));
+    const song = show.songs[songIdx];
+    clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci));
+    const c = song.clips[clipIdx];
+
+    $("num").textContent = song.talk ? "讲话" : song.combo || song.num ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
+    $("title").textContent = song.title;
+    $("tag").textContent = [song.note, song.cover && "原唱 " + song.cover, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
+
+    renderStage(c, autoplay);
+
+    renderVersions(song, c);
+
+    const cr = $("credit"); cr.replaceChildren();
+    if (c) {
+      cr.append(`拍摄 cr. ${c.by}`);
+      if (c.duration) cr.append(` · ${fmtDur(c.duration)}`);
+      if (c.via) cr.append(` · 搬运 ${c.via}`);
+      const href = originalUrl(c);
+      if (href) {
+        // R2 copies link to their original post; name the site it's on.
+        const where = c.platform === "r2" ? sourceSite(href) : PLATFORM[c.platform]?.name || "";
+        const a = el("a", null, c.platform === "r2" ? `在${where}打开原帖 ↗` : `在${where}打开原视频 ↗`);
+        a.href = href; a.target = "_blank"; a.rel = "noopener";
+        cr.append(" · ", a);
+      }
+    }
+
+    const prev = show.songs[stepFrom(songIdx, -1)], next = show.songs[stepFrom(songIdx, 1)];
+    $("prev").disabled = !prev; $("prevTo").textContent = prev ? prev.title : "—";
+    $("next").disabled = !next; $("nextTo").textContent = next ? next.title : "— 完 —";
+
+    document.querySelectorAll(".song").forEach(b => b.setAttribute("aria-current", +b.dataset.i === songIdx));
+    revealCurrent();
+    document.title = `${song.title} · ${show.dates ? show.city + "站" : show.city + show.label} · 出口·我们`;
+    writeUrl();
+  }
+
+  // Keep the current song visible inside the setlist box only; scrolling the page would move the player away.
+  function revealCurrent() {
+    const list = document.querySelector(".setlist"), cur = document.querySelector(`.song[data-i="${songIdx}"]`);
+    if (cur && list.scrollHeight > list.clientHeight) {
+      const top = cur.getBoundingClientRect().top - list.getBoundingClientRect().top + list.scrollTop, h = cur.offsetHeight;
+      if (top < list.scrollTop || top + h > list.scrollTop + list.clientHeight) list.scrollTop = top - list.clientHeight / 2;
+    }
+  }
+
+  // ---- phones: setlist dropdown ----
+  const narrow = matchMedia("(max-width: 919px)");
+  const listEl = () => document.querySelector(".setlist");
+  function openList() {
+    const list = listEl(), r = $("now").getBoundingClientRect(), top = Math.max(8, r.bottom + 6);
+    list.style.top = top + "px";
+    list.style.maxHeight = Math.max(200, innerHeight - top - 12) + "px";
+    list.classList.add("open");
+    $("now").setAttribute("aria-expanded", "true");
+    revealCurrent();
+  }
+  function closeList() {
+    const list = listEl();
+    if (!list.classList.contains("open")) return;
+    list.classList.remove("open");
+    list.style.top = list.style.maxHeight = "";
+    $("now").setAttribute("aria-expanded", "false");
+  }
+  function syncNarrow() {
+    const now = $("now");
+    if (narrow.matches) { now.setAttribute("role", "button"); now.tabIndex = 0; now.setAttribute("aria-expanded", "false"); }
+    else { closeList(); now.removeAttribute("role"); now.removeAttribute("tabindex"); now.removeAttribute("aria-expanded"); }
+  }
+  narrow.addEventListener("change", syncNarrow);
+  syncNarrow();
+  $("now").addEventListener("click", () => {
+    if (!narrow.matches) return;
+    listEl().classList.contains("open") ? closeList() : openList();
+  });
+  $("now").addEventListener("keydown", e => {
+    if (narrow.matches && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); $("now").click(); }
+  });
+  document.addEventListener("click", e => { if (!e.target.closest(".setlist, #now")) closeList(); if (!e.target.closest("#clips")) closeVersions(); });
+  addEventListener("scroll", closeList, { passive: true });   // the list is fixed; the song line would move away from it
+
+  async function loadShow(id, songN, clipN) {
+    // Old links (?show=nanjing-1 / nanjing-2) open the merged city entry through its "aliases".
+    const meta = tour.shows.find(s => (s.id === id || (s.aliases || []).includes(id)) && s.file) || tour.shows.find(s => s.file);
+    show = await getJSON("data/" + meta.file);
+    // Hidden clips are backups kept in the file (admin 藏 button); the site never shows them.
+    show.songs.forEach(s => { s.clips = siteOrder(s.clips.filter(c => !c.hidden)); });
+    renderShows(show.id);
+    renderSetlist();
+    const i = songN ? show.songs.findIndex(s => s.n === songN) : 0;
+    go(i < 0 ? 0 : i, clipN ? clipN - 1 : 0, false);
+  }
+
+  $("prev").onclick = () => go(stepFrom(songIdx, -1), 0, true);
+  $("next").onclick = () => go(stepFrom(songIdx, 1), 0, true);
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { closeList(); closeVersions(); }
+    if (e.target.closest("input, textarea")) return;
+    if (e.key === "ArrowLeft" && stepFrom(songIdx, -1) >= 0) go(stepFrom(songIdx, -1), 0, true);
+    if (e.key === "ArrowRight" && stepFrom(songIdx, 1) < show.songs.length) go(stepFrom(songIdx, 1), 0, true);
+  });
+
+  (async () => {
+    try {
+      tour = await getJSON("data/tour.json");
+      const q = new URLSearchParams(location.search);
+      await loadShow(q.get("show") || tour.shows[0].id, q.get("song"), +q.get("clip") || 0);
+    } catch (err) {
+      $("stage").replaceChildren(Object.assign(el("div", "card"), { textContent: "加载失败 · Could not load the setlist (" + err.message + ")" }));
+    }
+  })();
+})();
+</script>
+</body>
+</html>

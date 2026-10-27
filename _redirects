@@ -1,0 +1,7 @@
+# Cloudflare Pages: the project notes, admin tool and git files live in the repo only - don't serve them on the site
+/CLAUDE.md        /    301
+/tools/*          /    301
+/tests/*          /    301
+/.gitignore       /    301
+/run_admin.bat    /    301
+/run_admin.vbs    /    301
