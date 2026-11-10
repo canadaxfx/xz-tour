@@ -280,7 +280,7 @@
         <button class="step prev" id="prev"><span class="dir">← 上一首 Prev</span><span class="to" id="prevTo"></span></button>
         <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
       </div>
-      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。<span class="en">Best viewed on a tablet or computer.</span></p>
+      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，点播放器里的 ⛶ 全屏按钮，横过来看更清楚。<span class="en">Best viewed on a tablet or computer. On a phone, tap the player's full-screen button ⛶ and turn your phone sideways.</span></p>
       <p class="help">视频均为观众拍摄，嵌入自原平台。喜欢就去原视频点赞、转发 ❤ <span class="en">Fan-shot videos, embedded from their original platforms. Like &amp; share the originals.</span></p>
     </section>
 
@@ -568,7 +568,7 @@
     clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci));
     const c = song.clips[clipIdx];
 
-    $("num").textContent = song.talk ? "讲话" : song.combo || song.num ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
+    $("num").textContent = song.intro ? "开场" : song.talk ? "讲话" : song.combo || song.num ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
     $("title").textContent = song.title;
     $("tag").textContent = [song.note, song.cover && "原唱 " + song.cover, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
 
@@ -653,7 +653,7 @@
     show.songs.forEach(s => { s.clips = siteOrder(s.clips.filter(c => !c.hidden)); });
     renderShows(show.id);
     renderSetlist();
-    const i = songN ? show.songs.findIndex(s => s.n === songN) : 0;
+    const i = songN ? show.songs.findIndex(s => s.n === songN) : stepFrom(-1, 1);   // skips an intro (开场) without video
     go(i < 0 ? 0 : i, clipN ? clipN - 1 : 0, false);
   }
 
