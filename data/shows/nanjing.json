@@ -7,7 +7,6 @@
   "dates": ["2026-10-23", "2026-10-25"],
   "label": "10.23 + 10.25",
   "labelEn": "2 shows",
-  "setlistSource": {"label": "歌单 cr. 微博", "url": "https://weibo.com/7301377434/RosTattEc"},
   "songs": [
     {"n": "1", "title": "我们", "clips": [
       {"platform": "douyin", "vid": "7699888815472708069", "duration": 301, "by": "张小年", "note": "幕后视角直拍"},
