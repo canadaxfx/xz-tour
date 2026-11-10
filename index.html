@@ -469,7 +469,7 @@
       if (s.cover) t.append(el("small", null, "原唱 " + s.cover));
       if (s.only) t.append(el("small", null, "仅 " + mmdd(s.only)));
       b.append(t);
-      b.append(el("span", "c", s.clips.length ? (s.clips.length > 1 ? `${s.clips.length} 机位` : s.talk ? "▶" : "") : "待补充"));
+      b.append(el("span", "c", s.clips.length ? (s.talk && s.clips.length === 1 ? "▶" : `${s.clips.length} 机位`) : "待补充"));
       b.onclick = () => {
         go(i, 0, true);
         closeList();
