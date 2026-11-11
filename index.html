@@ -169,8 +169,18 @@
   .clips .vstep:disabled { opacity: .3; cursor: default; }
   .clips .vcur { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; text-align: left; cursor: pointer;
     font: inherit; font-size: 13px; color: var(--text); background: var(--panel); border: 1px solid var(--red); border-radius: 8px; padding: 7px 10px; }
-  .clips .vcur .lab { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clips .vcur .lab { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 6px; white-space: nowrap; overflow: hidden; }
+  .clips .vcur .lab > b, .clips .vcur .lab .tag-top { flex: none; }
   .clips .vcur small { color: var(--dim); }
+  /* Long filmer names get "…"; the note (近景直拍) and length after them always stay visible */
+  .clips .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clips .vcur small, .vlist .w small { flex: none; white-space: nowrap; }
+  .clips .vcur .nm { min-width: 3em; }
+  @media (max-width: 520px) {
+    .clips .vcur .caret .cw { display: none; }   /* phones: pill shows just "20 ▾" so the name fits */
+    .clips .vcur .dur { display: none; }          /* length is already on the line under the video */
+    .clips .vcur { gap: 6px; padding: 7px 8px; }
+  }
   /* A visible "切换 ▾" pill, so people notice the line opens a list */
   .clips .vcur .caret { flex: none; font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap;
     border: 1px solid var(--red); border-radius: 999px; padding: 2px 9px; background: rgba(216, 16, 42, .18); }
@@ -183,7 +193,8 @@
   .vlist button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: baseline; width: 100%;
     font: inherit; font-size: 13px; color: var(--text); text-align: left; cursor: pointer; background: none; border: 0; border-radius: 7px; padding: 8px 10px; }
   .vlist button:hover { background: var(--hover); }
-  .vlist .w { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vlist .w { min-width: 0; display: flex; align-items: baseline; gap: 6px; overflow: hidden; white-space: nowrap; }
+  .vlist .w .tag-top { flex: none; }
   .vlist small, .vlist .len { color: var(--dim); }
   .vlist .len { font-family: var(--mono); font-size: 12px; }
   .vlist button[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
@@ -395,20 +406,25 @@
     const n = song.clips.length;
     box.hidden = n < 2;
     if (n < 2) return;
-    const desc = k => [PLATFORM[k.platform]?.name, k.note].filter(Boolean).join(" · ");
+    // Platform name only when it isn't Douyin (nearly every clip is), so the note (近景直拍…) stays visible.
+    const desc = k => [k.platform !== "douyin" && PLATFORM[k.platform]?.name, k.note].filter(Boolean).join(" · ");
+    const nm = k => el("span", "nm", k.by);
     const step = (txt, title, j) => { const b = el("button", "vstep", txt); b.title = title; b.disabled = j < 0 || j >= n; b.onclick = () => go(songIdx, j, true); return b; };
     const cur = el("button", "vcur");
     cur.setAttribute("aria-haspopup", "listbox"); cur.setAttribute("aria-expanded", "false");
     const lab = el("span", "lab");
     if (c.top) lab.append(el("span", "tag-top", "推荐"));
-    lab.append(el("b", null, `机位 ${clipIdx + 1}/${n}`), ` · ${c.by} `, el("small", null, [desc(c), fmtDur(c.duration)].filter(Boolean).join(" · ")));
-    cur.append(lab, el("span", "caret", `换机位 ${n} 个 ▾`));
+    lab.append(el("b", null, `机位 ${clipIdx + 1}/${n} ·`), nm(c), el("small", null, desc(c)));
+    if (c.duration) lab.lastChild.append(el("span", "dur", (desc(c) ? " · " : "") + fmtDur(c.duration)));
+    const caret = el("span", "caret");
+    caret.append(el("span", "cw", "换机位 "), `${n}`, el("span", "cw", " 个"), " ▾");
+    cur.append(lab, caret);
     const list = el("ol", "vlist"); list.hidden = true; list.setAttribute("role", "listbox");
     song.clips.forEach((k, j) => {
       const b = el("button"); b.setAttribute("aria-current", j === clipIdx);
       const w = el("span", "w");
       if (k.top) w.append(el("span", "tag-top", "推荐"));
-      w.append(k.by + " ", el("small", null, desc(k)));
+      w.append(nm(k), el("small", null, desc(k)));
       b.append(el("b", null, `机位 ${j + 1}`), w, el("span", "len", fmtDur(k.duration)));
       b.onclick = () => { closeVersions(); go(songIdx, j, true); };
       const li = el("li"); li.append(b); list.append(li);
