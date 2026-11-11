@@ -7,6 +7,9 @@
 <meta name="description" content="肖战「出口·我们」巡回演唱会现场视频，按歌单顺序观看。Xiao Zhan HERE COMES OUR EXIT tour — fan-shot live videos in setlist order.">
 <meta name="copyright" content="Content curation and organization © 2026 CanadaXFX. Videos © their filmers. Unauthorized AI training prohibited.">
 <meta name="theme-color" content="#0B0708">
+<meta name="apple-mobile-web-app-title" content="出口·我们 现场视频"><!-- home-screen shortcut name (not the current song) -->
+<meta name="application-name" content="出口·我们 现场视频">
+<link rel="manifest" href="manifest.webmanifest"><!-- start_url "./": a home-screen shortcut opens the start page, not the song it was saved on -->
 <title>出口·我们 · 现场视频</title>
 <!-- Google Analytics (GA4 stream for xz-tour.pages.dev); async, so the page never waits for it (blocked in mainland China) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D462LSL414"></script>
@@ -597,7 +600,7 @@
 
     document.querySelectorAll(".song").forEach(b => b.setAttribute("aria-current", +b.dataset.i === songIdx));
     revealCurrent();
-    document.title = `${song.title} · ${show.dates ? show.city + "站" : show.city + show.label} · 出口·我们`;
+    document.title = `${song.title} · 出口·我们 · 现场视频`;   // no city: saved bookmarks/shortcuts shouldn't name one stop
     writeUrl();
   }
 

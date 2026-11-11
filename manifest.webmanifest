@@ -1,0 +1,11 @@
+{
+  "name": "出口·我们 · 现场视频",
+  "short_name": "出口·我们 现场视频",
+  "description": "肖战「出口·我们」巡回演唱会现场视频，按歌单顺序观看。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "lang": "zh-CN",
+  "background_color": "#0B0708",
+  "theme_color": "#0B0708"
+}

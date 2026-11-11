@@ -18,6 +18,20 @@
         "nanjing-2"
       ],
       "file": "shows/nanjing.json"
+    },
+    {
+      "id": "shanghai",
+      "city": "上海",
+      "cityEn": "Shanghai",
+      "date": "2026-11-06",
+      "dates": [
+        "2026-11-06",
+        "2026-11-08"
+      ],
+      "label": "11.06 + 11.08",
+      "labelEn": "2 shows",
+      "aliases": [],
+      "file": "shows/shanghai.json"
     }
   ]
 }

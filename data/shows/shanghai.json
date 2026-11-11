@@ -1,0 +1,356 @@
+{
+  "id": "shanghai",
+  "city": "上海",
+  "cityEn": "Shanghai",
+  "venue": "",
+  "date": "2026-11-06",
+  "dates": ["2026-11-06", "2026-11-08"],
+  "label": "11.06 + 11.08",
+  "labelEn": "2 shows",
+  "songs": [
+    {"n": "T0", "talk": true, "intro": true, "title": "开场Intro", "clips": [
+      {"platform": "douyin", "vid": "7705210734847246201", "duration": 113, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"}
+    ]},
+    {"n": "T0-2", "talk": true, "intro": true, "title": "VCR1", "clips": [
+      {"platform": "douyin", "vid": "7705211154322286821", "duration": 196, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"}
+    ]},
+    {"n": "1", "title": "我们", "clips": [
+      {"platform": "douyin", "vid": "7705405427743973606", "duration": 308, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705211588907659173", "duration": 301, "by": "xiaoyaobjl", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706489544234002826", "duration": 304, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705661673327636203", "duration": 286, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705225136223461221", "duration": 252, "by": "芒果馅儿的桃子", "dyid": "117561913", "secUid": "MS4wLjABAAAA5jqh8UNaVP2ngIupF7fSyX9uWvuGsQjfSK-SszaNE-0", "note": "近景直拍"}
+    ]},
+    {"n": "2", "title": "归零", "clips": [
+      {"platform": "douyin", "vid": "7705867060345478841", "duration": 234, "by": "姐姐只想有钱", "dyid": "35nuna", "secUid": "MS4wLjABAAAAjaKNnd4dt6b45YsIRHYH2o-nnWdIvpvgkwOrQ8fOte8", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7705212034941593512", "duration": 233, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706365865638726399", "duration": 232, "by": "酥到掉渣的小面包（看过肖战演唱会版）", "dyid": "YQ.a.XZ", "secUid": "MS4wLjABAAAABl4MsW7LSxBHUex_wDYQP-FzyTiijFxS9i5HPcPlMAQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706491242327036530", "duration": 241, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706423522030107321", "duration": 236, "by": "是个暴躁小太阳 🌞", "dyid": "990400295", "secUid": "MS4wLjABAAAAHGrzUHTumcTnHEYb6QWkJWEpBlKX28e-kEOcUeSL27Y", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705458341729233585", "duration": 230, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705765715848254117", "duration": 226, "by": "想有钱变有钱（上海有票🥰）", "dyid": "279346605", "secUid": "MS4wLjABAAAAXreMyNudPfAf1M_NFMHGWng2pj06CibDU7jAWgihMIE", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705338618092502410", "duration": 221, "by": "玉见小赞🦐", "dyid": "HovikZ1836", "secUid": "MS4wLjABAAAAtM4_YGqtEhcoaoK6RKZmx-w8Sn-038AQNhQyb8769K1ifQ9SMeA0baKzCZ8H-j_N", "note": "近景直拍"}
+    ]},
+    {"n": "3", "title": "还原", "clips": [
+      {"platform": "douyin", "vid": "7706018416167621866", "duration": 227, "by": "吃颗草莓🍓", "dyid": "xiaozhanshitu", "secUid": "MS4wLjABAAAA4phNhXsDGE2WNDQ6baoE_czx39pJ2DJPMc5Ek72DM0IaVIfFTC6DrSkF5Hu8jV40", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7705098971195691877", "duration": 225, "by": "麻咪麻咪轰🪄", "dyid": "24902974235", "secUid": "MS4wLjABAAAAvvjUTaS79HNAniPkiHpqFpWaKYNb_xzizvLS7rqI2wIIJJOM8ZerQSQnf7od2bn_", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7705114255302118053", "duration": 197, "by": "_Nc.（期待再见肖战版）", "dyid": "Sjn960312", "secUid": "MS4wLjABAAAA9aneDG1ZpvxprpCfgt9gKcMxnHQCcIGybVl_c4kMXIM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706499945549935195", "duration": 258, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706425005501245563", "duration": 255, "by": "是个暴躁小太阳 🌞", "dyid": "990400295", "secUid": "MS4wLjABAAAAHGrzUHTumcTnHEYb6QWkJWEpBlKX28e-kEOcUeSL27Y"},
+      {"platform": "douyin", "vid": "7706159773419061155", "duration": 214, "by": "鸽子小飞侠", "dyid": "1847891875", "secUid": "MS4wLjABAAAA3lCcR9LjFVijj9715gCsBY5KAslfT70IepKSBe8IntY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705689022421903099", "duration": 231, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705711859908239094", "duration": 184, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"}
+    ]},
+    {"n": "T3", "talk": true, "title": "VCR2", "clips": [
+      {"platform": "douyin", "vid": "7705213838110886321", "duration": 187, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv"}
+    ]},
+    {"n": "4", "cover": "孙燕姿", "title": "克卜勒", "clips": [
+      {"platform": "douyin", "vid": "7705423483442911330", "duration": 232, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "4K全景直拍"},
+      {"platform": "douyin", "vid": "7705755330987100005", "duration": 247, "by": "小福泥の大尾巴", "dyid": "Double.z95", "secUid": "MS4wLjABAAAAZ68eO6VAtwfQcFbTNRO2MQbF_KWYaE15cSLt14qFz7Q", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7706072207709489243", "duration": 248, "by": "xuan_n", "dyid": "376593621", "secUid": "MS4wLjABAAAA4HkTrXp7BHjSCSj_MsgWA2hp_t8bUnF0UjF7C177Cbw", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7706112154835339939", "duration": 260, "by": "刘怂怂～", "dyid": "1226160226j", "secUid": "MS4wLjABAAAAlNx7hbNSr9rDC-ue7ORUcfquN3Z6wYVOpfDL6Zy0DSs", "note": "4K全景直拍"},
+      {"platform": "douyin", "vid": "7706518208379994570", "duration": 291, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705096309439826426", "duration": 230, "by": "Maybe", "dyid": "288181803", "secUid": "MS4wLjABAAAAPZLUI9XUQwRxCGyBlob0IbrH90Dp5j6FUhQ9-RVZFgE", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705214282392381882", "duration": 289, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705268853958326116", "duration": 183, "by": "刘大喵🐱！", "dyid": "95943085", "secUid": "MS4wLjABAAAAVnvK5Erpgf7T4TRYK5-4u-bl4FBjg6vJPPsqb9ddOdI", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705772088518863222", "duration": 236, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705677908459033764", "duration": 257, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706408840901055194", "duration": 240, "by": "Crysli", "dyid": "15336668", "secUid": "MS4wLjABAAAANme-tfltyu3KZoOpIP5ZhmSnO6h0PD_9ue4-2La4pGI", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705354891728602091", "duration": 237, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"}
+    ]},
+    {"n": "5", "title": "荧", "clips": [
+      {"platform": "douyin", "vid": "7705131813324323583", "duration": 209, "by": "麻咪麻咪轰🪄", "dyid": "24902974235", "secUid": "MS4wLjABAAAAvvjUTaS79HNAniPkiHpqFpWaKYNb_xzizvLS7rqI2wIIJJOM8ZerQSQnf7od2bn_", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7706377931543464555", "duration": 197, "by": "吃颗草莓🍓", "dyid": "xiaozhanshitu", "secUid": "MS4wLjABAAAA4phNhXsDGE2WNDQ6baoE_czx39pJ2DJPMc5Ek72DM0IaVIfFTC6DrSkF5Hu8jV40", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705807498188146661", "duration": 209, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706358150757166245", "duration": 200, "by": "咪咪兔.", "dyid": "dy7hhuft6d3w", "secUid": "MS4wLjABAAAAQ4GpJ3My_WpV3wgHdFrp-uWFyxF-2eHSLgNfrIzoAjQ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705215020615958437", "duration": 219, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706523474382069499", "duration": 201, "by": "是个暴躁小太阳 🌞", "dyid": "990400295", "secUid": "MS4wLjABAAAAHGrzUHTumcTnHEYb6QWkJWEpBlKX28e-kEOcUeSL27Y", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706537906618321307", "duration": 205, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705980466285326693", "duration": 201, "by": "SeanlL（南京见过肖战还想再见版）", "dyid": "SeanlL", "secUid": "MS4wLjABAAAA_kjzFbanDF8fOMHiWQ630A-t31XMxVYyEr_i7hDyHbG0bB2vecEjDumzuJ1oENrH", "note": "全景直拍"}
+    ]},
+    {"n": "6", "title": "不合时宜", "clips": [
+      {"platform": "douyin", "vid": "7706055507803602175", "duration": 367, "by": "SuTian", "dyid": "SuTian_BAO", "secUid": "MS4wLjABAAAArvzsEJxMVIvjXUgHxNhCS2P9emTrtuvgYmv7Zq3TpJY", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705882223840591098", "duration": 243, "by": "小福泥の大尾巴", "dyid": "Double.z95", "secUid": "MS4wLjABAAAAZ68eO6VAtwfQcFbTNRO2MQbF_KWYaE15cSLt14qFz7Q", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7705995129996328889", "duration": 232, "by": "涛DAYTOY 1005（唯）", "dyid": "10021005183.6", "secUid": "MS4wLjABAAAAEby6EaYDDKHw3So1zLsE7pfKyZ5eAxOahpb4d3ERFzc", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705824546864158075", "duration": 240, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705215801117272826", "duration": 242, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706535661923548646", "duration": 241, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705713386038432975", "duration": 239, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705993580687970918", "duration": 242, "by": "Pride.", "dyid": "O.oO.oxy000", "secUid": "MS4wLjABAAAA3RdhyYn0sqWHeRbnUbYjhihZBzRpLwaB5_aIWgtOUpg", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705215503275452538", "duration": 252, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706530903472389241", "duration": 322, "by": "是个暴躁小太阳 🌞", "dyid": "990400295", "secUid": "MS4wLjABAAAAHGrzUHTumcTnHEYb6QWkJWEpBlKX28e-kEOcUeSL27Y", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706174724254489339", "duration": 213, "by": "🌈M.🐷", "dyid": "2110599211", "secUid": "MS4wLjABAAAAilDIyY-foAyeK627KZ48Cl2_s8wQmK63rJvK0FccnVY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705852770390248689", "duration": 241, "by": "落落（见过肖战版）", "dyid": "xiaoxiao.zan", "secUid": "MS4wLjABAAAAoeA8YlR8slFMrASJzvePsT3XuoaPXPzHF-7HQHKg-8s", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705680117808897769", "duration": 240, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706380813726447858", "duration": 360, "by": "Crysli", "dyid": "15336668", "secUid": "MS4wLjABAAAANme-tfltyu3KZoOpIP5ZhmSnO6h0PD_9ue4-2La4pGI", "note": "4K近景直拍"},
+      {"platform": "douyin", "vid": "7705635480985524123", "duration": 241, "by": "💓Meimei 7788", "dyid": "183557310", "secUid": "MS4wLjABAAAA09UcIms3ppNIZ7jbT2-AkAf5h4TcoLxCMIwfSH1xCMQ", "note": "全景直拍"}
+    ]},
+    {"n": "T6", "talk": true, "title": "Talking", "clips": [
+      {"platform": "douyin", "vid": "7705217035388108239", "duration": 86, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景实拍"},
+      {"platform": "douyin", "vid": "7705824267677476465", "duration": 412, "by": "喜欢海绵宝宝的小王子🎈", "dyid": "47003258626", "secUid": "MS4wLjABAAAAq36-WLEPixGWxg0FKjASxPDgqkAUXWU927TAJYr3DPSHp949Au39Lbc7V4zCjoxR", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706543221346732699", "duration": 124, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"}
+    ]},
+    {"n": "7", "cover": "莫文蔚", "title": "不要爱我", "clips": [
+      {"platform": "douyin", "vid": "7705587833638241378", "duration": 288, "by": "做一个小仙女才好呢(见过肖战版）", "dyid": "1099245961", "secUid": "MS4wLjABAAAAeCKI9rpiD2UJRo0kOIBW-hmrqbx9bIFKe4C7qOKsY-Y", "note": "近景直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7706199369960664169", "duration": 303, "by": "松鼠先生", "dyid": "dy85fz8xpz6k", "secUid": "MS4wLjABAAAAkdS4JqkUSSp7Y6_7xOorKe_PFcAvp2j3DDIIaVavvCc", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706131011839065523", "duration": 288, "by": "陆小兔DAYTOY", "dyid": "92996436", "secUid": "MS4wLjABAAAA9Xh4Ob7IAJH0uKRcROil8Z4ca_2uuaRQ_4TMoGJ2JRo", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705848462000772475", "duration": 308, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706431396550003877", "duration": 246, "by": "放羊的萤火虫", "dyid": "56774981459", "secUid": "MS4wLjABAAAABOhhPQq-21jHRX7CmnmhBuuOoiXzdw-ehabPxg2UJkTrVsphmFPeUUzZkvVHb2-y", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705217587772642417", "duration": 316, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706514522958690674", "duration": 278, "by": "鱿鱼会败北", "dyid": "3121299827W", "secUid": "MS4wLjABAAAAqD3bRxQqt_2RVdkjSa6-t9zRLIjgxDGe9dcbIOZu6gQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705852698579579121", "duration": 281, "by": "点兔", "dyid": "dy9oxx1uz53r", "secUid": "MS4wLjABAAAAzR430vQF0CiapV5Se1kA5O3jGXBwaYjAjwlUE5iZzFU", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706187939449244281", "duration": 268, "by": "🌈M.🐷", "dyid": "2110599211", "secUid": "MS4wLjABAAAAilDIyY-foAyeK627KZ48Cl2_s8wQmK63rJvK0FccnVY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705719045294709139", "duration": 291, "by": "好运大富～去过出口·我们-上海内场1排版", "dyid": "23760614008", "secUid": "MS4wLjABAAAA2YsdJTl7yRVyRqmC8up3fyxMTYswu009FWayeW4MMHXuu5IW45nHe2mzv6rVZufv", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706553815251560923", "duration": 328, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706005802901790948", "duration": 314, "by": "想做一条咸鱼的咸鱼（见过肖战5次版）", "dyid": "91757291", "secUid": "MS4wLjABAAAANpcrOUbD2wrmb_Q3pP6SAh0pdzv0MIe25u2gm_Ia7ZM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706045769312832697", "duration": 279, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705683265773266537", "duration": 311, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"}
+    ]},
+    {"n": "8", "title": "不要回头", "clips": [
+      {"platform": "douyin", "vid": "7705651505412364175", "duration": 254, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705116616275208953", "duration": 217, "by": "司马芮馨（唯）", "dyid": "2005585420", "secUid": "MS4wLjABAAAAk9xh3CpuIJJ4ki-bBvFMMSjkDA6ClfYOp1ENEvyiHZg", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705112895704749248", "duration": 215, "by": "丫丫的平方米🦐", "dyid": "yaya_1030.", "secUid": "MS4wLjABAAAAhElWKUMbPfIUqSPQv4fgSYuaHvFOOH_JfX-BjqYruOE", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705962052816420731", "duration": 212, "by": "可爱🐰🐰", "dyid": "55112073", "secUid": "MS4wLjABAAAA8beWsx8f9evmH3QZ5-OwGtG9aCSlVSN6bTZa6uqMJqM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705678714458545382", "duration": 217, "by": "有点社孔女士（上海见过肖战版）", "dyid": "58108082", "secUid": "MS4wLjABAAAA5gpQxIPqelZo27-Hexo98OpuDj8P5VGRdTrSXOosUiQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705218335609607865", "duration": 260, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705730870255183993", "duration": 232, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705218165211951538", "duration": 203, "by": "sleep🐰", "dyid": "sleep1005", "secUid": "MS4wLjABAAAAJ6qhD6KUWoVdnZPZ1kXkvXTE-7lVD_EMHeGF_myk7Dk", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706534503570234575", "duration": 209, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706560821496885897", "duration": 261, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705686196508470975", "duration": 220, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705944301951965433", "duration": 146, "by": "舒", "dyid": "579803234", "secUid": "MS4wLjABAAAAj_yXu0iWAcOTbU5czzy-uw7FenAIjEI_cXg9joCA3JY", "note": "近景直拍"}
+    ]},
+    {"n": "T8", "talk": true, "title": "VCR3", "clips": [
+      {"platform": "douyin", "vid": "7705219827099791845", "duration": 211, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"}
+    ]},
+    {"n": "9", "title": "漂流", "clips": [
+      {"platform": "douyin", "vid": "7706019973923547569", "duration": 206, "by": "涛DAYTOY 1005（唯）", "dyid": "10021005183.6", "secUid": "MS4wLjABAAAAEby6EaYDDKHw3So1zLsE7pfKyZ5eAxOahpb4d3ERFzc", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706235342625537275", "duration": 204, "by": "小福泥の大尾巴", "dyid": "Double.z95", "secUid": "MS4wLjABAAAAZ68eO6VAtwfQcFbTNRO2MQbF_KWYaE15cSLt14qFz7Q", "note": "4K直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7705739526345766607", "duration": 299, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705435378258811130", "duration": 297, "by": "_Nc.（期待再见肖战版）", "dyid": "Sjn960312", "secUid": "MS4wLjABAAAA9aneDG1ZpvxprpCfgt9gKcMxnHQCcIGybVl_c4kMXIM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705220354578913765", "duration": 307, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705745185091094707", "duration": 257, "by": "🐰晚晴儿DAYTOY🦐", "dyid": "NickyKing1005", "secUid": "MS4wLjABAAAAnHI5ftXBk01lRzv4dCOAbhPOoqp4vlxRyeZsA8vDOlvGBjLXSDtYQabYBQ4i21bG", "note": "近景直拍", "hidden": true},
+      {"platform": "douyin", "vid": "7706566264865838986", "duration": 310, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706378192194090703", "duration": 239, "by": "暮光.（许愿下次见", "dyid": "30450398430", "secUid": "MS4wLjABAAAAqgZgDphsxo8CrjhgHFBxNpJz4WjlYD413FQfOaVFwe131VZzM9yCtX9FMbsxAGIj", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706477062278473883", "duration": 261, "by": "拾柒👑", "dyid": "288326173Y", "secUid": "MS4wLjABAAAASD6www3rUN1TXjFaQWhliADhl9wxQtiXEnLE-Ng1r-A", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705452162210408649", "duration": 289, "by": "雪顶拿铁不加冰", "dyid": "yx2000xz1991", "secUid": "MS4wLjABAAAAqttDbrAWc4JtKxjn9X4lls7SfRyq_PutssNbG4ISkVb4j1kabP_Dz5riXnyuI_mR", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706150992424892809", "duration": 263, "by": "上心Xin🌟", "dyid": "shangxin_2021", "secUid": "MS4wLjABAAAAZSJLEb1CHNOzutUVlrbRMu9Vk04wFr2BO8oh_e478tw", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706194745811281321", "duration": 300, "by": "想做一条咸鱼的咸鱼（见过肖战5次版）", "dyid": "91757291", "secUid": "MS4wLjABAAAANpcrOUbD2wrmb_Q3pP6SAh0pdzv0MIe25u2gm_Ia7ZM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705695383901408767", "duration": 281, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706354067610251114", "duration": 226, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "10", "title": "Allez, aimez!", "clips": [
+      {"platform": "douyin", "vid": "7705835127285258880", "duration": 197, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705257561997851377", "duration": 283, "by": "Food榴柚", "dyid": "xiongbaobao277", "secUid": "MS4wLjABAAAAnil805ve3BWhJ1zCDL1UDjwnDJ6p3EC_ThZBw4gkYhM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705624965106896998", "duration": 287, "by": "玉见小赞🦐", "dyid": "HovikZ1836", "secUid": "MS4wLjABAAAAtM4_YGqtEhcoaoK6RKZmx-w8Sn-038AQNhQyb8769K1ifQ9SMeA0baKzCZ8H-j_N", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706375747800278117", "duration": 222, "by": "一个下巴太孤独", "dyid": "115272054", "secUid": "MS4wLjABAAAAf2eraI7CwO19KveUG-qmDSrACbNsC6Xu9T2gFJUWgfc", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705814755684528102", "duration": 196, "by": "战战1005", "dyid": "94348653774", "secUid": "MS4wLjABAAAA-ZEazzm11ZLyHpzhDRaPvZ8k1reVtS2grDnPKZa2JiV8q5rvBTzJvKPCtPfx6b0q", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705220882302401659", "duration": 210, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705099266805370771", "duration": 214, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705693526701687443", "duration": 201, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706526329000622329", "duration": 277, "by": "水矜采辛", "dyid": "363389504", "secUid": "MS4wLjABAAAAHX4tuXV2m-TK-fpj9AV5NtCxTkgpPxN235fGm69XKl8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706073303391279465", "duration": 237, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "T10", "talk": true, "title": "Talking", "clips": [
+      {"platform": "douyin", "vid": "7705221567936010112", "duration": 78, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705030035182308650", "duration": 33, "by": "星姐", "dyid": "xingjiebaby520", "secUid": "MS4wLjABAAAAGxBgui9ZieMwKFTeDQ3PWmMEAB0Mnz4h1VFvc7FXFlI", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705078530711987411", "duration": 77, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "近景直拍"}
+    ]},
+    {"n": "11", "title": "管他什么音乐", "clips": [
+      {"platform": "douyin", "vid": "7705037177352129801", "duration": 221, "by": "星姐", "dyid": "xingjiebaby520", "secUid": "MS4wLjABAAAAGxBgui9ZieMwKFTeDQ3PWmMEAB0Mnz4h1VFvc7FXFlI", "note": "4K近景直拍"},
+      {"platform": "douyin", "vid": "7706354748329476715", "duration": 224, "by": "love myself", "dyid": "sugarna", "secUid": "MS4wLjABAAAAt0ruXkKS1OQnLp0xevH3KTxZOr2BwPfx1kQpeMoMvDITxJiPRlFib14Id6rSJYin", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705222869844481265", "duration": 228, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705052179140315505", "duration": 215, "by": "喜欢海绵宝宝的小王子🎈", "dyid": "47003258626", "secUid": "MS4wLjABAAAAq36-WLEPixGWxg0FKjASxPDgqkAUXWU927TAJYr3DPSHp949Au39Lbc7V4zCjoxR", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705435280413267023", "duration": 222, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705137511564546291", "duration": 209, "by": "Stella", "dyid": "175026965", "secUid": "MS4wLjABAAAAMyV-zEqDFsOCzJ9iwJIRnlUQdtYQM-TUXbTUwMnwZwY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705769539107034217", "duration": 214, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "4K近景直拍"},
+      {"platform": "douyin", "vid": "7706498284286090939", "duration": 228, "by": "巴哒巴哒", "dyid": "dy02m8s0ax39", "secUid": "MS4wLjABAAAA9Is_kbPaMXQb4eTi8F9yMN3ZXUABQ46vEaIT-7p59RA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705246745051419578", "duration": 223, "by": "咪咪兔.", "dyid": "dy7hhuft6d3w", "secUid": "MS4wLjABAAAAQ4GpJ3My_WpV3wgHdFrp-uWFyxF-2eHSLgNfrIzoAjQ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705697588511323236", "duration": 221, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705036485619456585", "duration": 210, "by": "@不要回头.有钱🐰", "dyid": "194684808", "secUid": "MS4wLjABAAAAkbOWwE8IqCzXAxhZxu8TeYtf9B2t3YB4oBlNTuddZkM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706537256882755001", "duration": 217, "by": "水矜采辛", "dyid": "363389504", "secUid": "MS4wLjABAAAAHX4tuXV2m-TK-fpj9AV5NtCxTkgpPxN235fGm69XKl8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705116903426484582", "duration": 230, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705847639506183030", "duration": 222, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"}
+    ]},
+    {"n": "12", "cover": "孙燕姿", "title": "逃亡", "clips": [
+      {"platform": "douyin", "vid": "7705730343455028096", "duration": 338, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7706002066103974331", "duration": 383, "by": "想有钱变有钱（上海有票🥰）", "dyid": "279346605", "secUid": "MS4wLjABAAAAXreMyNudPfAf1M_NFMHGWng2pj06CibDU7jAWgihMIE", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705613097394377082", "duration": 231, "by": "Eliza球球-🦐想💰", "dyid": "dy590dtio38n", "secUid": "MS4wLjABAAAApFVCdH1OkRCeXZ8Quff5a7LIdUkKUimgxLfvNFmnCxYEXfsMWwqgf5JVycLNIFx3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705224403487439993", "duration": 502, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705053554550326897", "duration": 299, "by": "向阳而生1005青", "dyid": "79283071850", "secUid": "MS4wLjABAAAA54OcxYUvSZwObK0cfVC7ZwP8Kn6reExTe5odKK48vnQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705734601511675643", "duration": 260, "by": "Boshaw", "dyid": "BJYX1823959", "secUid": "MS4wLjABAAAAL7BirzlB1pE396Dt4VpvBxNaa50nfyuBLKUfzYqVS3I", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706520976260272975", "duration": 265, "by": "刘怂怂～", "dyid": "1226160226j", "secUid": "MS4wLjABAAAAlNx7hbNSr9rDC-ue7ORUcfquN3Z6wYVOpfDL6Zy0DSs", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706031692599628709", "duration": 269, "by": "jiw", "dyid": "1782314122", "secUid": "MS4wLjABAAAAatCnVkpg4OCiYqKy3EpApEKgW9FG9dvoCfyKAqV51EE", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706360022523854505", "duration": 278, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "13", "note": "唱跳", "title": "异想天开", "clips": [
+      {"platform": "douyin", "vid": "7705846404614202575", "duration": 279, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705432886081955785", "duration": 272, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705544162251562831", "duration": 266, "by": "（见过肖战版）不许抢小赞的薯片_", "dyid": "Flipped_10051115", "secUid": "MS4wLjABAAAAvOcmXaRQv3HRaYJo78I-nmBcj5tjixu0PedmQSz3Btg", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705225015701588303", "duration": 277, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705214443572361114", "duration": 248, "by": "Stella", "dyid": "175026965", "secUid": "MS4wLjABAAAAMyV-zEqDFsOCzJ9iwJIRnlUQdtYQM-TUXbTUwMnwZwY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705635522127735993", "duration": 276, "by": "咪咪兔.", "dyid": "dy7hhuft6d3w", "secUid": "MS4wLjABAAAAQ4GpJ3My_WpV3wgHdFrp-uWFyxF-2eHSLgNfrIzoAjQ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706428378392108913", "duration": 275, "by": "吃颗草莓🍓", "dyid": "xiaozhanshitu", "secUid": "MS4wLjABAAAA4phNhXsDGE2WNDQ6baoE_czx39pJ2DJPMc5Ek72DM0IaVIfFTC6DrSkF5Hu8jV40", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705851551663744485", "duration": 265, "by": "拱兴拱兴", "dyid": "161632781", "secUid": "MS4wLjABAAAAr2QRqvu2LIyteb_Om06WoYW_pp3YgGT-nVsap8O-4lM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705512455858356338", "duration": 70, "by": "xiaohua1980（见过肖战版）", "dyid": "1690086217", "secUid": "MS4wLjABAAAAUzVNPdNDb-ctusIgpCIIBTB6UG_g771SviRwn6X6Ysw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705240094604545892", "duration": 258, "by": "小熊软糖💕💕", "dyid": "HoeXM_0711", "secUid": "MS4wLjABAAAA8URYIE9Ks7sNcftrjKv_My9MSPst0xFDMXFOT6ndzR8ttFm9TCcKytFqcYQ1U7Bj", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705833876145627081", "duration": 192, "by": "小桃心Ami(看过肖战演唱会上海站)", "dyid": "92547804005", "secUid": "MS4wLjABAAAAi0mFnweogfByp6YZFy0VztJWYj_wpiyMlfb3mexJfSYb9pWX5NDL-XR9ROkraNb7", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706334997519761779", "duration": 272, "by": "晴天娘（娘）", "dyid": "1065804833", "secUid": "MS4wLjABAAAAs-X8yRhYXY7yOd_4U1c1Y30UwL_zWoiVkngCABlSO4s", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706077495501600320", "duration": 181, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705967317368992091", "duration": 268, "by": "肖肖是心上的月亮🌹", "dyid": "378224", "secUid": "MS4wLjABAAAAw5nDB9z_SlLoDOUYsdlVFGnzQ-m_chnKxXOll-sqUw0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705776173892065192", "duration": 185, "by": "拾月📷🐰（见过肖战版）", "dyid": "10055201314XZ.", "secUid": "MS4wLjABAAAAda0P19Iy52Ev11W--BJfFcT33n000YrELnVS9_opP0w", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705991058455828069", "duration": 275, "by": "落落（见过肖战版）", "dyid": "xiaoxiao.zan", "secUid": "MS4wLjABAAAAoeA8YlR8slFMrASJzvePsT3XuoaPXPzHF-7HQHKg-8s", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706052168041851761", "duration": 253, "by": "你吼辣么大声干嘛（抢到肖战演唱会票版）", "dyid": "127554907", "secUid": "MS4wLjABAAAAx6mAW-Q9qdfGc_zPeb4Z8BsrsmAwdm8e1eBeBfj3W0I", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705214217091604923", "duration": 265, "by": "Costa🐋", "dyid": "281092488", "secUid": "MS4wLjABAAAAU0MZlMKf0bx1P1Db9u-U1jJbmqNtRDYizx3BF2VlVIA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706331124993615450", "duration": 269, "by": "水矜采辛", "dyid": "363389504", "secUid": "MS4wLjABAAAAHX4tuXV2m-TK-fpj9AV5NtCxTkgpPxN235fGm69XKl8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706411837185959849", "duration": 260, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "T13", "talk": true, "title": "VCR4", "clips": [
+      {"platform": "douyin", "vid": "7705225258496486501", "duration": 207, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"}
+    ]},
+    {"n": "14", "title": "晚安", "clips": [
+      {"platform": "douyin", "vid": "7705798291246099008", "duration": 254, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705226166932520433", "duration": 276, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706168240096100982", "duration": 250, "by": "小熊软糖💕💕", "dyid": "HoeXM_0711", "secUid": "MS4wLjABAAAA8URYIE9Ks7sNcftrjKv_My9MSPst0xFDMXFOT6ndzR8ttFm9TCcKytFqcYQ1U7Bj", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705213776208371313", "duration": 260, "by": "芒果馅儿的桃子", "dyid": "117561913", "secUid": "MS4wLjABAAAA5jqh8UNaVP2ngIupF7fSyX9uWvuGsQjfSK-SszaNE-0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706354986075601060", "duration": 253, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "15", "title": "夜行人的自白", "clips": [
+      {"platform": "douyin", "vid": "7706061485323226394", "duration": 216, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "4K全景"},
+      {"platform": "douyin", "vid": "7705226852130296933", "duration": 216, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705459692244635259", "duration": 218, "by": "Costa🐋", "dyid": "281092488", "secUid": "MS4wLjABAAAAU0MZlMKf0bx1P1Db9u-U1jJbmqNtRDYizx3BF2VlVIA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705710036497208164", "duration": 204, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705215832738309881", "duration": 205, "by": "芒果馅儿的桃子", "dyid": "117561913", "secUid": "MS4wLjABAAAA5jqh8UNaVP2ngIupF7fSyX9uWvuGsQjfSK-SszaNE-0", "note": "近景直拍"}
+    ]},
+    {"n": "16", "title": "灯塔", "clips": [
+      {"platform": "douyin", "vid": "7705108911120179179", "duration": 263, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705227762488361192", "duration": 299, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706467260486993856", "duration": 267, "by": "肖战影音会", "dyid": "19911005xzyyh", "secUid": "MS4wLjABAAAAqC4DjHo_8kZSQV9bCTwoOgBbpaxksndgz8kzP96Q6bI", "note": "官摄", "top": true},
+      {"platform": "douyin", "vid": "7705654441320731625", "duration": 248, "by": "小熊软糖💕💕", "dyid": "HoeXM_0711", "secUid": "MS4wLjABAAAA8URYIE9Ks7sNcftrjKv_My9MSPst0xFDMXFOT6ndzR8ttFm9TCcKytFqcYQ1U7Bj", "note": "近景直拍"},
+      {"platform": "r2", "url": "https://assets.xz-studio-gallery.com/full/20261110_灯塔官摄上海演唱会_XZ-MISC-1.mp4", "duration": 267, "by": "央视新闻", "note": "官摄", "hidden": true, "top": true},
+      {"platform": "douyin", "vid": "7705216885323103845", "duration": 257, "by": "可爱🐰🐰", "dyid": "55112073", "secUid": "MS4wLjABAAAA8beWsx8f9evmH3QZ5-OwGtG9aCSlVSN6bTZa6uqMJqM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706017732085675209", "duration": 266, "by": "Crysli", "dyid": "15336668", "secUid": "MS4wLjABAAAANme-tfltyu3KZoOpIP5ZhmSnO6h0PD_9ue4-2La4pGI", "note": "4K近景直拍"}
+    ]},
+    {"n": "T16", "talk": true, "title": "Talking", "clips": [
+      {"platform": "douyin", "vid": "7705237187315122289", "duration": 93, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"}
+    ]},
+    {"n": "17", "title": "余年", "clips": [
+      {"platform": "douyin", "vid": "7705814889318951488", "duration": 251, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705210192036741696", "duration": 251, "by": "山亭夏日⛰️", "dyid": "1779422800", "secUid": "MS4wLjABAAAAkcKM4jpc8UuGieCVKSrMSWD5zSt9Wqhsm0Vqpzl2GjU", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705953373434492325", "duration": 233, "by": "jiw", "dyid": "1782314122", "secUid": "MS4wLjABAAAAatCnVkpg4OCiYqKy3EpApEKgW9FG9dvoCfyKAqV51EE", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7706029344448149105", "duration": 251, "by": "SeanlL（南京见过肖战还想再见版）", "dyid": "SeanlL", "secUid": "MS4wLjABAAAA_kjzFbanDF8fOMHiWQ630A-t31XMxVYyEr_i7hDyHbG0bB2vecEjDumzuJ1oENrH", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705231202866149733", "duration": 267, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705781462662939561", "duration": 255, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "4K近景直拍"},
+      {"platform": "douyin", "vid": "7705241293203262187", "duration": 261, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705069868496390568", "duration": 253, "by": "噜哩个噜（肖战上海演唱会对视版）", "dyid": "Vanora160214", "secUid": "MS4wLjABAAAAFHvm4q-N2HxyqyrswfLKQ_W80ot6qJm-u85MFmsNcMc", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706183199471749105", "duration": 247, "by": "海绵宝宝不吃香菜", "dyid": "873169045", "secUid": "MS4wLjABAAAA-hgH7jJqHMqM9C5SK4Y2uwdm0Qh6FhQyyLOZjFgwHQM", "note": "近景直拍"}
+    ]},
+    {"n": "18", "cover": "白安", "title": "是什么让我遇见这样的你", "clips": [
+      {"platform": "douyin", "vid": "7705624774634951865", "duration": 244, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705248640340154239", "duration": 246, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7706375419662020005", "duration": 225, "by": "涛DAYTOY 1005（唯）", "dyid": "10021005183.6", "secUid": "MS4wLjABAAAAEby6EaYDDKHw3So1zLsE7pfKyZ5eAxOahpb4d3ERFzc", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706040621870577256", "duration": 262, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705232071916463738", "duration": 245, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705348819081495141", "duration": 228, "by": "山亭夏日⛰️", "dyid": "1779422800", "secUid": "MS4wLjABAAAAkcKM4jpc8UuGieCVKSrMSWD5zSt9Wqhsm0Vqpzl2GjU", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705923745811366298", "duration": 255, "by": "@不要回头.有钱🐰", "dyid": "194684808", "secUid": "MS4wLjABAAAAkbOWwE8IqCzXAxhZxu8TeYtf9B2t3YB4oBlNTuddZkM", "note": "近景直拍"}
+    ]},
+    {"n": "19", "title": "都一样", "clips": [
+      {"platform": "douyin", "vid": "7706131306988459131", "duration": 281, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7706183462848024527", "duration": 235, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705232789393721713", "duration": 323, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705834363619980506", "duration": 275, "by": "Crysli", "dyid": "15336668", "secUid": "MS4wLjABAAAANme-tfltyu3KZoOpIP5ZhmSnO6h0PD_9ue4-2La4pGI", "note": "直拍"},
+      {"platform": "douyin", "vid": "7705230457289727350", "duration": 225, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705334195870935461", "duration": 256, "by": "Costa🐋", "dyid": "281092488", "secUid": "MS4wLjABAAAAU0MZlMKf0bx1P1Db9u-U1jJbmqNtRDYizx3BF2VlVIA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705251444942024809", "duration": 259, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705809095421246857", "duration": 232, "by": "Pride.", "dyid": "O.oO.oxy000", "secUid": "MS4wLjABAAAA3RdhyYn0sqWHeRbnUbYjhihZBzRpLwaB5_aIWgtOUpg", "note": "近景直拍"}
+    ]},
+    {"n": "T19", "talk": true, "title": "VCR5", "clips": [
+      {"platform": "douyin", "vid": "7705233334305221218", "duration": 200, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"}
+    ]},
+    {"n": "20", "title": "竹石", "clips": [
+      {"platform": "douyin", "vid": "7706397507463398592", "duration": 221, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705877058165774586", "duration": 239, "by": "舒", "dyid": "579803234", "secUid": "MS4wLjABAAAAj_yXu0iWAcOTbU5czzy-uw7FenAIjEI_cXg9joCA3JY", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705844125463324410", "duration": 220, "by": "水矜采辛", "dyid": "363389504", "secUid": "MS4wLjABAAAAHX4tuXV2m-TK-fpj9AV5NtCxTkgpPxN235fGm69XKl8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706047421935693290", "duration": 227, "by": "想做一条咸鱼的咸鱼（见过肖战5次版）", "dyid": "91757291", "secUid": "MS4wLjABAAAANpcrOUbD2wrmb_Q3pP6SAh0pdzv0MIe25u2gm_Ia7ZM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705462862449349755", "duration": 233, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705982450552016613", "duration": 201, "by": "你吼辣么大声干嘛（抢到肖战演唱会票版）", "dyid": "127554907", "secUid": "MS4wLjABAAAAx6mAW-Q9qdfGc_zPeb4Z8BsrsmAwdm8e1eBeBfj3W0I", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705243442548433765", "duration": 228, "by": "Costa🐋", "dyid": "281092488", "secUid": "MS4wLjABAAAAU0MZlMKf0bx1P1Db9u-U1jJbmqNtRDYizx3BF2VlVIA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705254618347775167", "duration": 225, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705427107715594865", "duration": 222, "by": "海绵宝宝不吃香菜", "dyid": "873169045", "secUid": "MS4wLjABAAAA-hgH7jJqHMqM9C5SK4Y2uwdm0Qh6FhQyyLOZjFgwHQM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706063461138775514", "duration": 226, "by": "玉见小赞🦐", "dyid": "HovikZ1836", "secUid": "MS4wLjABAAAAtM4_YGqtEhcoaoK6RKZmx-w8Sn-038AQNhQyb8769K1ifQ9SMeA0baKzCZ8H-j_N", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705223106760059259", "duration": 232, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705836191300943487", "duration": 223, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"}
+    ]},
+    {"n": "21", "title": "轻轻", "clips": [
+      {"platform": "douyin", "vid": "7705255762365732081", "duration": 406, "by": "@Me 赞 💞", "dyid": "787015015", "secUid": "MS4wLjABAAAASNgHyYXK68iX8yjU6Jn3BFij7oLXIlvsn6njtcnyHKA", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705112977792052581", "duration": 315, "by": "芒果馅儿的桃子", "dyid": "117561913", "secUid": "MS4wLjABAAAA5jqh8UNaVP2ngIupF7fSyX9uWvuGsQjfSK-SszaNE-0", "note": "直拍"},
+      {"platform": "douyin", "vid": "7705847918700430335", "duration": 207, "by": "想做一条咸鱼的咸鱼（见过肖战5次版）", "dyid": "91757291", "secUid": "MS4wLjABAAAANpcrOUbD2wrmb_Q3pP6SAh0pdzv0MIe25u2gm_Ia7ZM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705463783401920483", "duration": 212, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706004876770022025", "duration": 265, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706006858021037051", "duration": 194, "by": "咪咪兔.", "dyid": "dy7hhuft6d3w", "secUid": "MS4wLjABAAAAQ4GpJ3My_WpV3wgHdFrp-uWFyxF-2eHSLgNfrIzoAjQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705372281752784090", "duration": 246, "by": "皮皮酱（已看肖战南京首场内场+上海内场）", "dyid": "331326404", "secUid": "MS4wLjABAAAAeTYkrcNOWty9WFH6VBRoBbHDrQ9VNg4hT1MeFqACZx8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705382650597176804", "duration": 202, "by": "小熊软糖💕💕", "dyid": "HoeXM_0711", "secUid": "MS4wLjABAAAA8URYIE9Ks7sNcftrjKv_My9MSPst0xFDMXFOT6ndzR8ttFm9TCcKytFqcYQ1U7Bj", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705801240559010895", "duration": 92, "by": "拾月📷🐰（见过肖战版）", "dyid": "10055201314XZ.", "secUid": "MS4wLjABAAAAda0P19Iy52Ev11W--BJfFcT33n000YrELnVS9_opP0w", "note": "近景直拍"},
+      {"platform": "r2", "url": "https://assets.xz-studio-gallery.com/full/20261108_%E5%B0%8F%E5%9F%8E%E8%89%AF%E6%96%B9_XZ-MISC-1.mp4", "duration": 212, "by": "央视新闻", "note": "官摄", "hidden": true, "top": true},
+      {"platform": "douyin", "vid": "7705334707999638362", "duration": 430, "by": "玉见小赞🦐", "dyid": "HovikZ1836", "secUid": "MS4wLjABAAAAtM4_YGqtEhcoaoK6RKZmx-w8Sn-038AQNhQyb8769K1ifQ9SMeA0baKzCZ8H-j_N", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705221310528480411", "duration": 236, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705756915439572111", "duration": 212, "by": "肖战影音会", "dyid": "19911005xzyyh", "secUid": "MS4wLjABAAAAqC4DjHo_8kZSQV9bCTwoOgBbpaxksndgz8kzP96Q6bI", "note": "官摄", "top": true}
+    ]},
+    {"n": "T21", "talk": true, "title": "Talking", "clips": [
+      {"platform": "douyin", "vid": "7705465176968353393", "duration": 398, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv"},
+      {"platform": "douyin", "vid": "7706170675686047970", "duration": 224, "by": "拾月📷🐰（见过肖战版）", "dyid": "10055201314XZ.", "secUid": "MS4wLjABAAAAda0P19Iy52Ev11W--BJfFcT33n000YrELnVS9_opP0w", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705222401667758457", "duration": 92, "by": "Rainbow🌈🌈🌈", "dyid": "606782224", "secUid": "MS4wLjABAAAAYLlMLsaGPrdsi2V735XrxzV2Yvs7oEptKkt8tsIxxY8", "note": "近景直拍"}
+    ]},
+    {"n": "T21-2", "talk": true, "title": "合照", "clips": [
+      {"platform": "douyin", "vid": "7705993681387942235", "duration": 90, "by": "莲花兔兔", "dyid": "Urmysunshine105", "secUid": "MS4wLjABAAAAuINlzt1JJx_uQA4opDC0h0KDsNCGK6Q03vy0EBT3ocCZUKSeaPfexcIRMG6clfg3", "note": "全景直拍"}
+    ]},
+    {"n": "22", "cover": "周笔畅", "title": "用尽我的一切奔向你", "clips": [
+      {"platform": "douyin", "vid": "7706162642570783360", "duration": 230, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705114461926264677", "duration": 226, "by": "祁愿", "dyid": "2030518037", "secUid": "MS4wLjABAAAAVDu1EBPpHLZ96SJeH2ak3rhS4yU8zZqSKrhm-lsRAjA", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7706343458155904953", "duration": 244, "by": "涛DAYTOY 1005（唯）", "dyid": "10021005183.6", "secUid": "MS4wLjABAAAAEby6EaYDDKHw3So1zLsE7pfKyZ5eAxOahpb4d3ERFzc", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7706138048056331889", "duration": 243, "by": "喜欢小耳朵（上海内场见过肖战版）", "dyid": "Lairifangchangqi", "secUid": "MS4wLjABAAAAVOVU9njVn_xI-RyzezHJ_1t5VayWyZs9kMqPOPNFTsbCOGlbMI_KjI7F9ui9JP9x", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705101433729821115", "duration": 237, "by": "_Nc.（期待再见肖战版）", "dyid": "Sjn960312", "secUid": "MS4wLjABAAAA9aneDG1ZpvxprpCfgt9gKcMxnHQCcIGybVl_c4kMXIM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706405894993886373", "duration": 224, "by": "y派大星y-1005", "dyid": "888656088", "secUid": "MS4wLjABAAAAB_5PfvXbnjUmog6YgwoENf4DNESego3KjvaUWs9g7No", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705136620747729050", "duration": 231, "by": "鱿鱼会败北", "dyid": "3121299827W", "secUid": "MS4wLjABAAAAqD3bRxQqt_2RVdkjSa6-t9zRLIjgxDGe9dcbIOZu6gQ", "note": "近景直拍"}
+    ]},
+    {"n": "23", "title": "光点", "clips": [
+      {"platform": "douyin", "vid": "7706123236153759715", "duration": 341, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7706166807409858280", "duration": 241, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景4K直拍"},
+      {"platform": "douyin", "vid": "7705144120822480475", "duration": 339, "by": "攒攒小战记🦐（看过肖战演唱会首场版）", "dyid": "49792701995", "secUid": "MS4wLjABAAAAH60tPf2ZGhxrtHwJPF73hcTpGhsdT3sraCdHbOw5kAIXTsIAJwEHXky0oTBFZz4d", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705112087110221425", "duration": 202, "by": "小菇凉啊", "dyid": "194182qwe.", "secUid": "MS4wLjABAAAAlBlLgwA63x9AYGndVW4nkAuO5ipZ43suN4XYzDELu40", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705400568727171155", "duration": 263, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "4K近景直拍"},
+      {"platform": "douyin", "vid": "7705349202058035898", "duration": 296, "by": "咪咪兔.", "dyid": "dy7hhuft6d3w", "secUid": "MS4wLjABAAAAQ4GpJ3My_WpV3wgHdFrp-uWFyxF-2eHSLgNfrIzoAjQ", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705874815014648741", "duration": 249, "by": "拱兴拱兴", "dyid": "161632781", "secUid": "MS4wLjABAAAAr2QRqvu2LIyteb_Om06WoYW_pp3YgGT-nVsap8O-4lM", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705722507736005291", "duration": 258, "by": "小熊软糖💕💕", "dyid": "HoeXM_0711", "secUid": "MS4wLjABAAAA8URYIE9Ks7sNcftrjKv_My9MSPst0xFDMXFOT6ndzR8ttFm9TCcKytFqcYQ1U7Bj", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705096951460911030", "duration": 246, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705098664130701233", "duration": 340, "by": "肖战小城良方东方或北京卫视+爱奇艺在播", "dyid": "xxzz.1005", "secUid": "MS4wLjABAAAAiUPl8C67vkY5EPdT33OMVKbhWJAiaNDTyyvqDcKVh7U", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706588684683230554", "duration": 301, "by": "想有钱变有钱（上海有票🥰）", "dyid": "279346605", "secUid": "MS4wLjABAAAAXreMyNudPfAf1M_NFMHGWng2pj06CibDU7jAWgihMIE", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706076991829391849", "duration": 271, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"}
+    ]},
+    {"n": "T23", "talk": true, "title": "安可", "clips": [
+      {"platform": "douyin", "vid": "7705384837015946403", "duration": 49, "by": "ohhduo（看过肖战演唱会版", "dyid": "40120536", "secUid": "MS4wLjABAAAA4Erjowi5jbIosQJ6nlTvpvaNcBVyHM7RQwK9Jio_HyY", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706164055686278626", "duration": 57, "by": "panda714li", "dyid": "dykzi31gj3u5", "secUid": "MS4wLjABAAAA733sGlJJsno4r-0uDGvxQgdAm3JpL8JGbhq3Mc4L6fj2gCnswUFaD7Ikzv8CrdgJ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705472597617822842", "duration": 129, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706191500430543723", "duration": 59, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "全景直拍"}
+    ]},
+    {"n": "E1", "encore": true, "title": "最幸运的幸运", "clips": [
+      {"platform": "douyin", "vid": "7705612894864973234", "duration": 194, "by": "💓Meimei 7788", "dyid": "183557310", "secUid": "MS4wLjABAAAA09UcIms3ppNIZ7jbT2-AkAf5h4TcoLxCMIwfSH1xCMQ", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706321450046982291", "duration": 229, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705937775333911473", "duration": 221, "by": "水矜采辛", "dyid": "363389504", "secUid": "MS4wLjABAAAAHX4tuXV2m-TK-fpj9AV5NtCxTkgpPxN235fGm69XKl8", "note": "4K直拍"},
+      {"platform": "douyin", "vid": "7705474041599417253", "duration": 234, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7706392413548420339", "duration": 217, "by": "Pride.", "dyid": "O.oO.oxy000", "secUid": "MS4wLjABAAAA3RdhyYn0sqWHeRbnUbYjhihZBzRpLwaB5_aIWgtOUpg", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706107799932004331", "duration": 240, "by": "长 曦", "dyid": "yr0309284977", "secUid": "MS4wLjABAAAALU-UpZUUA5TbTwaiXFaOV1WR54EA_yU_8qWsuTNIlLtlZ7k5oGio0YmH1YJeZa7r", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705306055978437705", "duration": 337, "by": "鱿鱼会败北", "dyid": "3121299827W", "secUid": "MS4wLjABAAAAqD3bRxQqt_2RVdkjSa6-t9zRLIjgxDGe9dcbIOZu6gQ", "note": "近景直拍"}
+    ]},
+    {"n": "E2", "encore": true, "title": "满足", "clips": [
+      {"platform": "douyin", "vid": "7706075859048871082", "duration": 299, "by": "titiiiiiiii", "dyid": "iiibjyx_0905wx", "secUid": "MS4wLjABAAAAMakvs98_hPSv0ucULr8hVqYkv_EX0zBR6D-sID3uVuRpeAS4FMzkw0mp0UGynuZB", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706097364876518314", "duration": 324, "by": "hhzzZ（肖战演唱会已看版）", "dyid": "79507630", "secUid": "MS4wLjABAAAAuaOSw4yG1Kt02XsyLQEDm4IhxVWuybUtYZ8Cetj4TCY", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705447446981682344", "duration": 332, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "直拍"},
+      {"platform": "douyin", "vid": "7706051979584637170", "duration": 304, "by": "Crysli", "dyid": "15336668", "secUid": "MS4wLjABAAAANme-tfltyu3KZoOpIP5ZhmSnO6h0PD_9ue4-2La4pGI", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705479262363787258", "duration": 312, "by": "小幺冰激凌（26.11.6上海见肖战版）", "dyid": "xiaoyaobjl", "secUid": "MS4wLjABAAAAKuh6SxHLeXilOWM2IJFC1StXPaDkpj2uC_UAn9F7FzDa-_IZKsm9ROjd5wCK70Qv", "note": "全景直拍"},
+      {"platform": "douyin", "vid": "7705762338497998582", "duration": 314, "by": "是如愿吖Z-J¹⁰⁰⁵", "dyid": "zhj0634", "secUid": "MS4wLjABAAAAA0ScQeYxVji6KBo4ECSelkoNW8uM9ss3DaVtmYbGse0", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7705717454471496809", "duration": 295, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
+      {"platform": "douyin", "vid": "7706458124236552292", "duration": 285, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"}
+    ]}
+  ]
+}
