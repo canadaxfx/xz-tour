@@ -202,10 +202,12 @@
   .credit { margin: 8px 0 0; font-size: 13px; color: var(--dim); }
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
-  .credit .fsgo { font: inherit; font-size: 12px; color: var(--text); background: transparent; border: 1px solid var(--line);
-    border-radius: 999px; padding: 1px 10px; margin-right: 4px; cursor: pointer; white-space: nowrap; }
-  .help .fsgo { font: inherit; font-size: 12px; color: var(--text); background: transparent; border: 1px solid var(--line);
-    border-radius: 999px; padding: 0 9px; cursor: pointer; white-space: nowrap; }
+  /* Same look as the 换机位 pill (red outline + tint, bold): reads as "tap me" without outshouting the 机位 picker */
+  .fsgo { font: inherit; font-size: 13px; font-weight: 700; line-height: 1; color: var(--text); white-space: nowrap; cursor: pointer;
+    min-height: 28px; padding: 6px 12px; border: 1px solid var(--red); border-radius: 999px; background: rgba(216, 16, 42, .18); }
+  .fsgo:hover { background: rgba(216, 16, 42, .32); }
+  .credit .fsgo { margin-right: 6px; }
+  .help .fsgo { vertical-align: middle; }
   .stage:fullscreen { border: 0; border-radius: 0; background: #000; }
   .stage.fill { position: fixed !important; inset: 0; width: auto !important; height: auto !important; aspect-ratio: auto !important;
     max-height: none; margin: 0; z-index: 1000; border: 0; border-radius: 0; }
