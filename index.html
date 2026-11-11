@@ -203,7 +203,9 @@
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
   .credit .fsgo { font: inherit; font-size: 12px; color: var(--text); background: transparent; border: 1px solid var(--line);
-    border-radius: 999px; padding: 1px 10px; margin-left: 6px; cursor: pointer; white-space: nowrap; }
+    border-radius: 999px; padding: 1px 10px; margin-right: 4px; cursor: pointer; white-space: nowrap; }
+  .help .fsgo { font: inherit; font-size: 12px; color: var(--text); background: transparent; border: 1px solid var(--line);
+    border-radius: 999px; padding: 0 9px; cursor: pointer; white-space: nowrap; }
   .stage:fullscreen { border: 0; border-radius: 0; background: #000; }
   .stage.fill { position: fixed !important; inset: 0; width: auto !important; height: auto !important; aspect-ratio: auto !important;
     max-height: none; margin: 0; z-index: 1000; border: 0; border-radius: 0; }
@@ -304,7 +306,7 @@
         <button class="step prev" id="prev"><span class="dir">← 上一首 Prev</span><span class="to" id="prevTo"></span></button>
         <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
       </div>
-      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，两指在画面上张开就能直接放大；也可以点 ⛶ 全屏按钮。<span class="en">Best viewed on a tablet or computer. On a phone, spread two fingers on the video to zoom in, or tap the full-screen button ⛶.</span></p>
+      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，两指在画面上张开就能直接放大；也可以点 <button class="fsgo" id="tipFs" type="button">⛶ 全屏</button>。<span class="en">Best viewed on a tablet or computer. On a phone, spread two fingers on the video to zoom in, or tap ⛶ 全屏 for full screen.</span></p>
       <p class="help">视频均为观众拍摄，嵌入自原平台。喜欢就去原视频点赞、转发 ❤ <span class="en">Fan-shot videos, embedded from their original platforms. Like &amp; share the originals.</span></p>
     </section>
 
@@ -592,6 +594,7 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape" && $("stage").classList.contains("fill")) fsFill(false); });
   const fsX = el("button", "fsx", "✕ 退出全屏");
   fsX.onclick = exitFull;
+  $("tipFs").onclick = () => { if ($("stage").querySelector("iframe, video")) enterFull(); };   // the tip's ⛶ 全屏 is the real button
 
   function renderStage(c, autoplay) {
     const stage = $("stage");
@@ -645,6 +648,11 @@
 
     const cr = $("credit"); cr.replaceChildren();
     if (c) {
+      // ⛶ 全屏 first, so a long filmer name / 抖音号 wraps after it instead of pushing the button down
+      if ($("stage").querySelector("iframe, video")) {   // only for clips that play here
+        const fs = el("button", "fsgo", "⛶ 全屏"); fs.title = "全屏观看，左上角有「退出全屏」· Full screen";
+        fs.onclick = enterFull; cr.append(fs, " ");
+      }
       cr.append(`拍摄 cr. ${c.by}`);
       if (c.duration) cr.append(` · ${fmtDur(c.duration)}`);
       if (c.via) cr.append(` · 搬运 ${c.via}`);
@@ -655,10 +663,6 @@
         const a = el("a", null, c.platform === "r2" ? `在${where}打开原帖 ↗` : `在${where}打开原视频 ↗`);
         a.href = href; a.target = "_blank"; a.rel = "noopener";
         cr.append(" · ", a);
-      }
-      if ($("stage").querySelector("iframe, video")) {   // only for clips that play here
-        const fs = el("button", "fsgo", "⛶ 全屏"); fs.title = "全屏观看，左上角有「退出全屏」· Full screen";
-        fs.onclick = enterFull; cr.append(fs);
       }
     }
 
