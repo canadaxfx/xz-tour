@@ -505,11 +505,15 @@
 
   const DOUYIN_WIDE = 768;   // frame width where Douyin's embed switches from its phone layout to the wide one
 
-  // "land": phone held sideways · "fit": narrow portrait (scaled 360x720 phone layout) · "wide": 16:9 box as is
+  // "land": Douyin's wide player scaled to the column (phone held sideways, or a LANDSCAPE clip in a narrow column:
+  //         the fancam fills the width instead of a thin band in a tall box) · "fit": narrow column + PORTRAIT clip
+  //         (scaled 360x720 phone layout) · "wide": 16:9 box as is. Orientation comes from the admin (clip.vertical,
+  //         read from Douyin's video size); unknown counts as landscape, like most concert fancams.
   function douyinMode(stage) {
     if (!stage.classList.contains("douyin")) return null;
     if (innerWidth > innerHeight && innerHeight <= 500) return "land";
-    return stage.parentElement.clientWidth < DOUYIN_WIDE ? "fit" : "wide";
+    if (stage.parentElement.clientWidth >= DOUYIN_WIDE) return "wide";
+    return stage.classList.contains("dyvert") ? "fit" : "land";
   }
 
   function fitDouyin() {
@@ -530,9 +534,9 @@
       stage.style.height = Math.floor(h) + "px";
       f.style.transform = `scale(${stage.clientHeight / 720})`;
     } else if (mode === "land") {
-      // Phone held sideways: the wide player at its natural 800 × (450 + 36), scaled to fit the screen height
-      // (and the column width), centred.
-      const F = 800, s = Math.min(1, col / F, (innerHeight - 16) / wideH(F));
+      // Douyin's wide layout (asked for with mode=pc, so any frame width works) at max(520, column) px wide — 520
+      // keeps its speed button (shown from 503 px) — scaled to fit the column and the screen height, centred.
+      const F = Math.max(520, col), s = Math.min(1, col / F, (innerHeight - 16) / wideH(F));
       Object.assign(stage.style, { width: Math.floor(F * s) + "px", height: Math.floor(wideH(F) * s) + "px" });
       Object.assign(f.style, { width: F + "px", height: wideH(F) + "px", transform: `scale(${s})` });
     } else if (mode === "wide") {
@@ -541,7 +545,7 @@
     }
     // Douyin picks its layout when it loads, so reload the player if it now needs the other one (e.g. on rotation).
     const layout = mode === "fit" ? "phone" : "wide";
-    if (mode && f.dataset.layout && f.dataset.layout !== layout) f.src = f.src;
+    if (mode && f.dataset.layout && f.dataset.layout !== layout) f.src = f.src.replace("&mode=pc", "") + (layout === "wide" ? "&mode=pc" : "");
     if (mode) f.dataset.layout = layout;
   }
   new ResizeObserver(fitDouyin).observe(document.querySelector(".player"));
@@ -550,6 +554,7 @@
   function renderStage(c, autoplay) {
     const stage = $("stage");
     stage.classList.toggle("douyin", c?.platform === "douyin");
+    stage.classList.toggle("dyvert", c?.platform === "douyin" && !!c?.vertical);   // portrait Douyin clip: tall phone player
     stage.classList.toggle("vertical", !!c?.vertical && c?.platform !== "douyin");
     fitDouyin();   // every clip change: also clears the portrait box when switching away from Douyin
     stage.replaceChildren();
@@ -562,7 +567,7 @@
       stage.append(v);
     } else if (src) {
       const f = el("iframe");
-      f.src = src;
+      f.src = c.platform === "douyin" && !stage.classList.contains("dyfit") ? src + "&mode=pc" : src;   // wide layout (see douyinMode)
       f.allow = "autoplay; fullscreen; encrypted-media; picture-in-picture";
       f.allowFullscreen = true;
       f.referrerPolicy = "strict-origin-when-cross-origin";
