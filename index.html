@@ -451,10 +451,34 @@
       if (!list.hidden) return closeVersions();
       closeList();
       list.hidden = false; cur.setAttribute("aria-expanded", "true");
-      list.querySelector('[aria-current="true"]')?.scrollIntoView({ block: "nearest" });
+      fitVersions(true);
     };
     box.append(step("‹", "上一个机位 Previous version", clipIdx - 1), cur, step("›", "下一个机位 Next version", clipIdx + 1), list);
   }
+  // The open 机位 list must END at the bottom of the screen: a list box running past the screen edge can only scroll
+  // until its last version reaches the box's own (hidden) bottom, so the last versions could never be seen on a phone
+  // (tested on a real phone 2026-11-12: 机位 16–20 of 20 unreachable). So the box gets the room left below it, down to
+  // the screen's bottom edge. The page never moves (the user's wish: the video stays fully in view; you just scroll
+  // inside the list from 机位 1 to the last). The current version is centred inside the list only.
+  function fitVersions(first) {
+    const list = document.querySelector("#clips .vlist");
+    if (!list || list.hidden) return;
+    list.style.maxHeight = "";
+    const cap = Math.min(innerHeight * 0.6, 440), margin = 12;
+    let room = innerHeight - list.getBoundingClientRect().top - margin;
+    // Shrinking the list can shorten a short page, and the browser then pulls the page back down (moving the list):
+    // re-measure until it stays put.
+    for (let k = 0; k < 3; k++) {
+      list.style.maxHeight = Math.floor(Math.max(120, Math.min(cap, room))) + "px";   // at least ~2½ rows
+      const again = innerHeight - list.getBoundingClientRect().top - margin;
+      if (Math.abs(again - room) < 1) break;
+      room = again;
+    }
+    const cur = list.querySelector('[aria-current="true"]');
+    if (first && cur) list.scrollTop = cur.offsetTop - (list.clientHeight - cur.offsetHeight) / 2;
+  }
+  addEventListener("resize", () => fitVersions(false));
+
   function closeVersions() {
     const list = document.querySelector("#clips .vlist");
     if (list && !list.hidden) { list.hidden = true; document.querySelector("#clips .vcur")?.setAttribute("aria-expanded", "false"); }
