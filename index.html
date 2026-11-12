@@ -367,10 +367,26 @@
     .song .c { font-size: 13px; }
     .song.talk { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
   }
+  .site-update button[hidden] { display: none; }
+  .site-update button {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 2px 10px; width: 100%; min-height: 44px; padding: 6px 10px; margin: 0 0 10px;
+    border: 1px solid var(--line); border-left: 3px solid var(--red-text);
+    border-radius: 6px; background: var(--panel); color: var(--text);
+    font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .site-update button:hover, .site-update button:focus-visible { border-color: var(--red-text); }
+  .site-update button:focus-visible { outline: 2px solid var(--red-text); outline-offset: 2px; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="site-update" id="siteUpdate" aria-live="polite">
+    <button type="button" hidden>
+      <span>网站已更新 · 点此刷新 ↻</span>
+      <span lang="en">Site updated — tap to refresh</span>
+    </button>
+  </div>
   <header>
     <div class="brand">
       <span class="logo" role="img" aria-label="HERE COMES OUR EXIT">
@@ -430,6 +446,48 @@
 
 <script>
 (() => {
+  // Keep the HTML and JSON this tab loaded as the baseline for update checks.
+  const loadedResources = new Map();
+  const updateButton = document.querySelector("#siteUpdate button");
+  const pageUrl = location.pathname;
+  let checkingForUpdate = false;
+
+  async function rememberJson(path, response) {
+    const text = await response.text();
+    const data = JSON.parse(text);
+    if (!loadedResources.has(path)) loadedResources.set(path, text);
+    return data;
+  }
+
+  async function checkForUpdate() {
+    if (document.visibilityState !== "visible" || checkingForUpdate || !updateButton.hidden) return;
+    checkingForUpdate = true;
+    try {
+      const changed = await Promise.all([...loadedResources].map(async ([path, loaded]) => {
+        try {
+          const response = await fetch(path, { cache: "no-cache", signal: AbortSignal.timeout(8000) });
+          return response.status === 404 || response.status === 410 ||
+            (response.ok && await response.text() !== loaded);
+        } catch {
+          return false;
+        }
+      }));
+      if (changed.some(Boolean)) updateButton.hidden = false;
+    } finally {
+      checkingForUpdate = false;
+    }
+  }
+
+  if (location.protocol === "http:" || location.protocol === "https:") {
+    fetch(pageUrl, { cache: "no-cache", signal: AbortSignal.timeout(8000) }).then(async response => {
+      if (response.ok) loadedResources.set(pageUrl, await response.text());
+    }).catch(() => {});
+    document.addEventListener("visibilitychange", checkForUpdate);
+    window.addEventListener("pageshow", event => { if (event.persisted) checkForUpdate(); });
+    window.setInterval(checkForUpdate, 5 * 60 * 1000);
+    updateButton.addEventListener("click", () => location.reload());
+  }
+
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 
@@ -593,7 +651,7 @@
   async function getJSON(path) {
     const r = await fetch(path, { cache: "no-cache" });
     if (!r.ok) throw new Error(path + " " + r.status);
-    return r.json();
+    return rememberJson(path, r);
   }
 
   function writeUrl() {
