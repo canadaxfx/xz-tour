@@ -93,8 +93,19 @@
   h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: .02em; }
   h1 .en { font-weight: 600; letter-spacing: .12em; margin-left: 4px; }
 
-  .shows { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
+  /* Stops as overlapping folder tabs (2026-11-12, option C): cities only, the selected stop adds its dates. The row
+     scrolls sideways only if it ever doesn't fit (long names / many stops). */
+  .shows { display: flex; align-items: flex-end; margin-top: 12px; padding: 4px 2px 0; overflow-x: auto; scrollbar-width: none;
+    border-bottom: 1px solid #5a2a31; }
   .shows::-webkit-scrollbar { display: none; }
+  .show { position: relative; flex: none; font: inherit; font-size: 14px; white-space: nowrap; cursor: pointer; color: var(--dim);
+    background: #1f1215; border: 1px solid #4a2a2f; border-bottom: 0; border-radius: 10px 10px 0 0;
+    padding: 7px 14px 6px; margin-left: -8px; box-shadow: -4px 0 8px rgba(0, 0, 0, .45); }
+  .show:first-child { margin-left: 0; }
+  .show:not(:disabled):not([aria-pressed="true"]):hover { color: var(--text); }
+  .show[aria-pressed="true"] { color: var(--night); background: var(--text); border-color: var(--text); font-weight: 700; padding-top: 9px; }
+  .show .d { margin-left: 5px; }
+  .show:disabled { cursor: default; color: rgba(168, 151, 154, .5); border-style: dashed; }   /* future stop: no setlist yet */
   /* Phones: one compact header line, so the player gets the room. */
   @media (max-width: 600px) {
     header { margin: 0 0 10px; }
@@ -104,15 +115,10 @@
     h1 { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
     h1 .en { display: none; }   /* the logo already says HERE COMES OUR; keeps the title clear of the red corner */
     .shows { margin-top: 8px; }
-    .show { font-size: 12px; padding: 4px 10px; white-space: nowrap; }    .now { padding: 6px 12px; margin-bottom: 6px; }
+    .show { font-size: 12px; padding: 5px 11px 5px; }
+    .show[aria-pressed="true"] { padding-top: 7px; }
+    .now { padding: 6px 12px; margin-bottom: 6px; }
   }
-  .show {
-    flex: none; font: inherit; font-size: 14px; color: var(--text); cursor: pointer;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
-    padding: 6px 14px;
-  }
-  .show[aria-pressed="true"] { background: var(--text); color: var(--night); border-color: var(--text); font-weight: 700; }
-  .show:disabled { color: var(--dim); cursor: default; border-style: dashed; }
 
   /* ---------- layout ---------- */
   .grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
@@ -165,8 +171,9 @@
   .clips { position: relative; display: flex; gap: 6px; margin-top: 10px; }
   .clips[hidden] { display: none; }
   .clips .vstep { flex: none; width: 40px; font: inherit; font-size: 20px; line-height: 1; color: var(--text); cursor: pointer;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
-  .clips .vstep:disabled { opacity: .3; cursor: default; }
+    background: var(--panel); border: 1px solid rgba(216, 16, 42, .55); border-radius: 8px; }   /* same soft red outline as Prev/Next */
+  .clips .vstep:not(:disabled):hover, .clips .vstep:not(:disabled):active { border-color: var(--red); }
+  .clips .vstep:disabled { opacity: .3; cursor: default; border-color: var(--line); }
   .clips .vcur { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; text-align: left; cursor: pointer;
     font: inherit; font-size: 13px; color: var(--text); background: var(--panel); border: 1px solid var(--red); border-radius: 8px; padding: 7px 10px; }
   .clips .vcur .lab { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 6px; white-space: nowrap; overflow: hidden; }
@@ -200,15 +207,18 @@
   .vlist button[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
   .vlist button[aria-current="true"] small, .vlist button[aria-current="true"] .len, .vlist button[aria-current="true"] .tag-top { color: var(--red-ink); }
 
-  .credit { margin: 8px 0 0; font-size: 13px; color: var(--dim); }
+  .credit { margin: 10px 0 0; font-size: 13px; line-height: 1.55; color: var(--dim); display: flex; align-items: flex-start; gap: 10px; }
+  .credit .ctext { flex: 1; min-width: 0; padding-top: 4px; }   /* first text line centred on the 28 px pill */
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
   /* Same look as the 换机位 pill (red outline + tint, bold): reads as "tap me" without outshouting the 机位 picker */
   .fsgo { font: inherit; font-size: 13px; font-weight: 700; line-height: 1; color: var(--text); white-space: nowrap; cursor: pointer;
     min-height: 28px; padding: 6px 12px; border: 1px solid var(--red); border-radius: 999px; background: rgba(216, 16, 42, .18); }
   .fsgo:hover { background: rgba(216, 16, 42, .32); }
-  .credit .fsgo { margin-right: 6px; }
-  .help .fsgo { vertical-align: middle; }
+  .credit .fsgo { flex: none; }
+  /* in the tip it's a word-sized pill on the text line, so it doesn't stretch the line spacing */
+  .help .fsgo { min-height: 0; padding: 1px 7px; font-size: 11px; font-weight: 600; line-height: 1.35; vertical-align: 1px; margin: 0 2px; }
+  .help .en { display: block; margin-top: 3px; }   /* English on its own line under the Chinese */
   .stage:fullscreen { border: 0; border-radius: 0; background: #000; }
   .stage.fill { position: fixed !important; inset: 0; width: auto !important; height: auto !important; aspect-ratio: auto !important;
     max-height: none; margin: 0; z-index: 1000; border: 0; border-radius: 0; }
@@ -221,9 +231,11 @@
   .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
   .step {
     font: inherit; cursor: pointer; text-align: left; min-width: 0;
-    background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 10px 14px;
+    background: var(--panel); color: var(--text); border: 1px solid rgba(216, 16, 42, .55); border-radius: var(--radius);
+    padding: 10px 14px;   /* soft tour-red outline, like the other tappable pills (was the near-invisible panel line) */
   }
+  .step:not(:disabled):hover, .step:not(:disabled):active { border-color: var(--red); }
+  .step:disabled { border-color: var(--line); }
   .step.next { text-align: right; }
   .step .dir { display: block; font-size: 12px; color: var(--dim); }
   .step .to { display: block; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -271,7 +283,9 @@
   .encore { margin: 10px 8px 4px; font-size: 12px; letter-spacing: .14em; color: var(--dim); border-top: 1px dashed var(--line); padding-top: 10px; }
 
   .help { font-size: 12px; color: var(--dim); margin: 10px 2px 0; }
-  .help.bigscreen { color: var(--text); }
+  .notes { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .notes .help:first-child { margin-top: 0; }
+  @media (min-width: 768px) { .notes .help:nth-child(2) { margin-top: 0; } }   /* the phone tip is hidden there */
   @media (min-width: 768px) { .help.bigscreen { display: none; } }   /* only worth saying on a phone */
 
   /* ---------- footer (shared kit) ---------- */
@@ -309,8 +323,10 @@
         <button class="step prev" id="prev"><span class="dir">← 上一首 Prev</span><span class="to" id="prevTo"></span></button>
         <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
       </div>
+      <div class="notes">   <!-- side notes: a thin divider above, soft grey, no box -->
       <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，两指在画面上张开就能直接放大；也可以点 <button class="fsgo" id="tipFs" type="button">⛶ 全屏</button>。<span class="en">Best viewed on a tablet or computer. On a phone, spread two fingers on the video to zoom in, or tap ⛶ 全屏 for full screen.</span></p>
       <p class="help">视频均为观众拍摄，嵌入自原平台。喜欢就去原视频点赞、转发 ❤ <span class="en">Fan-shot videos, embedded from their original platforms. Like &amp; share the originals.</span></p>
+      </div>
     </section>
 
     <nav class="setlist" aria-label="歌单 Setlist">
@@ -500,14 +516,22 @@
 
   function renderShows(activeId) {
     const box = $("shows"); box.replaceChildren();
-    for (const s of tour.shows) {
-      const b = el("button", "show");
-      b.append(showTitle(s));
-      if (!s.file) { b.disabled = true; b.append(el("span", "en", " · 整理中")); }
-      b.setAttribute("aria-pressed", s.id === activeId);
+    const at = Math.max(0, tour.shows.findIndex(s => s.id === activeId));
+    tour.shows.forEach((s, i) => {
+      // Folder tabs: city only; the selected stop adds its dates ("上海 11.06/08"). A stop without a setlist file
+      // (incl. the City 3/4/5 placeholders) is a dim dashed tab that can't be opened yet.
+      const b = el("button", "show"), on = s.id === activeId;
+      b.append(s.city);
+      if (!s.file) { b.disabled = true; b.title = "即将更新 · coming soon"; }
+      else {
+        b.title = showTitle(s);
+        if (on) b.append(el("span", "d", showTitle(s).slice(s.city.length).trim()));
+      }
+      b.setAttribute("aria-pressed", on);
+      b.style.zIndex = on ? 9 : 5 - Math.min(4, Math.abs(i - at));   // nearer the selected tab = higher
       b.onclick = () => loadShow(s.id);
       box.append(b);
-    }
+    });
   }
 
   function renderSetlist() {
@@ -678,18 +702,19 @@
       // ⛶ 全屏 first, so a long filmer name / 抖音号 wraps after it instead of pushing the button down
       if ($("stage").querySelector("iframe, video")) {   // only for clips that play here
         const fs = el("button", "fsgo", "⛶ 全屏"); fs.title = "全屏观看，左上角有「退出全屏」· Full screen";
-        fs.onclick = enterFull; cr.append(fs, " ");
+        fs.onclick = enterFull; cr.append(fs);
       }
-      cr.append(`拍摄 cr. ${c.by}`);
-      if (c.duration) cr.append(` · ${fmtDur(c.duration)}`);
-      if (c.via) cr.append(` · 搬运 ${c.via}`);
+      const ct = el("span", "ctext"); cr.append(ct);   // the credit as its own block: wrapped lines line up under the text
+      ct.append(`拍摄 cr. ${c.by}`);
+      if (c.duration) ct.append(` · ${fmtDur(c.duration)}`);
+      if (c.via) ct.append(` · 搬运 ${c.via}`);
       const href = originalUrl(c);
       if (href) {
         // R2 copies link to their original post; name the site it's on.
         const where = c.platform === "r2" ? sourceSite(href) : PLATFORM[c.platform]?.name || "";
         const a = el("a", null, c.platform === "r2" ? `在${where}打开原帖 ↗` : `在${where}打开原视频 ↗`);
         a.href = href; a.target = "_blank"; a.rel = "noopener";
-        cr.append(" · ", a);
+        ct.append(" · ", a);
       }
     }
 

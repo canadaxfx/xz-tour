@@ -32,6 +32,33 @@
       "labelEn": "2 shows",
       "aliases": [],
       "file": "shows/shanghai.json"
+    },
+    {
+      "id": "city3",
+      "city": "City 3",
+      "cityEn": "City 3",
+      "date": "",
+      "label": "",
+      "placeholder": true,
+      "file": null
+    },
+    {
+      "id": "city4",
+      "city": "City 4",
+      "cityEn": "City 4",
+      "date": "",
+      "label": "",
+      "placeholder": true,
+      "file": null
+    },
+    {
+      "id": "city5",
+      "city": "City 5",
+      "cityEn": "City 5",
+      "date": "",
+      "label": "",
+      "placeholder": true,
+      "file": null
     }
   ]
 }
