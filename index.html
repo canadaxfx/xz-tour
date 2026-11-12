@@ -498,7 +498,7 @@
       const li = el("li");
       const b = el("button", "song" + (s.clips.length ? "" : " none") + (s.talk ? " talk" : "") + (s.combo || s.num ? " combo" : ""));
       b.dataset.i = i;
-      b.append(el("span", "n", s.talk ? "" : s.combo || s.num || s.encore ? s.n : s.n.padStart(2, "0")));
+      b.append(el("span", "n", s.talk ? "" : s.num ? s.num : s.combo || s.encore ? s.n : s.n.padStart(2, "0")));   // ★ as typed; "★2" is only the link id
       const t = el("span", "t", s.title);
       if (s.note) t.append(el("small", null, s.note));
       if (s.cover) t.append(el("small", null, "原唱 " + s.cover));
@@ -640,7 +640,7 @@
     clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci));
     const c = song.clips[clipIdx];
 
-    $("num").textContent = song.intro ? song.label || "开场" : song.talk ? "讲话" : song.combo || song.num ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
+    $("num").textContent = song.intro ? song.label || "开场" : song.talk ? "讲话" : song.num ? song.num : song.combo ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
     $("title").textContent = song.title;
     $("tag").textContent = [song.note, song.cover && "原唱 " + song.cover, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
 
