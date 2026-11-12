@@ -320,6 +320,35 @@
   .terms ul { margin: 8px 0 0; padding-left: 18px; }
   .terms li { margin-bottom: 4px; }
   .terms .en { display: block; }
+
+  /* ---------- tablets (touch screen, ≥ 601 px) ----------
+     A tablet gets the desktop/one-column layout by width, but is used with a finger and shows a CSS pixel smaller than a
+     laptop, so the 12–13 px controls felt tiny. Touch screens (pointer: coarse — Android tablets, iPads without a trackpad)
+     get bigger text and tap areas; laptops with a mouse and phones (≤ 600 px, already tuned) are unchanged. */
+  @media (pointer: coarse) and (min-width: 601px) {
+    .show { font-size: 15px; padding: 9px 16px 8px; }
+    .show[aria-pressed="true"] { padding-top: 11px; }
+    .settoggle { font-size: 14px; padding: 7px 14px; }
+    .now .num { font-size: 15px; }
+    .now .tag { font-size: 14px; }
+    .clips .vstep { width: 48px; min-height: 46px; font-size: 22px; }
+    .clips .vcur { font-size: 15px; padding: 10px 12px; min-height: 46px; }
+    .clips .vcur .caret { font-size: 13px; padding: 3px 10px; }
+    .vlist button { font-size: 15px; padding: 11px 12px; }
+    .vlist .len { font-size: 13px; }
+    .credit { font-size: 14px; }
+    .credit .fsgo { font-size: 14px; min-height: 34px; padding: 8px 14px; }
+    .credit .ctext { padding-top: 7px; }
+    .help, .help .fsgo { font-size: 13px; }
+    .step { padding: 12px 16px; }
+    .step .dir { font-size: 13px; }
+    .step .to { font-size: 17px; }
+    .setlist h2 { font-size: 15px; }
+    .song { padding: 10px 10px; }
+    .song .n { font-size: 14px; }
+    .song .c { font-size: 13px; }
+    .song.talk { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
+  }
 </style>
 </head>
 <body>
