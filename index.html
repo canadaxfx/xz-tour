@@ -250,9 +250,15 @@
   .stage.fill { position: fixed !important; inset: 0; width: auto !important; height: auto !important; aspect-ratio: auto !important;
     max-height: none; margin: 0; z-index: 1000; border: 0; border-radius: 0; }
   body.fsfill { overflow: hidden; }
-  .stage .fsx { display: none; position: absolute; top: 10px; left: 10px; z-index: 3; font: inherit; font-size: 14px; color: #fff;
-    background: rgba(0, 0, 0, .65); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
-  .stage:fullscreen .fsx, .stage.fill .fsx { display: block; }
+  /* In full screen, top-left: ✕ 退出全屏 and ⟲ 横屏 / 竖屏 (the latter on touch screens only) */
+  .stage .fsbar2 { display: none; position: absolute; top: 10px; left: 10px; z-index: 3; gap: 8px; }
+  .stage:fullscreen .fsbar2, .stage.fill .fsbar2 { display: flex; }
+  .stage .fsbar2 button { font: inherit; font-size: 14px; color: #fff; cursor: pointer; white-space: nowrap;
+    background: rgba(0, 0, 0, .65); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 6px 14px; }
+  @media (pointer: fine) { .stage .fsbar2 .fsr { display: none; } }
+  /* ⟲ where the phone won't turn itself (iPhone; window-fill mode): the box is turned 90° and sized to the turned screen */
+  .stage.fill.rot { width: 100vh !important; width: 100dvh !important; height: 100vw !important; inset: auto; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg); }
   .credit a { white-space: nowrap; }
 
   .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
@@ -312,12 +318,15 @@
   .help { font-size: 12px; color: var(--dim); margin: 10px 2px 0; }
   .notes { margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); }
   .notes .help:first-child { margin-top: 0; }
+  @media (min-width: 768px) { .notes { display: none; } }   /* only the phone tip is left there, and it's phone-only */
   @media (min-width: 768px) { .notes .help:nth-child(2) { margin-top: 0; } }   /* the phone tip is hidden there */
   @media (min-width: 768px) { .help.bigscreen { display: none; } }   /* only worth saying on a phone */
 
   /* ---------- footer (shared kit) ---------- */
   .foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
   .foot p { margin: 0 0 8px; }
+  .foot .rights { font-size: 11px; line-height: 1.5; }   /* the video-rights note (moved here from under the player, 2026-11-12) */
+  .foot .rights .en { display: block; font-size: 10px; opacity: .85; }
   .foot .more { display: flex; flex-wrap: wrap; gap: 4px 14px; }
   .foot .links { display: flex; flex-wrap: wrap; gap: 4px 14px; }
   .foot a { color: var(--link); text-decoration: none; }
@@ -380,8 +389,7 @@
         <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
       </div>
       <div class="notes">   <!-- side notes: a thin divider above, soft grey, no box -->
-      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，两指在画面上张开就能直接放大；也可以点 <button class="fsgo" id="tipFs" type="button">⛶ 全屏</button>。<span class="en">Best viewed on a tablet or computer. On a phone, spread two fingers on the video to zoom in, or tap ⛶ 全屏 for full screen.</span></p>
-      <p class="help">视频均为观众拍摄，嵌入自原平台。喜欢就去原视频点赞、转发 ❤ <span class="en">Fan-shot videos, embedded from their original platforms. Like &amp; share the originals.</span></p>
+      <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，可以点 <button class="fsgo" id="tipFs" type="button">⛶ 全屏</button>，全屏后再点「⟲ 横屏」把画面横过来。<span class="en">Best viewed on a tablet or computer. On a phone, tap ⛶ 全屏 for full screen, then ⟲ 横屏 to turn it sideways.</span></p>
       </div>
     </section>
 
@@ -398,12 +406,14 @@
         <a href="https://xzyt.pages.dev/" target="_blank" rel="noopener">肖战 YouTube 合集 <span class="en">XZYT</span> ↗</a>
         <a href="https://xz-dance-room.pages.dev/" target="_blank" rel="noopener">舞蹈练习室 <span class="en">Dance Room</span> ↗</a>
       </span></p>
+    <p class="rights">视频版权归原作者 · 观众拍摄的视频均嵌入原平台，本站不存储 · 喜欢就去原视频点赞、转发 ❤
+      <span class="en">All videos belong to their creators · fan-shot videos are embedded, never stored here · like &amp; share the originals</span></p>
     <p class="owner">&copy; 2026 CanadaXFX. All rights reserved. · 背景照片 cr. 肖战工作室 <span class="en">Background photo © XZ Studio</span></p>
     <details class="terms">
       <summary>使用条款 <span class="en">Terms of Use</span></summary>
       <ul>
         <li>所有与肖战相关的内容归各自版权所有者所有；现场视频归拍摄者所有。<span class="en">All content related to Xiao Zhan belongs to its respective copyright owners; live videos belong to the people who filmed them.</span></li>
-        <li>本站只做歌单整理与嵌入，不存储视频。本站内容的整理与编排版权归 © 2026 CanadaXFX 所有。<span class="en">This site only organizes and embeds; it stores no videos. The curation and organization are © 2026 CanadaXFX.</span></li>
+        <li>本站只做歌单整理与嵌入；观众拍摄的视频均不存储。本站内容的整理与编排版权归 © 2026 CanadaXFX 所有。<span class="en">This site only organizes and embeds; fan-shot videos are never stored here. The curation and organization are © 2026 CanadaXFX.</span></li>
         <li>拍摄者如不希望被收录，联系后即删除。<span class="en">Filmers who prefer not to be listed will be removed on request.</span></li>
         <li>仅限个人及非商业用途。<span class="en">Personal and non-commercial use only.</span></li>
         <li>严禁将本站内容用于 AI 训练。<span class="en">AI training is strictly prohibited.</span></li>
@@ -711,14 +721,35 @@
     setTimeout(() => { if (!settled && !isFull()) fsFill(true); }, 800);         // WeChat & co. never answer
   }
   function exitFull() {
+    rotReset();
     if ($("stage").classList.contains("fill")) return fsFill(false);
     (document.exitFullscreen || document.webkitExitFullscreen || (() => {})).call(document);
   }
-  document.addEventListener("fullscreenchange", fitDouyin);
-  document.addEventListener("webkitfullscreenchange", fitDouyin);
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && $("stage").classList.contains("fill")) fsFill(false); });
-  const fsX = el("button", "fsx", "✕ 退出全屏");
-  fsX.onclick = exitFull;
+  // ⟲ 横屏 / 竖屏: Android turns the screen itself (screen.orientation.lock, only in real full screen); elsewhere (iPhone,
+  // window-fill mode) the box is turned 90° by CSS (.rot). In real full screen where the lock is refused (e.g. iPad) the
+  // box can't be turned (browsers cancel transforms on full-screen elements), so it asks to turn the device.
+  let rotMode = null;   // "lock" | "css" | null
+  const rotLabel = () => { fsR.textContent = rotMode ? "⟲ 竖屏" : "⟲ 横屏"; };
+  function rotReset() {
+    if (rotMode === "lock") { try { screen.orientation.unlock(); } catch (e) {} }
+    rotMode = null; $("stage").classList.remove("rot"); rotLabel();
+  }
+  async function rotToggle() {
+    const st = $("stage"), real = document.fullscreenElement === st || document.webkitFullscreenElement === st;
+    if (rotMode === "css") { st.classList.remove("rot"); rotMode = null; rotLabel(); fitDouyin(); return; }
+    if (rotMode === "lock") { try { await screen.orientation.lock("portrait"); } catch (e) {} rotMode = null; rotLabel(); return; }
+    if (real && screen.orientation && screen.orientation.lock) {
+      try { await screen.orientation.lock("landscape"); rotMode = "lock"; rotLabel(); return; } catch (e) {}
+    }
+    if (real) { fsR.textContent = "请把设备横过来"; setTimeout(rotLabel, 2500); return; }
+    st.classList.add("rot"); rotMode = "css"; rotLabel(); fitDouyin();
+  }
+  const onFsChange = () => { if (!document.fullscreenElement && !document.webkitFullscreenElement && rotMode === "lock") rotReset(); fitDouyin(); };
+  document.addEventListener("fullscreenchange", onFsChange);
+  document.addEventListener("webkitfullscreenchange", onFsChange);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && $("stage").classList.contains("fill")) exitFull(); });
+  const fsX = el("button", "fsx", "✕ 退出全屏"), fsR = el("button", "fsr", "⟲ 横屏"), fsBar = el("div", "fsbar2");
+  fsX.onclick = exitFull; fsR.onclick = rotToggle; fsR.title = "横屏 / 竖屏 · Rotate"; fsBar.append(fsX, fsR);
   $("tipFs").onclick = () => { if ($("stage").querySelector("iframe, video")) enterFull(); };   // the tip's ⛶ 全屏 is the real button
 
   function renderStage(c, autoplay) {
@@ -727,7 +758,7 @@
     stage.classList.toggle("dyvert", c?.platform === "douyin" && !!c?.vertical);   // portrait Douyin clip: tall phone player
     stage.classList.toggle("vertical", !!c?.vertical && c?.platform !== "douyin");
     fitDouyin();   // every clip change: also clears the portrait box when switching away from Douyin
-    stage.replaceChildren(fsX);                   // the ✕ 退出全屏 lives in the box (shown only in full screen)
+    stage.replaceChildren(fsBar);                 // ✕ 退出全屏 + ⟲ live in the box (shown only in full screen)
     if (!c) { const card = el("div", "card"); card.append(el("div", "empty", "这首歌还没有视频，欢迎推荐 · No video yet")); stage.append(card); return; }
     const src = embedUrl(c, autoplay);
     if (c.platform === "r2") {
