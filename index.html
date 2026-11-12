@@ -229,8 +229,13 @@
   .vlist button[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
   .vlist button[aria-current="true"] small, .vlist button[aria-current="true"] .len, .vlist button[aria-current="true"] .tag-top { color: var(--red-ink); }
 
-  .credit { margin: 10px 0 0; font-size: 13px; line-height: 1.55; color: var(--dim); display: flex; align-items: flex-start; gap: 10px; }
-  .credit .ctext { flex: 1; min-width: 0; padding-top: 4px; }   /* first text line centred on the 28 px pill */
+  /* One line: [⛶ 全屏]  cr. filmer (non-Douyin only, cut with …)  [抖音原视频 ↗] — a pill at each end (2026-11-12) */
+  .credit { margin: 10px 0 0; font-size: 13px; line-height: 1.4; color: var(--dim); display: flex; align-items: center; gap: 10px; }
+  .credit .ctext { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .credit .olink { flex: none; display: inline-flex; align-items: center; min-height: 28px; padding: 6px 12px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; color: var(--link);
+    border: 1px solid rgba(255, 179, 185, .45); }
+  .credit .olink:hover { border-color: var(--link); background: rgba(255, 179, 185, .08); }
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
   /* Same look as the 换机位 pill (red outline + tint, bold): reads as "tap me" without outshouting the 机位 picker */
@@ -338,7 +343,7 @@
     .vlist .len { font-size: 13px; }
     .credit { font-size: 14px; }
     .credit .fsgo { font-size: 14px; min-height: 34px; padding: 8px 14px; }
-    .credit .ctext { padding-top: 7px; }
+    .credit .olink { font-size: 14px; min-height: 34px; padding: 8px 14px; }
     .help, .help .fsgo { font-size: 13px; }
     .step { padding: 12px 16px; }
     .step .dir { font-size: 13px; }
@@ -773,17 +778,16 @@
         const fs = el("button", "fsgo", "⛶ 全屏"); fs.title = "全屏观看，左上角有「退出全屏」· Full screen";
         fs.onclick = enterFull; cr.append(fs);
       }
-      const ct = el("span", "ctext"); cr.append(ct);   // the credit as its own block: wrapped lines line up under the text
-      ct.append(`拍摄 cr. ${c.by}`);
-      if (c.duration) ct.append(` · ${fmtDur(c.duration)}`);
-      if (c.via) ct.append(` · 搬运 ${c.via}`);
+      // Credit only where the player doesn't show it: Douyin's player always shows "@filmer" (and the 机位 row has
+      // the length), so Douyin clips get no credit text; R2 / Bilibili / YouTube / Weibo get a short "cr. filmer".
+      const credit = [c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
+      const ct = el("span", "ctext", credit); ct.title = credit; cr.append(ct);
       const href = originalUrl(c);
-      if (href) {
-        // R2 copies link to their original post; name the site it's on.
+      if (href) {   // the original post as an outlined pill on the right (R2 copies link to where they came from)
         const where = c.platform === "r2" ? sourceSite(href) : PLATFORM[c.platform]?.name || "";
-        const a = el("a", null, c.platform === "r2" ? `在${where}打开原帖 ↗` : `在${where}打开原视频 ↗`);
-        a.href = href; a.target = "_blank"; a.rel = "noopener";
-        ct.append(" · ", a);
+        const a = el("a", "olink", c.platform === "r2" ? `${where}原帖 ↗` : `${where}原视频 ↗`);
+        a.href = href; a.target = "_blank"; a.rel = "noopener"; a.title = "在原平台打开，喜欢就点赞、转发 · Open the original";
+        cr.append(a);
       }
     }
 
