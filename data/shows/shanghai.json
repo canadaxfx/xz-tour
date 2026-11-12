@@ -353,7 +353,7 @@
       {"platform": "douyin", "vid": "7705717454471496809", "duration": 295, "vertical": true, "by": "今天吃什么", "dyid": "93822889", "secUid": "MS4wLjABAAAAAmiW6nv6Ls6aS1H-mUjADDZLDA7Ai1TBKB04xZ81VRw", "note": "近景直拍"},
       {"platform": "douyin", "vid": "7706458124236552292", "duration": 285, "vertical": true, "by": "CC*", "dyid": "C_Chang_C", "secUid": "MS4wLjABAAAAzeNTYcOkhPzJAzveveNfbRVVgluv736WZPxv8yeyAkY", "note": "近景直拍"}
     ]},
-    {"n": "TE2", "talk": true, "title": "★ 舞美速看", "clips": [
+    {"n": "★", "title": "舞美速看", "encore": true, "num": "★", "clips": [
       {"platform": "douyin", "vid": "7706417884444030178", "duration": 97, "vertical": false, "by": "苏影清辞（唯🦐）", "dyid": "23396332273", "secUid": "MS4wLjABAAAA5ynNVQZKZJ99ufcQs8CBgVg2_p5B3MccFaRjgKETBoTNGVU-1E2tYCQncalatl0x", "note": "全景直拍"}
     ]}
   ]

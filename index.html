@@ -125,6 +125,7 @@
   /* ---------- player ---------- */
   .now { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; min-width: 0; }
   .now .num { font-family: var(--mono); color: var(--red-text); font-weight: 700; font-size: 14px; flex: none; }
+  .now .num:empty { display: none; }   /* talk entries: title only, no label */
   .now .title { font-size: 20px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .now .tag { color: var(--dim); font-size: 13px; flex: none; }
 
@@ -640,7 +641,7 @@
     clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci));
     const c = song.clips[clipIdx];
 
-    $("num").textContent = song.intro ? song.label || "开场" : song.talk ? "讲话" : song.num ? song.num : song.combo ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
+    $("num").textContent = song.intro ? song.label || "开场" : song.talk ? "" : song.num ? song.num : song.combo ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
     $("title").textContent = song.title;
     $("tag").textContent = [song.note, song.cover && "原唱 " + song.cover, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
 
