@@ -193,9 +193,19 @@
     border: 1px solid var(--red); border-radius: 999px; padding: 2px 9px; background: rgba(216, 16, 42, .18); }
   .clips .vcur[aria-expanded="true"] .caret { background: var(--red); color: var(--red-ink); }
   .tag-top { display: inline-block; font-size: 11px; line-height: 1.4; color: var(--red-text); border: 1px solid currentColor; border-radius: 4px; padding: 0 4px; margin-right: 4px; vertical-align: 1px; }
-  .vlist { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 15; margin: 0; padding: 4px; list-style: none;
-    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 18px 44px rgba(0, 0, 0, .65);
-    max-height: min(60vh, 440px); overflow-y: auto; overscroll-behavior: contain; }
+  /* The list box itself is see-through and tap-through: the dark panel is drawn on the rows, so the empty space after
+     the last version (.vpad, which lets it scroll up under the selector) shows the page below, and taps there reach the
+     credit / Prev / Next. Rows take the taps and the swipes (scrolling still moves the box). */
+  .vlist { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 15; margin: 0; padding: 0; list-style: none;
+    max-height: min(60vh, 440px); overflow-y: auto; overscroll-behavior: contain;   /* swipes stay in the list, the page never moves */
+    pointer-events: none; scrollbar-width: none; }
+  .vlist::-webkit-scrollbar { display: none; }
+  .vlist li { pointer-events: auto; background: var(--panel); border: solid var(--line); border-width: 0 1px; padding: 0 4px; }
+  .vlist li:first-child { border-top-width: 1px; border-radius: var(--radius) var(--radius) 0 0; padding-top: 4px; }
+  .vlist li:not(.vpad):last-child, .vlist li:not(.vpad):has(+ .vpad) {
+    border-bottom-width: 1px; border-radius: 0 0 var(--radius) var(--radius); padding-bottom: 4px; box-shadow: 0 18px 30px rgba(0, 0, 0, .55); }
+  .vlist li:first-child:not(.vpad):has(+ .vpad), .vlist li:first-child:last-child { border-radius: var(--radius); }
+  .vlist .vpad { pointer-events: none; background: none; border: 0; padding: 0; }   /* empty space after the last version (see fitVersions) */
   .vlist[hidden] { display: none; }
   .vlist button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: baseline; width: 100%;
     font: inherit; font-size: 13px; color: var(--text); text-align: left; cursor: pointer; background: none; border: 0; border-radius: 7px; padding: 8px 10px; }
@@ -479,9 +489,13 @@
   function fitVersions(first) {
     const list = document.querySelector("#clips .vlist");
     if (!list || list.hidden) return;
-    list.style.maxHeight = "";
     const cap = Math.min(innerHeight * 0.6, 440), margin = 12;
     let room = innerHeight - list.getBoundingClientRect().top - margin;
+    // Only when the selector is tapped (never on page load): if fewer than ~3 rows would show (e.g. a tall portrait
+    // player puts the 机位 row at the bottom edge), lift the page just enough for 3 rows. The list then refits as the
+    // page moves (scroll listener).
+    const row = list.querySelector("li:not(.vpad)")?.offsetHeight || 40, need = Math.min(cap, row * 3 + 8);
+    if (first && room < need) scrollBy({ top: need - room, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     // Shrinking the list can shorten a short page, and the browser then pulls the page back down (moving the list):
     // re-measure until it stays put.
     for (let k = 0; k < 3; k++) {
@@ -490,10 +504,24 @@
       if (Math.abs(again - room) < 1) break;
       room = again;
     }
+    // Empty space after the last version, so the list keeps scrolling until the last version sits at its top, right
+    // under the 机位 selector (the user's wish: the scroll itself keeps working; the page never moves). This also makes
+    // every version reachable when part of the list is below the screen (tall portrait player).
+    let pad = list.querySelector(".vpad");
+    if (!pad) { pad = el("li", "vpad"); pad.setAttribute("aria-hidden", "true"); list.append(pad); }
+    const rows = list.querySelectorAll("li:not(.vpad)"), last = rows[rows.length - 1];
+    pad.style.height = Math.max(0, list.clientHeight - (last ? last.offsetHeight : 0) - 8) + "px";
     const cur = list.querySelector('[aria-current="true"]');
     if (first && cur) list.scrollTop = cur.offsetTop - (list.clientHeight - cur.offsetHeight) / 2;
   }
   addEventListener("resize", () => fitVersions(false));
+  // If the page is scrolled (by hand, outside the list) while the list is open, it refits to the room below it.
+  let fitQueued = false;
+  addEventListener("scroll", () => {
+    if (fitQueued) return;
+    fitQueued = true;
+    requestAnimationFrame(() => { fitQueued = false; fitVersions(false); });
+  }, { passive: true });
 
   function closeVersions() {
     const list = document.querySelector("#clips .vlist");
