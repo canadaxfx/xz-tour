@@ -124,9 +124,21 @@
   .grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 920px) {
     .grid { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; }
+    /* 收起歌单: the setlist hides and the player takes the whole width (desktop only; remembered in localStorage) */
+    .grid.wide { grid-template-columns: minmax(0, 1fr); }
+    .grid.wide .setlist { display: none; }
+
+    /* …but never taller than the window: the whole 16:9 player (+ Douyin's control bar) stays on screen, centred */
+    .grid.wide .player { width: 100%; max-width: calc((100vh - 225px) * 16 / 9); justify-self: center; }   /* 225 px = header + song line + Douyin bar + margin */
     .player { position: sticky; top: 14px; }
     .setlist { max-height: calc(100vh - 150px); overflow-y: auto; }
   }
+
+  /* One toggle, always at the right end of the song line (desktop only): 收起歌单 ⟩ ↔ ☰ 歌单 */
+  .settoggle { display: none; font: inherit; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; white-space: nowrap;
+    background: transparent; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; padding: 4px 12px; }
+  .settoggle:hover { border-color: var(--red); background: rgba(216, 16, 42, .12); }
+  @media (min-width: 920px) { .settoggle { display: inline-flex; margin-left: auto; align-self: center; } }
 
   /* ---------- player ---------- */
   .now { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; min-width: 0; }
@@ -325,7 +337,7 @@
 
   <div class="grid">
     <section class="player" aria-live="polite">
-      <div class="now" id="now"><span class="num" id="num"></span><span class="title" id="title"></span><span class="tag" id="tag"></span><span class="caret" aria-hidden="true">选歌 ▾</span></div>
+      <div class="now" id="now"><span class="num" id="num"></span><span class="title" id="title"></span><span class="tag" id="tag"></span><span class="caret" aria-hidden="true">选歌 ▾</span><button class="settoggle" id="setToggle" type="button" title="收起歌单，让播放器变宽 · Hide the setlist for a wider player">收起歌单 ⟩</button></div>
       <div class="stage" id="stage"></div>
       <div class="clips" id="clips" role="group" aria-label="机位 Clips"></div>
       <p class="credit" id="credit"></p>
@@ -766,6 +778,17 @@
   }
 
   // ---- phones: setlist dropdown ----
+  // 收起歌单 / 显示歌单 (desktop): remembered per browser
+  const setWide = on => {
+    document.querySelector(".grid").classList.toggle("wide", on);
+    const t = $("setToggle");
+    t.textContent = on ? "☰ 歌单" : "收起歌单 ⟩";
+    t.title = on ? "显示歌单 · Show the setlist" : "收起歌单，让播放器变宽 · Hide the setlist for a wider player";
+    try { localStorage.setItem("xzTour.setHidden", on ? "1" : ""); } catch (e) {}
+  };
+  $("setToggle").onclick = () => setWide(!document.querySelector(".grid").classList.contains("wide"));
+  try { if (localStorage.getItem("xzTour.setHidden") === "1") setWide(true); } catch (e) {}
+
   const narrow = matchMedia("(max-width: 919px)");
   const listEl = () => document.querySelector(".setlist");
   function openList() {
