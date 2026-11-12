@@ -800,7 +800,8 @@
   document.addEventListener("click", e => { if (!e.target.closest(".setlist, #now")) closeList(); if (!e.target.closest("#clips")) closeVersions(); });
   addEventListener("scroll", closeList, { passive: true });   // the list is fixed; the song line would move away from it
 
-  async function loadShow(id, songN, clipN) {
+  // pick (optional): {title, vid} — open that song (by title) on that video (by id); used for tour.json "start".
+  async function loadShow(id, songN, clipN, pick) {
     // Old links (?show=nanjing-1 / nanjing-2) open the merged city entry through its "aliases".
     const meta = tour.shows.find(s => (s.id === id || (s.aliases || []).includes(id)) && s.file) || tour.shows.find(s => s.file);
     show = await getJSON("data/" + meta.file);
@@ -808,7 +809,12 @@
     show.songs.forEach(s => { s.clips = siteOrder(s.clips.filter(c => !c.hidden)); });
     renderShows(show.id);
     renderSetlist();
-    const i = songN ? show.songs.findIndex(s => s.n === songN) : stepFrom(-1, 1);   // skips an intro (开场) without video
+    let i = songN ? show.songs.findIndex(s => s.n === songN) : stepFrom(-1, 1);   // skips an intro (开场) without video
+    if (pick && pick.title) {
+      const k = show.songs.findIndex(s => s.title === pick.title && !s.talk);
+      const mainId = c => String(c.vid || c.bvid || c.id || c.bid || c.url || "");   // same order as the admin's clip_main_id
+      if (k >= 0) { i = k; const j = pick.vid ? show.songs[k].clips.findIndex(c => mainId(c) === pick.vid) : -1; clipN = j >= 0 ? j + 1 : 0; }
+    }
     go(i < 0 ? 0 : i, clipN ? clipN - 1 : 0, false);
   }
 
@@ -825,7 +831,10 @@
     try {
       tour = await getJSON("data/tour.json");
       const q = new URLSearchParams(location.search);
-      await loadShow(q.get("show") || tour.shows[0].id, q.get("song"), +q.get("clip") || 0);
+      // No link → the start point from tour.json ("start": {show, title, vid}), else the first stop's first song.
+      const st = !q.get("show") && tour.start;
+      if (st) await loadShow(st.show, null, 0, st);
+      else await loadShow(q.get("show") || tour.shows[0].id, q.get("song"), +q.get("clip") || 0);
     } catch (err) {
       $("stage").replaceChildren(Object.assign(el("div", "card"), { textContent: "加载失败 · Could not load the setlist (" + err.message + ")" }));
     }

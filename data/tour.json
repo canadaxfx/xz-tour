@@ -1,6 +1,11 @@
 {
   "tour": "出口·我们",
   "tourEn": "HERE COMES OUR EXIT",
+  "start": {
+    "show": "shanghai",
+    "title": "轻轻",
+    "vid": "7705756915439572111"
+  },
   "shows": [
     {
       "id": "nanjing",
