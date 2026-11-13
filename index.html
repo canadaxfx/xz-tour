@@ -261,7 +261,7 @@
      under the player was off-screen — it flickered as the address bar hid, and was hidden while that line was half cut.) */
   .stage .fsq { display: none; position: absolute; z-index: 3; font: inherit; font-size: 12.5px; font-weight: 700;
     top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right));   /* same spot as ✕ 退出全屏 in full screen */
-    color: #fff; cursor: pointer; background: rgba(0, 0, 0, .7); border: 1px solid rgba(216, 16, 42, .7); border-radius: 999px; padding: 4px 11px;
+    color: #fff; cursor: pointer; background: rgba(0, 0, 0, .7); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 4px 11px;
     -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); box-shadow: 0 2px 10px rgba(0, 0, 0, .45); }   /* frosted: blurs Douyin's logo behind it */
   .stage.playable .fsq { display: block; }   /* every video that plays here (2026-11-12: the only 全屏 button) */
   .stage.fill .fsq, .stage:fullscreen .fsq { display: none !important; }
