@@ -253,18 +253,21 @@
   /* In full screen, top-left: ✕ 退出全屏 and ⟲ 横屏 / 竖屏 (the latter on touch screens only) */
   /* top-right, clear of camera notches / rounded corners (safe-area insets; viewport-fit=cover is set). In the CSS-turned
      box (.rot) its top-right corner lies on the screen's right/bottom edges, so those insets are used instead. */
-  .stage .fsbar2 { display: none; position: absolute; z-index: 3; gap: 8px;
+  .stage .fsbar2 { display: none; position: absolute; z-index: 3; gap: 6px;
     top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
-  /* Corner ⛶ (top-left; Douyin's logo is top-right): only while the credit line's ⛶ 全屏 is below the screen edge
-     (tall portrait player on a phone), never in full screen */
-  .stage .fsq { display: none; position: absolute; top: 8px; left: 8px; z-index: 3; font: inherit; font-size: 13px; font-weight: 700;
-    color: #fff; cursor: pointer; background: rgba(0, 0, 0, .55); border: 1px solid rgba(216, 16, 42, .7); border-radius: 999px; padding: 5px 11px; }
-  .stage.fsq-on .fsq { display: block; }
+  /* Corner ⛶ (top-right, where ✕ 退出全屏 appears in full screen; covering Douyin's logo is fine — the user's call, its
+     bottom banner still says 抖音): always on the tall portrait player (.dyfit), where the ⛶ 全屏 under
+     the player can be off or half off the screen; never in full screen. (A first version showed it only while the line
+     under the player was off-screen — it flickered as the address bar hid, and was hidden while that line was half cut.) */
+  .stage .fsq { display: none; position: absolute; z-index: 3; font: inherit; font-size: 12.5px; font-weight: 700;
+    top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right));   /* same spot as ✕ 退出全屏 in full screen */
+    color: #fff; cursor: pointer; background: rgba(0, 0, 0, .55); border: 1px solid rgba(216, 16, 42, .7); border-radius: 999px; padding: 4px 11px; }
+  .stage.dyfit .fsq { display: block; }
   .stage.fill .fsq, .stage:fullscreen .fsq { display: none !important; }
   .stage.rot .fsbar2 { top: max(10px, env(safe-area-inset-right)); right: max(10px, env(safe-area-inset-bottom)); }
   .stage:fullscreen .fsbar2, .stage.fill .fsbar2 { display: flex; }
-  .stage .fsbar2 button { font: inherit; font-size: 14px; color: #fff; cursor: pointer; white-space: nowrap;
-    background: rgba(0, 0, 0, .65); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 6px 14px; }
+  .stage .fsbar2 button { font: inherit; font-size: 12.5px; color: #fff; cursor: pointer; white-space: nowrap;
+    background: rgba(0, 0, 0, .65); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 4px 11px; }
   @media (pointer: fine) { .stage .fsbar2 .fsr { display: none; } }
   /* ⟲ where the phone won't turn itself (iPhone; window-fill mode): the box is turned 90° and sized to the turned screen */
   .stage.fill.rot { width: 100vh !important; width: 100dvh !important; height: 100vw !important; inset: auto; top: 50%; left: 50%;
@@ -819,11 +822,7 @@
   const fsX = el("button", "fsx", "✕ 退出全屏"), fsR = el("button", "fsr", "⟲ 横屏"), fsBar = el("div", "fsbar2");
   fsX.onclick = exitFull; fsR.onclick = rotToggle; fsR.title = "横屏 / 竖屏 · Rotate"; fsBar.append(fsR, fsX);   // ✕ in the corner
   const fsQ = el("button", "fsq", "⛶ 全屏"); fsQ.title = "全屏观看 · Full screen"; fsQ.onclick = enterFull;
-  // show the corner ⛶ only while the credit line (with its ⛶ 全屏) is below the bottom of the screen
-  new IntersectionObserver(([en]) => {
-    const below = !en.isIntersecting && en.boundingClientRect.top > (en.rootBounds ? en.rootBounds.bottom : innerHeight);
-    $("stage").classList.toggle("fsq-on", below && !!$("stage").querySelector("iframe, video"));
-  }).observe($("credit"));
+
   $("tipFs").onclick = () => { if ($("stage").querySelector("iframe, video")) enterFull(); };   // the tip's ⛶ 全屏 is the real button
 
   function renderStage(c, autoplay) {
