@@ -262,7 +262,7 @@
   .stage .fsq { display: none; position: absolute; z-index: 3; font: inherit; font-size: 12.5px; font-weight: 700;
     top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right));   /* same spot as ✕ 退出全屏 in full screen */
     color: #fff; cursor: pointer; background: rgba(0, 0, 0, .55); border: 1px solid rgba(216, 16, 42, .7); border-radius: 999px; padding: 4px 11px; }
-  .stage.dyfit .fsq { display: block; }
+  .stage.playable .fsq { display: block; }   /* every video that plays here (2026-11-12: the only 全屏 button) */
   .stage.fill .fsq, .stage:fullscreen .fsq { display: none !important; }
   .stage.rot .fsbar2 { top: max(10px, env(safe-area-inset-right)); right: max(10px, env(safe-area-inset-bottom)); }
   .stage:fullscreen .fsbar2, .stage.fill .fsbar2 { display: flex; }
@@ -832,6 +832,7 @@
     stage.classList.toggle("vertical", !!c?.vertical && c?.platform !== "douyin");
     fitDouyin();   // every clip change: also clears the portrait box when switching away from Douyin
     stage.replaceChildren(fsBar, fsQ);            // ✕ 退出全屏 + ⟲ (full screen only) and the corner ⛶ live in the box
+    stage.classList.toggle("playable", !!c && (c.platform === "r2" || !!embedUrl(c, false)));   // shows the corner ⛶
     if (!c) { const card = el("div", "card"); card.append(el("div", "empty", "这首歌还没有视频，欢迎推荐 · No video yet")); stage.append(card); return; }
     const src = embedUrl(c, autoplay);
     if (c.platform === "r2") {
@@ -877,11 +878,6 @@
 
     const cr = $("credit"); cr.replaceChildren();
     if (c) {
-      // ⛶ 全屏 first, so a long filmer name / 抖音号 wraps after it instead of pushing the button down
-      if ($("stage").querySelector("iframe, video")) {   // only for clips that play here
-        const fs = el("button", "fsgo", "⛶ 全屏"); fs.title = "全屏观看，左上角有「退出全屏」· Full screen";
-        fs.onclick = enterFull; cr.append(fs);
-      }
       // Credit only where the player doesn't show it: Douyin's player always shows "@filmer" (and the 机位 row has
       // the length), so Douyin clips get no credit text; R2 / Bilibili / YouTube / Weibo get a short "cr. filmer".
       const credit = [c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
