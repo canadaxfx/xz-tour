@@ -259,7 +259,7 @@
      bottom banner still says 抖音): always on the tall portrait player (.dyfit), where the ⛶ 全屏 under
      the player can be off or half off the screen; never in full screen. (A first version showed it only while the line
      under the player was off-screen — it flickered as the address bar hid, and was hidden while that line was half cut.) */
-  .stage .fsq { display: none; position: absolute; z-index: 3; font: inherit; font-size: 12.5px; font-weight: 700;
+  .stage .fsq { display: none; position: absolute; z-index: 3; font: inherit; font-size: 12.5px; font-weight: 600;
     top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right));   /* same spot as ✕ 退出全屏 in full screen */
     color: #fff; cursor: pointer; background: rgba(0, 0, 0, .7); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 4px 11px;
     -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); box-shadow: 0 2px 10px rgba(0, 0, 0, .45); }   /* frosted: blurs Douyin's logo behind it */
@@ -267,7 +267,7 @@
   .stage.fill .fsq, .stage:fullscreen .fsq { display: none !important; }
   .stage.rot .fsbar2 { top: max(10px, env(safe-area-inset-right)); right: max(10px, env(safe-area-inset-bottom)); }
   .stage:fullscreen .fsbar2, .stage.fill .fsbar2 { display: flex; }
-  .stage .fsbar2 button { font: inherit; font-size: 12.5px; color: #fff; cursor: pointer; white-space: nowrap;
+  .stage .fsbar2 button { font: inherit; font-size: 12.5px; font-weight: 600; color: #fff; cursor: pointer; white-space: nowrap;
     background: rgba(0, 0, 0, .7); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; padding: 4px 11px;
     -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); box-shadow: 0 2px 10px rgba(0, 0, 0, .45); }
   @media (pointer: fine) { .stage .fsbar2 .fsr { display: none; } }
