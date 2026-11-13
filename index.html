@@ -219,9 +219,17 @@
   .vlist li:first-child:not(.vpad):has(+ .vpad), .vlist li:first-child:last-child { border-radius: var(--radius); }
   .vlist .vpad { pointer-events: none; background: none; border: 0; padding: 0; }   /* empty space after the last version (see fitVersions) */
   .vlist[hidden] { display: none; }
-  .vlist button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: baseline; width: 100%;
+  .vlist button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%;
     font: inherit; font-size: 13px; color: var(--text); text-align: left; cursor: pointer; background: none; border: 0; border-radius: 7px; padding: 8px 10px; }
   .vlist button:hover { background: var(--hover); }
+  /* 4:3 thumbnail (Douyin's long-lived "cover") with the version number on it; a plain number tile without one (2026-11-13) */
+  .vlist .th { position: relative; flex: none; width: 56px; height: 42px; border-radius: 6px; overflow: hidden; background: #000;
+    border: 1px solid var(--line); display: grid; place-items: center; }
+  .vlist .th img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .vlist .th .num { position: absolute; top: 2px; left: 2px; font: 700 10px/1.3 var(--mono); color: #fff; background: rgba(0, 0, 0, .7);
+    border-radius: 4px; padding: 0 3px; }
+  .vlist .th.plain .num { position: static; font-size: 13px; background: none; }
+  .vlist button[aria-current="true"] .th { border-color: var(--red-ink); }
   .vlist .w { min-width: 0; display: flex; align-items: baseline; gap: 6px; overflow: hidden; white-space: nowrap; }
   .vlist .w .tag-top { flex: none; }
   .vlist small, .vlist .len { color: var(--dim); }
@@ -597,7 +605,13 @@
       const w = el("span", "w");
       if (k.top) w.append(el("span", "tag-top", "推荐"));
       w.append(nm(k), el("small", null, desc(k)));
-      b.append(el("b", null, `机位 ${j + 1}`), w, el("span", "len", fmtDur(k.duration)));
+      const th = el("span", "th plain"); th.append(el("span", "num", `${j + 1}`));
+      if (k.cover) {
+        const im = el("img"); im.alt = ""; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; im.src = k.cover;
+        im.onerror = () => { im.remove(); th.classList.add("plain"); };   // link gone → plain number tile
+        th.classList.remove("plain"); th.prepend(im);
+      }
+      b.append(th, w, el("span", "len", fmtDur(k.duration)));
       b.onclick = () => { closeVersions(); go(songIdx, j, true); };
       const li = el("li"); li.append(b); list.append(li);
     });
