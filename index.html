@@ -135,6 +135,19 @@
   }
 
   /* One toggle, always at the right end of the song line (desktop only): 收起歌单 ⟩ ↔ ☰ 歌单 */
+  /* 随机 on/off (top right of the header): on = each song starts on a random 官摄/推荐 (or any) version, off = 机位 1.
+     Dark fill so it reads over the red corner band; red outline like the other page buttons. */
+  .rndsw { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 7px; font: inherit; font-size: 12px; font-weight: 600;
+    color: var(--text); cursor: pointer; white-space: nowrap; background: rgba(11, 7, 8, .72); border: 1px solid rgba(216, 16, 42, .55);
+    border-radius: 999px; padding: 4px 6px 4px 11px; }
+  .rndsw:hover { border-color: var(--red); }
+  @media (max-width: 360px) { h1 { font-size: 14px !important; } .brand { gap: 6px !important; }
+    .rndsw { font-size: 11px; padding: 3px 4px 3px 8px; gap: 4px; } .rndsw i { width: 22px; height: 13px; }
+    .rndsw i::after { width: 9px; height: 9px; } .rndsw[aria-checked="true"] i::after { left: 11px; } }   /* small phones: title + switch on one line */
+  .rndsw i { position: relative; width: 26px; height: 15px; border-radius: 999px; background: #4a3a3d; transition: background .15s; }
+  .rndsw i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #fff; transition: left .15s; }
+  .rndsw[aria-checked="true"] i { background: var(--red); }
+  .rndsw[aria-checked="true"] i::after { left: 13px; }
   .settoggle { display: none; font: inherit; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; white-space: nowrap;
     background: transparent; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; padding: 4px 12px; }
   .settoggle:hover { border-color: var(--red); background: rgba(216, 16, 42, .12); }
@@ -142,9 +155,10 @@
 
   /* ---------- player ---------- */
   .now { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; min-width: 0; }
-  .now .num { font-family: var(--mono); color: var(--red-text); font-weight: 700; font-size: 14px; flex: none; }
+  .now .num { font-family: var(--mono); color: var(--red-text); font-weight: 700; font-size: 13px; flex: none; }
   .now .num:empty { display: none; }   /* talk entries: title only, no label */
-  .now .title { font-size: 20px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .now .title { font-size: 16px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  @media (max-width: 600px) { .now .title { font-size: 14px; } .now .num { font-size: 12px; } }   /* 2026-11-13: smaller (was 20 / 14 px everywhere) */
   .now .tag { color: var(--dim); font-size: 13px; flex: none; }
 
   .stage {
@@ -240,10 +254,12 @@
   /* One line: [⛶ 全屏]  cr. filmer (non-Douyin only, cut with …)  [抖音原视频 ↗] — a pill at each end (2026-11-12) */
   .credit { margin: 10px 0 0; font-size: 13px; line-height: 1.4; color: var(--dim); display: flex; align-items: center; gap: 10px; }
   .credit .ctext { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .credit .olink { flex: none; display: inline-flex; align-items: center; min-height: 28px; padding: 6px 12px; border-radius: 999px;
-    font-size: 13px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; color: var(--link);
-    border: 1px solid rgba(255, 179, 185, .45); }
-  .credit .olink:hover { border-color: var(--link); background: rgba(255, 179, 185, .08); }
+  /* 抖音原视频 ↗: a plain text link (rose like the footer links, thin underline), not a pill (2026-11-13: the outlined pink pill
+     clashed with the red pills). The padding keeps a finger-sized tap area without drawing a box. */
+  .credit .olink { flex: none; display: inline-flex; align-items: center; min-height: 28px; padding: 4px 2px 4px 8px; margin-left: auto;
+    font-size: 12.5px; font-weight: 500; line-height: 1; white-space: nowrap; color: var(--link);
+    text-decoration: underline; text-decoration-color: rgba(255, 179, 185, .4); text-underline-offset: 3px; }
+  .credit .olink:hover { text-decoration-color: var(--link); }
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
   /* Same look as the 换机位 pill (red outline + tint, bold): reads as "tap me" without outshouting the 机位 picker */
@@ -284,7 +300,10 @@
     transform: translate(-50%, -50%) rotate(90deg); }
   .credit a { white-space: nowrap; }
 
-  .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .nav { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; margin-top: 14px; }
+  .step.rand { text-align: center; padding-left: 12px; padding-right: 12px; }   /* 🎲 随机选歌, between Prev and Next */
+  .step.rand .dir { font-size: 16px; line-height: 1.1; color: var(--text); }
+  @media (max-width: 380px) { .nav { gap: 6px; } .step.rand { padding-left: 8px; padding-right: 8px; } .step.rand .to { font-size: 13px; } .step .dir-en { display: none; } }
   .step {
     font: inherit; cursor: pointer; text-align: left; min-width: 0;
     background: var(--panel); color: var(--text); border: 1px solid rgba(216, 16, 42, .55); border-radius: var(--radius);
@@ -323,8 +342,10 @@
   }
   .song:hover { background: var(--hover); }
   .song .n { font-family: var(--mono); font-size: 13px; color: var(--dim); text-align: right; }
-  .song .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .song .t small { color: var(--dim); margin-left: 6px; }
+  /* Title + small info (note, 原唱, 仅): one line when it fits; otherwise the info moves down as a whole to a second line
+     (never cut), and a title longer than the row wraps (2026-11-13; it used to be cut with … and hid 原唱 on small phones). */
+  .song .t { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 6px; row-gap: 1px; overflow-wrap: anywhere; }
+  .song .t small { color: var(--dim); white-space: nowrap; }
   .song .c { font-size: 12px; color: var(--dim); font-family: var(--mono); }
   .song[aria-current="true"] { background: var(--red); color: var(--red-ink); font-weight: 700; }
   .song[aria-current="true"] .n, .song[aria-current="true"] .c, .song[aria-current="true"] small { color: var(--red-ink); }
@@ -332,7 +353,7 @@
   .between { margin: 2px 8px 2px 46px; font-size: 12px; color: var(--dim); }
   /* A talk with a video: a lighter line in the setlist, still clickable */
   .song.talk { padding-top: 4px; padding-bottom: 4px; font-size: 13px; color: var(--dim); }
-  .song.talk .t::before { content: "— "; }
+  .song.talk .t::before { content: "—"; }   /* the row's 6 px gap is the space */
   .song.talk[aria-current="true"] { color: var(--red-ink); }
   .song.combo { grid-template-columns: auto minmax(0, 1fr) auto; }   /* "E1+E2" needs a wider number column */
   .between::before { content: "— "; }
@@ -366,7 +387,7 @@
     .show { font-size: 15px; padding: 9px 16px 8px; }
     .show[aria-pressed="true"] { padding-top: 11px; }
     .settoggle { font-size: 14px; padding: 7px 14px; }
-    .now .num { font-size: 15px; }
+    .now .num { font-size: 14px; }
     .now .tag { font-size: 14px; }
     .clips .vstep { width: 48px; min-height: 46px; font-size: 22px; }
     .clips .vcur { font-size: 15px; padding: 10px 12px; min-height: 46px; }
@@ -375,7 +396,7 @@
     .vlist .len { font-size: 13px; }
     .credit { font-size: 14px; }
     .credit .fsgo { font-size: 14px; min-height: 34px; padding: 8px 14px; }
-    .credit .olink { font-size: 14px; min-height: 34px; padding: 8px 14px; }
+    .credit .olink { font-size: 14px; min-height: 34px; padding: 6px 2px 6px 10px; }
     .help, .help .fsgo { font-size: 13px; }
     .step { padding: 12px 16px; }
     .step .dir { font-size: 13px; }
@@ -413,6 +434,7 @@
         <svg viewBox="0 0 48 12" aria-hidden="true"><path d="M9 1 3 6l6 5"/><path d="M39 1l6 5-6 5"/></svg>
       </span>
       <h1>出口·我们 · 现场视频<span class="en">HERE COMES OUR EXIT · LIVE</span></h1>
+      <button class="rndsw" id="rndSw" type="button" role="switch" aria-checked="true">随机机位<i aria-hidden="true"></i></button>
     </div>
     <div class="shows" id="shows" role="group" aria-label="场次 Shows"></div>
   </header>
@@ -424,8 +446,9 @@
       <div class="clips" id="clips" role="group" aria-label="机位 Clips"></div>
       <p class="credit" id="credit"></p>
       <div class="nav">
-        <button class="step prev" id="prev"><span class="dir">← 上一首 Prev</span><span class="to" id="prevTo"></span></button>
-        <button class="step next" id="next"><span class="dir">下一首 Next →</span><span class="to" id="nextTo"></span></button>
+        <button class="step prev" id="prev"><span class="dir">← 上一首<span class="dir-en"> Prev</span></span><span class="to" id="prevTo"></span></button>
+        <button class="step rand" id="rand" type="button" title="随机选一首歌和一个机位 · Random song"><span class="dir">🎲</span><span class="to">随机选歌</span></button>
+        <button class="step next" id="next"><span class="dir">下一首<span class="dir-en"> Next</span> →</span><span class="to" id="nextTo"></span></button>
       </div>
       <div class="notes">   <!-- side notes: a thin divider above, soft grey, no box -->
       <p class="help bigscreen">💻 建议用平板或电脑观看，画面更大，切换机位也更方便。用手机看时，可以点 <button class="fsgo" id="tipFs" type="button">⛶ 全屏</button>，全屏后再点「⟲ 横屏」把画面横过来。<span class="en">Best viewed on a tablet or computer. On a phone, tap ⛶ 全屏 for full screen, then ⟲ 横屏 to turn it sideways.</span></p>
@@ -589,7 +612,7 @@
     // Platform name only when it isn't Douyin (nearly every clip is), so the note (近景直拍…) stays visible.
     const desc = k => [k.platform !== "douyin" && PLATFORM[k.platform]?.name, k.note].filter(Boolean).join(" · ");
     const nm = k => el("span", "nm", k.by);
-    const step = (txt, title, j) => { const b = el("button", "vstep", txt); b.title = title; b.disabled = j < 0 || j >= n; b.onclick = () => go(songIdx, j, true); return b; };
+    const step = (txt, title, j) => { const b = el("button", "vstep", txt); b.title = title; b.disabled = j < 0 || j >= n; b.onclick = () => { go(songIdx, j, true); remember(); }; return b; };
     const cur = el("button", "vcur");
     cur.setAttribute("aria-haspopup", "listbox"); cur.setAttribute("aria-expanded", "false");
     const lab = el("span", "lab");
@@ -612,7 +635,7 @@
         th.classList.remove("plain"); th.prepend(im);
       }
       b.append(th, w, el("span", "len", fmtDur(k.duration)));
-      b.onclick = () => { closeVersions(); go(songIdx, j, true); };
+      b.onclick = () => { closeVersions(); go(songIdx, j, true); remember(); };
       const li = el("li"); li.append(b); list.append(li);
     });
     cur.onclick = e => {
@@ -672,6 +695,30 @@
   }
 
   let tour, show, songIdx = 0, clipIdx = 0;
+  // Which version a song starts on (2026-11-13, user's rule): a random one of its 官摄 / 推荐 versions, or of all versions
+  // when it has none. A version picked by hand is remembered for this visit (coming back to the song shows it again).
+  // Links naming a version (&clip=N) and the tour.json start point are always exact.
+  const mainId = c => String(c.vid || c.bvid || c.id || c.bid || c.url || "");   // same order as the admin's clip_main_id
+  const chosen = {};                                                           // "show|song n" → main id picked by hand
+  const remember = () => { const c = show.songs[songIdx].clips[clipIdx]; if (c) chosen[show.id + "|" + show.songs[songIdx].n] = mainId(c); };
+  // 随机 switch in the header (default on, remembered per browser); off = every song starts on 机位 1 as before.
+  let randomOn = true;
+  try { randomOn = localStorage.getItem("xzTour.random") !== "0"; } catch (e) {}
+  const rndSw = $("rndSw");
+  const showRnd = () => {
+    rndSw.setAttribute("aria-checked", randomOn);
+    rndSw.title = randomOn ? "随机机位：开（每首歌随机从官摄/推荐机位开始）· Random start version: on" : "随机机位：关（每首歌从机位 1 开始）· Random start version: off";
+  };
+  showRnd();
+  rndSw.onclick = () => { randomOn = !randomOn; showRnd(); try { localStorage.setItem("xzTour.random", randomOn ? "1" : "0"); } catch (e) {} };
+  function startClip(song) {
+    const mine = chosen[show.id + "|" + song.n], k = mine ? song.clips.findIndex(c => mainId(c) === mine) : -1;
+    if (k >= 0) return k;
+    if (!randomOn) return 0;
+    const best = song.clips.map((c, i) => i).filter(i => /官摄/.test(song.clips[i].note || "") || song.clips[i].top);
+    const pool = best.length ? best : song.clips.map((c, i) => i);
+    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : 0;
+  }
 
   async function getJSON(path) {
     const r = await fetch(path, { cache: "no-cache" });
@@ -700,7 +747,8 @@
       }
       b.setAttribute("aria-pressed", on);
       b.style.zIndex = on ? 9 : 5 - Math.min(4, Math.abs(i - at));   // nearer the selected tab = higher
-      b.onclick = () => loadShow(s.id);
+      // same song in the other stop (by title); from a talk (often just "Talking") the stop's first song as before
+      b.onclick = () => { const cur = show && show.songs[songIdx]; loadShow(s.id, null, 0, cur && !cur.talk ? { title: cur.title } : null); };
       box.append(b);
     });
   }
@@ -726,7 +774,7 @@
       b.append(t);
       b.append(el("span", "c", s.clips.length ? (s.talk && s.clips.length === 1 ? "▶" : `${s.clips.length} 机位`) : "待补充"));
       b.onclick = () => {
-        go(i, 0, true);
+        go(i, null, true);
         closeList();
         // Phones: the setlist sits under the player, so bring the player back into view.
         const p = document.querySelector(".player");
@@ -878,15 +926,16 @@
     }
   }
 
-  function go(i, ci = 0, autoplay = false) {
+  function go(i, ci = null, autoplay = false) {   // ci null → startClip() picks the version
     songIdx = Math.max(0, Math.min(show.songs.length - 1, i));
     const song = show.songs[songIdx];
-    clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci));
+    clipIdx = Math.max(0, Math.min(song.clips.length - 1, ci == null ? startClip(song) : ci));
     const c = song.clips[clipIdx];
 
     $("num").textContent = song.intro ? song.label || "开场" : song.talk ? "" : song.num ? song.num : song.combo ? song.n : `${song.encore ? song.n : song.n.padStart(2, "0")} / ${songCount()}`;
     $("title").textContent = song.title;
-    $("tag").textContent = [song.note, song.cover && "原唱 " + song.cover, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
+    // 原唱 is shown in the setlist only, not on this line (user's call, 2026-11-13: it got cut on small phones anyway)
+    $("tag").textContent = [song.note, song.only && "仅 " + mmdd(song.only)].filter(Boolean).join(" · ");
 
     renderStage(c, autoplay);
 
@@ -984,19 +1033,23 @@
     let i = songN ? show.songs.findIndex(s => s.n === songN) : stepFrom(-1, 1);   // skips an intro (开场) without video
     if (pick && pick.title) {
       const k = show.songs.findIndex(s => s.title === pick.title && !s.talk);
-      const mainId = c => String(c.vid || c.bvid || c.id || c.bid || c.url || "");   // same order as the admin's clip_main_id
       if (k >= 0) { i = k; const j = pick.vid ? show.songs[k].clips.findIndex(c => mainId(c) === pick.vid) : -1; clipN = j >= 0 ? j + 1 : 0; }
     }
-    go(i < 0 ? 0 : i, clipN ? clipN - 1 : 0, false);
+    go(i < 0 ? 0 : i, clipN ? clipN - 1 : null, false);
   }
 
-  $("prev").onclick = () => go(stepFrom(songIdx, -1), 0, true);
-  $("next").onclick = () => go(stepFrom(songIdx, 1), 0, true);
+  $("prev").onclick = () => go(stepFrom(songIdx, -1), null, true);
+  $("next").onclick = () => go(stepFrom(songIdx, 1), null, true);
+  // 🎲 随机选歌: any other entry with a video (songs, talks / VCRs with video), on its startClip() version
+  $("rand").onclick = () => {
+    const pool = show.songs.map((s, i) => i).filter(i => i !== songIdx && show.songs[i].clips.length);
+    if (pool.length) go(pool[Math.floor(Math.random() * pool.length)], null, true);
+  };
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") { closeList(); closeVersions(); }
     if (e.target.closest("input, textarea")) return;
-    if (e.key === "ArrowLeft" && stepFrom(songIdx, -1) >= 0) go(stepFrom(songIdx, -1), 0, true);
-    if (e.key === "ArrowRight" && stepFrom(songIdx, 1) < show.songs.length) go(stepFrom(songIdx, 1), 0, true);
+    if (e.key === "ArrowLeft" && stepFrom(songIdx, -1) >= 0) go(stepFrom(songIdx, -1), null, true);
+    if (e.key === "ArrowRight" && stepFrom(songIdx, 1) < show.songs.length) go(stepFrom(songIdx, 1), null, true);
   });
 
   (async () => {
