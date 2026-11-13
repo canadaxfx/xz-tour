@@ -255,6 +255,12 @@
      box (.rot) its top-right corner lies on the screen's right/bottom edges, so those insets are used instead. */
   .stage .fsbar2 { display: none; position: absolute; z-index: 3; gap: 8px;
     top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); }
+  /* Corner ⛶ (top-left; Douyin's logo is top-right): only while the credit line's ⛶ 全屏 is below the screen edge
+     (tall portrait player on a phone), never in full screen */
+  .stage .fsq { display: none; position: absolute; top: 8px; left: 8px; z-index: 3; font: inherit; font-size: 13px; font-weight: 700;
+    color: #fff; cursor: pointer; background: rgba(0, 0, 0, .55); border: 1px solid rgba(216, 16, 42, .7); border-radius: 999px; padding: 5px 11px; }
+  .stage.fsq-on .fsq { display: block; }
+  .stage.fill .fsq, .stage:fullscreen .fsq { display: none !important; }
   .stage.rot .fsbar2 { top: max(10px, env(safe-area-inset-right)); right: max(10px, env(safe-area-inset-bottom)); }
   .stage:fullscreen .fsbar2, .stage.fill .fsbar2 { display: flex; }
   .stage .fsbar2 button { font: inherit; font-size: 14px; color: #fff; cursor: pointer; white-space: nowrap;
@@ -812,6 +818,12 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape" && $("stage").classList.contains("fill")) exitFull(); });
   const fsX = el("button", "fsx", "✕ 退出全屏"), fsR = el("button", "fsr", "⟲ 横屏"), fsBar = el("div", "fsbar2");
   fsX.onclick = exitFull; fsR.onclick = rotToggle; fsR.title = "横屏 / 竖屏 · Rotate"; fsBar.append(fsR, fsX);   // ✕ in the corner
+  const fsQ = el("button", "fsq", "⛶ 全屏"); fsQ.title = "全屏观看 · Full screen"; fsQ.onclick = enterFull;
+  // show the corner ⛶ only while the credit line (with its ⛶ 全屏) is below the bottom of the screen
+  new IntersectionObserver(([en]) => {
+    const below = !en.isIntersecting && en.boundingClientRect.top > (en.rootBounds ? en.rootBounds.bottom : innerHeight);
+    $("stage").classList.toggle("fsq-on", below && !!$("stage").querySelector("iframe, video"));
+  }).observe($("credit"));
   $("tipFs").onclick = () => { if ($("stage").querySelector("iframe, video")) enterFull(); };   // the tip's ⛶ 全屏 is the real button
 
   function renderStage(c, autoplay) {
@@ -820,7 +832,7 @@
     stage.classList.toggle("dyvert", c?.platform === "douyin" && !!c?.vertical);   // portrait Douyin clip: tall phone player
     stage.classList.toggle("vertical", !!c?.vertical && c?.platform !== "douyin");
     fitDouyin();   // every clip change: also clears the portrait box when switching away from Douyin
-    stage.replaceChildren(fsBar);                 // ✕ 退出全屏 + ⟲ live in the box (shown only in full screen)
+    stage.replaceChildren(fsBar, fsQ);            // ✕ 退出全屏 + ⟲ (full screen only) and the corner ⛶ live in the box
     if (!c) { const card = el("div", "card"); card.append(el("div", "empty", "这首歌还没有视频，欢迎推荐 · No video yet")); stage.append(card); return; }
     const src = embedUrl(c, autoplay);
     if (c.platform === "r2") {
