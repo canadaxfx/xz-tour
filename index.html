@@ -104,7 +104,7 @@
   .show:first-child { margin-left: 0; }
   /* Other real stops (2026-11-13): near-white text, a lighter tab and a soft red edge, so they read as tappable — clearly
      apart from the dim dashed placeholders (City 3/4/5) */
-  .show:not(:disabled):not([aria-pressed="true"]) { color: rgba(243, 236, 236, .85); background: #2a171b; border-color: rgba(216, 16, 42, .55); }
+  .show:not(:disabled):not([aria-pressed="true"]) { color: var(--text); background: #2a171b; border-color: rgba(216, 16, 42, .55); }
   .show:not(:disabled):not([aria-pressed="true"]):hover { color: var(--text); border-color: var(--red); }
   .show[aria-pressed="true"] { color: var(--night); background: var(--text); border-color: var(--text); font-weight: 700; padding-top: 9px; }
   .show .d { margin-left: 5px; }
