@@ -496,6 +496,9 @@
   const updateButton = document.querySelector("#siteUpdate button");
   const pageUrl = location.pathname;
   let checkingForUpdate = false;
+  // AbortSignal.timeout only exists in Chrome 103+ / iOS 16+; older engines (e.g. some Baidu App builds) would throw
+  // here and stop the whole page, so the 8-second limit is used only where the browser has it.
+  const timeoutSignal = ms => (window.AbortSignal && typeof AbortSignal.timeout === "function") ? AbortSignal.timeout(ms) : undefined;
 
   async function rememberJson(path, response) {
     const text = await response.text();
@@ -510,7 +513,7 @@
     try {
       const changed = await Promise.all([...loadedResources].map(async ([path, loaded]) => {
         try {
-          const response = await fetch(path, { cache: "no-cache", signal: AbortSignal.timeout(8000) });
+          const response = await fetch(path, { cache: "no-cache", signal: timeoutSignal(8000) });
           return response.status === 404 || response.status === 410 ||
             (response.ok && await response.text() !== loaded);
         } catch {
@@ -524,7 +527,7 @@
   }
 
   if (location.protocol === "http:" || location.protocol === "https:") {
-    fetch(pageUrl, { cache: "no-cache", signal: AbortSignal.timeout(8000) }).then(async response => {
+    fetch(pageUrl, { cache: "no-cache", signal: timeoutSignal(8000) }).then(async response => {
       if (response.ok) loadedResources.set(pageUrl, await response.text());
     }).catch(() => {});
     document.addEventListener("visibilitychange", checkForUpdate);
