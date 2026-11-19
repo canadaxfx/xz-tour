@@ -281,7 +281,6 @@
   .credit .favgo { flex: none; display: inline-flex; align-items: center; min-height: 28px; padding: 4px 2px; font: inherit; font-size: 12.5px;
     font-weight: 500; line-height: 1; white-space: nowrap; color: var(--link); background: none; border: 0; cursor: pointer; }
   .credit .favgo[hidden] { display: none; }
-  @media (max-width: 380px) { .credit .fav .fl { display: none; } .credit .fav { padding: 4px 9px; } }   /* heart only: room for "cr. …" */
   .credit .favgo:hover { text-decoration: underline; text-underline-offset: 3px; }
   .vlist .w .fh { flex: none; color: var(--red-text); font-size: 12px; }   /* ♥ on favourited versions */
   .vlist button[aria-current="true"] .w .fh { color: var(--red-ink); }
@@ -814,7 +813,7 @@
     const cur = list.querySelector('[aria-current="true"]');
     if (first && cur) list.scrollTop = cur.offsetTop - (list.clientHeight - cur.offsetHeight) / 2;
   }
-  addEventListener("resize", () => fitVersions(false));
+  addEventListener("resize", () => { fitVersions(false); fitCredit(); });
   // If the page is scrolled (by hand, outside the list) while the list is open, it refits to the room below it.
   let fitQueued = false;
   addEventListener("scroll", () => {
@@ -891,8 +890,9 @@
     if (!b) return;
     const on = favAt(show.songs[songIdx].clips[clipIdx]) >= 0;
     b.setAttribute("aria-pressed", on);
-    b.replaceChildren(el("span", "h", on ? "♥" : "♡"), el("span", "fl", on ? "已收藏" : "收藏"));   // .fl hidden on very narrow phones
-    b.setAttribute("aria-label", on ? "已收藏" : "收藏");
+    // "本站收藏" (user's wording, 2026-11-19): this site's list, not Douyin's own ★ 收藏 inside the player; once saved just "已收藏"
+    b.replaceChildren(el("span", "h", on ? "♥" : "♡"), el("span", "fl", on ? "已收藏" : "本站收藏"));
+    b.setAttribute("aria-label", on ? "已收藏" : "本站收藏");
     b.title = on ? "已收藏，点一下取消 · Saved — tap to remove" : "收藏这个机位（只保存在这个浏览器里）· Save to my favourites";
     const g = document.querySelector("#credit .favgo");
     if (g) {
@@ -901,6 +901,15 @@
       g.textContent = `我的收藏 ${n} ›`;
       g.title = "打开我的收藏（所有站）· Open my favourites";
     }
+    fitCredit();
+  }
+  // "cr. …" on the credit line steps aside when it doesn't fit — but only when the 机位 selector above shows the filmer (2+ versions).
+  // A song with one version has no selector, so there the credit always stays (cut with "…" if needed). User's rule, 2026-11-19.
+  function fitCredit() {
+    const ct = document.querySelector("#credit .ctext");
+    if (!ct) return;
+    ct.hidden = false;
+    if (ct.classList.contains("opt") && ct.textContent && ct.scrollWidth > ct.clientWidth + 1) ct.hidden = true;
   }
   function paintFavBtn() {                              // "♥ 我的收藏 N" in the setlist heading (only once there is one)
     const b = $("favBtn"), n = favs.filter(f => locate(f) !== false).length;
@@ -1349,7 +1358,7 @@
       // the length), so Douyin clips get no credit text; R2 / Bilibili / YouTube / Weibo get a short "cr. filmer".
       // cr (原拍) is shown on every platform, Douyin too: its player shows the posting account, not the filmer
       const credit = [c.cr ? `cr. ${c.cr}` : c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
-      const ct = el("span", "ctext", credit); ct.title = credit; cr.append(ct);
+      const ct = el("span", "ctext" + (song.clips.length > 1 ? " opt" : ""), credit); ct.title = credit; cr.append(ct);   // opt: see fitCredit()
       const fv = el("button", "fav"); fv.type = "button"; fv.onclick = toggleFav; cr.append(fv);   // ♡ 收藏 (paintFav fills it)
       // 我的收藏 N › next to the heart: opens the setlist on the favourites view (only once there is a favourite)
       const fg = el("button", "favgo"); fg.type = "button"; fg.hidden = true;
