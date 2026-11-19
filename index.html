@@ -290,18 +290,28 @@
     padding: 3px 9px; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; background: none; }
   .favbtn:hover, .favbtn[aria-pressed="true"] { border-color: var(--red); background: rgba(216, 16, 42, .18); }
   .favs { list-style: none; margin: 0; padding: 0; }
-  .favs li { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--line); }
-  .favs li:first-child { border-top: 0; }
+  /* 2026-11-19, user's pick "A": every favourite is a card (lighter panel, thin soft-red bar on the left, small gaps), the
+     playing one gets a light red tint + solid red bar + "▶ 播放中" — not the setlist's full red fill (too loud in this short list) */
+  .favs { display: flex; flex-direction: column; gap: 6px; padding: 2px 2px 4px; }
+  .favs[hidden] { display: none; }   /* display: flex would otherwise override the hidden attribute */
+  .favs li.fcard { display: flex; align-items: center; border-radius: 8px; background: #1F1215; border: 1px solid var(--line);
+    border-left: 3px solid rgba(216, 16, 42, .45); transition: background .15s; }
+  .favs li.fcard:hover { background: #2A171B; }
+  .favs li.fcard.cur { background: rgba(216, 16, 42, .16); border-color: rgba(216, 16, 42, .45); border-left-color: var(--red); }
   .favs .go { flex: 1; min-width: 0; text-align: left; font: inherit; color: var(--text); background: none; border: 0; cursor: pointer;
-    padding: 8px; border-radius: 6px; display: flex; flex-direction: column; gap: 2px; }
-  .favs .go:hover { background: var(--hover); }
-  .favs .go[aria-current="true"] { background: var(--red); color: var(--red-ink); }
-  .favs .go b { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    padding: 9px 10px; border-radius: 8px; display: flex; flex-direction: column; gap: 2px; }
+  .favs .go b { font-size: 14.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .favs .go b .tt { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .favs .go .now { flex: none; font-size: 11px; font-weight: 600; color: var(--red-text); border: 1px solid rgba(255, 90, 104, .5);
+    border-radius: 999px; padding: 0 6px; line-height: 1.6; }
   .favs .go small { font-size: 12px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .favs .go[aria-current="true"] small { color: var(--red-ink); }
+  .favs li.fcard.cur .go small { color: #E8C9CC; }
+  .favs li.sep { border-top: 1px solid var(--line); margin: 4px 4px 0; }   /* line between the cards and the note / tools */
   .favs .rm { flex: none; font: inherit; font-size: 16px; line-height: 1; color: var(--dim); background: none; border: 0; cursor: pointer;
     padding: 8px 10px; border-radius: 6px; }
   .favs .rm:hover { color: var(--text); background: var(--hover); }
+  .favs li.fcard .rm { opacity: .7; border-radius: 8px; }
+  .favs li.fcard:hover .rm { opacity: 1; }
   .favs .note { display: block; padding: 8px; font-size: 12px; color: var(--dim); line-height: 1.5; }
   /* 分享 / 导入 (2026-11-19): under the own list; the link prompt bar for ?fav= links */
   .favs .tools { display: flex; flex-direction: column; gap: 8px; padding: 8px; }
@@ -907,7 +917,7 @@
     if (favPreview) {                                    // 只看看: a shared list, not saved
       const head = el("li", "head");
       const add = el("button", "pill main", "全部加入我的收藏"); add.type = "button";
-      add.onclick = () => { const n = addFavs(favPreview); favPreview = null; renderFavs(); paintFavBtn();
+      add.onclick = e => { e.stopPropagation(); const n = addFavs(favPreview); favPreview = null; renderFavs(); paintFavBtn();
                             const m = ol.querySelector(".tools .msg"); if (m) m.textContent = n ? `已加入 ${n} 个 · Added ${n}` : "这些你都已经收藏了"; };
       head.append(el("span", null, "分享给你的收藏（还没保存）"), add);
       ol.append(head);
@@ -915,19 +925,23 @@
     src.forEach((f, k) => {
       const at = locate(f);
       if (at === false) return;                          // its video is gone from the site
-      const li = el("li"), b = el("button", "go");
+      const playing = !!(f.s === show.id && cur && mainId(cur) === f.v);
+      const li = el("li", "fcard" + (playing ? " cur" : "")), b = el("button", "go");   // "fcard", not "card": that class fills the player box
       b.type = "button";
-      b.setAttribute("aria-current", f.s === show.id && cur && mainId(cur) === f.v);
-      b.append(el("b", null, f.t), el("small", null, [city(f.s), f.who, f.note].filter(Boolean).join(" · ")));
+      b.setAttribute("aria-current", playing);
+      const title = el("b"); title.append(el("span", "tt", f.t));
+      if (playing) title.append(el("span", "now", "▶ 播放中"));
+      b.append(title, el("small", null, [city(f.s), f.who, f.note].filter(Boolean).join(" · ")));
       b.onclick = () => openFav(f);
       const rm = el("button", "rm", "×"); rm.type = "button"; rm.title = "取消收藏 · Remove"; rm.setAttribute("aria-label", "取消收藏 " + f.t);
-      rm.onclick = () => { favs.splice(k, 1); saveFavs(); renderFavs(); paintFavBtn(); paintFav(); renderVersions(show.songs[songIdx], show.songs[songIdx].clips[clipIdx]); };
+      // stopPropagation: the list is redrawn, so the tapped × is no longer on the page and the page's tap-outside check would close the list
+      rm.onclick = e => { e.stopPropagation(); favs.splice(k, 1); saveFavs(); renderFavs(); paintFavBtn(); paintFav(); renderVersions(show.songs[songIdx], show.songs[songIdx].clips[clipIdx]); };
       if (favPreview) li.append(b); else li.append(b, rm);
       ol.append(li);
     });
     if (!ol.children.length) ol.append(el("li", "note", "还没有收藏。播放时点视频下面的「♡ 收藏」，就会出现在这里。"));
     if (favPreview) return;
-    const note = el("li"); note.append(el("span", "note", "收藏只保存在这个浏览器里：换手机/电脑、用无痕模式或清除浏览数据后会看不到。可以用「分享 / 备份」生成链接，在别的手机、电脑上打开。· Saved in this browser only."));
+    const note = el("li", "sep"); note.append(el("span", "note", "收藏只保存在这个浏览器里：换手机/电脑、用无痕模式或清除浏览数据后会看不到。可以用「分享 / 备份」生成链接，在别的手机、电脑上打开。· Saved in this browser only."));
     ol.append(note);
     // 分享 / 备份 (a link with the code) and 导入 (paste a link or code)
     const tools = el("li", "tools"), row = el("div", "row"), msg = el("div", "msg"), box = el("div", "row");
