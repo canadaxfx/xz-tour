@@ -9,6 +9,13 @@
 <meta name="theme-color" content="#0B0708">
 <meta name="apple-mobile-web-app-title" content="出口·我们 现场视频"><!-- home-screen shortcut name (not the current song) -->
 <meta name="application-name" content="出口·我们 现场视频">
+<!-- What's new: shown in the update notice ("网站已更新：…") when a visitor's open page has a different note. Change it with every
+     page update that visitors should hear about; leave it as is for small fixes (the notice then says 网站功能更新). Keep it short. -->
+<meta name="xz-whatsnew" content="新增收藏功能：♡ 收藏喜欢的机位，还能分享收藏链接">
+<!-- The same note also shows ONCE per browser as a 新功能 bar after loading, for 30 days from this date (update it with the note).
+     xz-whatsnew-try: what 试试看 does — "fav" = point at the ♡ 收藏 button; empty = only 知道了. -->
+<meta name="xz-whatsnew-date" content="2026-11-19">
+<meta name="xz-whatsnew-try" content="fav">
 <link rel="manifest" href="manifest.webmanifest"><!-- start_url "./": a home-screen shortcut opens the start page, not the song it was saved on -->
 <title>出口·我们 · 现场视频</title>
 <!-- Google Analytics (GA4 stream for xz-tour.pages.dev); async, so the page never waits for it (blocked in mainland China) -->
@@ -263,6 +270,58 @@
     font-size: 12.5px; font-weight: 500; line-height: 1; white-space: nowrap; color: var(--link);
     text-decoration: underline; text-decoration-color: rgba(255, 179, 185, .4); text-underline-offset: 3px; }
   .credit .olink:hover { text-decoration-color: var(--link); }
+  /* ♡ 收藏 (2026-11-19): favourites kept in this browser; a plain text button like 原视频 ↗, red heart when on */
+  .credit .fav { flex: none; display: inline-flex; align-items: center; gap: 4px; min-height: 28px; padding: 4px 8px; margin-left: auto;
+    font: inherit; font-size: 12.5px; font-weight: 500; line-height: 1; white-space: nowrap; color: var(--text); cursor: pointer;
+    background: none; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; }
+  .credit .fav:hover { border-color: var(--red); }
+  .credit .fav .h { color: var(--red-text); font-size: 14px; }
+  .credit .fav[aria-pressed="true"] { background: rgba(216, 16, 42, .18); border-color: var(--red); }
+  .credit .fav + .olink { margin-left: 0; }
+  .vlist .w .fh { flex: none; color: var(--red-text); font-size: 12px; }   /* ♥ on favourited versions */
+  .vlist button[aria-current="true"] .w .fh { color: var(--red-ink); }
+  .setlist h2 { flex-wrap: wrap; align-items: center; }
+  .favbtn { font: inherit; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; white-space: nowrap;
+    padding: 3px 9px; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; background: none; }
+  .favbtn:hover, .favbtn[aria-pressed="true"] { border-color: var(--red); background: rgba(216, 16, 42, .18); }
+  .favs { list-style: none; margin: 0; padding: 0; }
+  .favs li { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--line); }
+  .favs li:first-child { border-top: 0; }
+  .favs .go { flex: 1; min-width: 0; text-align: left; font: inherit; color: var(--text); background: none; border: 0; cursor: pointer;
+    padding: 8px; border-radius: 6px; display: flex; flex-direction: column; gap: 2px; }
+  .favs .go:hover { background: var(--hover); }
+  .favs .go[aria-current="true"] { background: var(--red); color: var(--red-ink); }
+  .favs .go b { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .favs .go small { font-size: 12px; color: var(--dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .favs .go[aria-current="true"] small { color: var(--red-ink); }
+  .favs .rm { flex: none; font: inherit; font-size: 16px; line-height: 1; color: var(--dim); background: none; border: 0; cursor: pointer;
+    padding: 8px 10px; border-radius: 6px; }
+  .favs .rm:hover { color: var(--text); background: var(--hover); }
+  .favs .note { display: block; padding: 8px; font-size: 12px; color: var(--dim); line-height: 1.5; }
+  /* 分享 / 导入 (2026-11-19): under the own list; the link prompt bar for ?fav= links */
+  .favs .tools { display: flex; flex-direction: column; gap: 8px; padding: 8px; }
+  .favs .tools .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .favs .tools .row:empty { display: none; }
+  .favs .tools input { flex: 1 1 12em; min-width: 0; font: inherit; font-size: 12px; color: var(--text); background: var(--night);
+    border: 1px solid var(--line); border-radius: 6px; padding: 7px 8px; }
+  .favs .tools .msg { font-size: 12px; color: var(--dim); line-height: 1.5; }
+  .favs .tools .msg:empty { display: none; }
+  .favs .head { padding: 8px; font-size: 12px; color: var(--dim); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pill { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--text); cursor: pointer; white-space: nowrap; min-height: 30px;
+    padding: 5px 12px; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; background: none; }
+  .pill:hover { border-color: var(--red); }
+  .pill.main { background: var(--red); border-color: var(--red); color: var(--red-ink); }
+  .favlink { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); max-width: 560px;
+    margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 12px 14px; font-size: 13.5px;
+    color: var(--text); background: var(--panel); border: 1px solid var(--red); border-radius: var(--radius);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .7); }
+  .favlink[hidden] { display: none; }
+  .favlink .msg b { color: var(--red-text); font-weight: 700; }
+  /* 试试看: the ♡ 收藏 button glows a few times */
+  @keyframes favpulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(216, 16, 42, 0); } 50% { box-shadow: 0 0 0 6px rgba(216, 16, 42, .45); } }
+  .credit .fav.pulse { animation: favpulse 0.9s ease-in-out 3; border-color: var(--red); }
+  .favlink .msg { flex: 1 1 14em; line-height: 1.45; }
+  .favlink .x { font: inherit; font-size: 18px; line-height: 1; color: var(--dim); background: none; border: 0; cursor: pointer; padding: 4px 6px; }
   /* Our own 全屏 (like the dance room): the whole player box goes full-screen, with a big ✕ 退出全屏. iPhone and
      in-app browsers that can't do element full-screen fill the window instead (.fill). */
   /* Same look as the 换机位 pill (red outline + tint, bold): reads as "tap me" without outshouting the 机位 picker */
@@ -413,6 +472,7 @@
     .song.talk { font-size: 14px; padding-top: 8px; padding-bottom: 8px; }
   }
   .site-update button[hidden] { display: none; }
+  .site-update .nw { white-space: nowrap; }
   .site-update button {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
     gap: 2px 10px; width: 100%; min-height: 44px; padding: 6px 10px; margin: 0 0 10px;
@@ -426,6 +486,8 @@
 </head>
 <body>
 <div class="wrap">
+  <div class="favlink" id="favLink" role="dialog" aria-live="polite" hidden></div>
+  <div class="favlink" id="whatsNew" role="status" aria-live="polite" hidden></div>
   <div class="site-update" id="siteUpdate" aria-live="polite">
     <button type="button" hidden>
       <span>网站已更新 · 点此刷新 ↻</span>
@@ -461,8 +523,9 @@
     </section>
 
     <nav class="setlist" aria-label="歌单 Setlist">
-      <h2><span id="showName"></span><a id="setSrc" target="_blank" rel="noopener"></a></h2>
+      <h2><span id="showName"></span><button type="button" class="favbtn" id="favBtn" hidden></button><a id="setSrc" target="_blank" rel="noopener"></a></h2>
       <ol id="songs"></ol>
+      <ol id="favs" class="favs" hidden></ol>
     </nav>
   </div>
 
@@ -477,6 +540,8 @@
         <a href="https://xz-dance-room.pages.dev/" target="_blank" rel="noopener">舞蹈练习室 <span class="en">Dance Room</span> ↗</a>
       </span></p>
     <p class="owner">&copy; 2026 CanadaXFX. All rights reserved. · 背景照片 cr. 肖战工作室 <span class="en">Background photo © XZ Studio</span></p>
+    <!-- Shared Contact Us site (same as the other fan sites); ?return= brings the visitor back here after sending -->
+    <p class="contact"><a href="https://contact-us-866.pages.dev/?return=https://xz-tour.pages.dev/" target="_blank" rel="noopener">联系我们 <span class="en">Contact Us</span> ↗</a></p>
     <details class="terms">
       <summary>使用条款 <span class="en">Terms of Use</span></summary>
       <ul>
@@ -510,6 +575,36 @@
     return data;
   }
 
+  // What changed, for the notice (2026-11-19): compares the files this tab loaded with the new ones, e.g.
+  // "上海站新增 3 个视频，新增一站：杭州，网站功能更新". Only the page, tour.json and the open stop are checked (the others aren't
+  // loaded). Videos = visible clip ids (hidden ones don't count); a stop file that changed without new videos = "上海站内容更新".
+  function describeUpdate(changes) {
+    const news = [], other = [];
+    const ids = d => new Set((d.songs || []).flatMap(s => (s.clips || []).filter(c => !c.hidden).map(mainId)));
+    for (const ch of changes) {
+      try {
+        if (ch.path === pageUrl) {                       // the page: its "xz-whatsnew" note if it changed, else a general line
+          const note = t => ((t || "").match(/<meta name="xz-whatsnew" content="([^"]*)"/) || [])[1] || "";
+          const now = note(ch.text);
+          other.push(now && now !== note(ch.loaded) ? now : "网站功能更新");
+          continue;
+        }
+        if (ch.gone || ch.text == null) continue;
+        const before = JSON.parse(ch.loaded), after = JSON.parse(ch.text);
+        if (/tour\.json$/.test(ch.path)) {
+          const had = new Set((before.shows || []).filter(s => s.file).map(s => s.id));
+          (after.shows || []).filter(s => s.file && !had.has(s.id)).forEach(s => news.push(`新增一站：${s.city}`));
+        } else if (after.songs) {
+          const old = ids(before), added = [...ids(after)].filter(v => !old.has(v)).length;
+          const meta = (tour && tour.shows || []).find(s => "data/" + s.file === ch.path);
+          const city = meta ? meta.city + "站" : "";
+          news.push(added ? `${city}新增 ${added} 个视频` : `${city}内容更新`);
+        }
+      } catch (e) {}
+    }
+    return [...new Set([...news, ...other])].join("，");
+  }
+
   async function checkForUpdate() {
     if (document.visibilityState !== "visible" || checkingForUpdate || !updateButton.hidden) return;
     checkingForUpdate = true;
@@ -517,13 +612,21 @@
       const changed = await Promise.all([...loadedResources].map(async ([path, loaded]) => {
         try {
           const response = await fetch(path, { cache: "no-cache", signal: timeoutSignal(8000) });
-          return response.status === 404 || response.status === 410 ||
-            (response.ok && await response.text() !== loaded);
+          if (response.status === 404 || response.status === 410) return { path, loaded, gone: true };
+          if (!response.ok) return null;
+          const text = await response.text();
+          return text !== loaded ? { path, loaded, text } : null;
         } catch {
-          return false;
+          return null;
         }
       }));
-      if (changed.some(Boolean)) updateButton.hidden = false;
+      const changes = changed.filter(Boolean);
+      if (changes.length) {
+        const what = describeUpdate(changes);
+        const tail = document.createElement("span"); tail.className = "nw"; tail.textContent = "点此刷新 ↻";   // never split ↻ off
+        updateButton.firstElementChild.replaceChildren(what ? `网站已更新：${what} · ` : "网站已更新 · ", tail);
+        updateButton.hidden = false;
+      }
     } finally {
       checkingForUpdate = false;
     }
@@ -637,6 +740,7 @@
       const w = el("span", "w");
       if (k.top) w.append(el("span", "tag-top", "推荐"));
       w.append(nm(k), el("small", null, desc(k)));
+      if (favAt(k) >= 0) { const h = el("span", "fh", "♥"); h.title = "已收藏 · in my favourites"; w.append(h); }
       const th = el("span", "th plain"); th.append(el("span", "num", `${j + 1}`));
       if (k.cover) {
         const im = el("img"); im.alt = ""; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; im.src = k.cover;
@@ -729,6 +833,250 @@
     return pool.length ? pool[Math.floor(Math.random() * pool.length)] : 0;
   }
 
+  // ---- ♡ 收藏 favourites (2026-11-19) ----
+  // Kept in this browser only (localStorage "xzTour.favs"; nothing leaves the device). Each one is {s: stop id, t: song
+  // title, v: video main id, who, note, at}; it's found again by its video id (titles like "Talking" repeat in a stop), so
+  // renumbering or adding clips never mixes them up. A favourite whose video was hidden/removed drops out of the list.
+  const FAV_KEY = "xzTour.favs";
+  let favs = [], favView = false;
+  const allShows = {};                                  // stop id → its show file, filled by renderTotal() (raw, hidden included)
+  try { favs = (JSON.parse(localStorage.getItem(FAV_KEY) || "[]") || []).filter(f => f && f.s && f.v); } catch (e) { favs = []; }
+  const saveFavs = () => { try { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); } catch (e) {} };
+  const favAt = c => c ? favs.findIndex(f => f.s === show.id && f.v === mainId(c)) : -1;
+  // Where a favourite is now: {sh, i, j} · null = that stop isn't loaded yet (keep it) · false = gone (hidden / removed)
+  function locate(f) {
+    const sh = f.s === show.id ? show : allShows[f.s];
+    if (!sh) return null;
+    let hit = false;
+    sh.songs.forEach((s, i) => {
+      const vis = sh === show ? s.clips : siteOrder(s.clips.filter(c => !c.hidden));
+      const j = vis.findIndex(c => mainId(c) === f.v);
+      if (j >= 0 && (!hit || (s.title === f.t && sh.songs[hit.i].title !== f.t))) hit = { sh, i, j };
+    });
+    return hit;
+  }
+  function toggleFav() {
+    const song = show.songs[songIdx], c = song.clips[clipIdx];
+    if (!c) return;
+    const k = favAt(c);
+    if (k >= 0) favs.splice(k, 1);
+    else favs.unshift({ s: show.id, t: song.title, v: mainId(c), who: c.cr || c.by || "", note: c.note || "", at: Date.now() });
+    saveFavs();
+    paintFav(); renderVersions(song, c); paintFavBtn();
+    if (favView) renderFavs();
+  }
+  function paintFav() {                                 // the ♡ 收藏 button on the credit line
+    const b = document.querySelector("#credit .fav");
+    if (!b) return;
+    const on = favAt(show.songs[songIdx].clips[clipIdx]) >= 0;
+    b.setAttribute("aria-pressed", on);
+    b.replaceChildren(el("span", "h", on ? "♥" : "♡"), on ? "已收藏" : "收藏");
+    b.title = on ? "已收藏，点一下取消 · Saved — tap to remove" : "收藏这个机位（只保存在这个浏览器里）· Save to my favourites";
+  }
+  function paintFavBtn() {                              // "♥ 我的收藏 N" in the setlist heading (only once there is one)
+    const b = $("favBtn"), n = favs.filter(f => locate(f) !== false).length;
+    b.hidden = !n && !favView;
+    b.setAttribute("aria-pressed", favView);
+    b.textContent = favView ? "← 返回歌单" : `♥ 我的收藏 ${n}`;
+    b.title = favView ? "回到歌单 · Back to the setlist" : "我收藏的机位（所有站）· My favourites";
+  }
+  function renderFavs() {
+    const ol = $("favs"); ol.replaceChildren();
+    const city = id => (tour.shows.find(s => s.id === id) || {}).city || id;
+    const cur = show.songs[songIdx] && show.songs[songIdx].clips[clipIdx];
+    const src = favPreview || favs;
+    if (favPreview) {                                    // 只看看: a shared list, not saved
+      const head = el("li", "head");
+      const add = el("button", "pill main", "全部加入我的收藏"); add.type = "button";
+      add.onclick = () => { const n = addFavs(favPreview); favPreview = null; renderFavs(); paintFavBtn();
+                            const m = ol.querySelector(".tools .msg"); if (m) m.textContent = n ? `已加入 ${n} 个 · Added ${n}` : "这些你都已经收藏了"; };
+      head.append(el("span", null, "分享给你的收藏（还没保存）"), add);
+      ol.append(head);
+    }
+    src.forEach((f, k) => {
+      const at = locate(f);
+      if (at === false) return;                          // its video is gone from the site
+      const li = el("li"), b = el("button", "go");
+      b.type = "button";
+      b.setAttribute("aria-current", f.s === show.id && cur && mainId(cur) === f.v);
+      b.append(el("b", null, f.t), el("small", null, [city(f.s), f.who, f.note].filter(Boolean).join(" · ")));
+      b.onclick = () => openFav(f);
+      const rm = el("button", "rm", "×"); rm.type = "button"; rm.title = "取消收藏 · Remove"; rm.setAttribute("aria-label", "取消收藏 " + f.t);
+      rm.onclick = () => { favs.splice(k, 1); saveFavs(); renderFavs(); paintFavBtn(); paintFav(); renderVersions(show.songs[songIdx], show.songs[songIdx].clips[clipIdx]); };
+      if (favPreview) li.append(b); else li.append(b, rm);
+      ol.append(li);
+    });
+    if (!ol.children.length) ol.append(el("li", "note", "还没有收藏。播放时点视频下面的「♡ 收藏」，就会出现在这里。"));
+    if (favPreview) return;
+    const note = el("li"); note.append(el("span", "note", "收藏只保存在这个浏览器里：换手机/电脑、用无痕模式或清除浏览数据后会看不到。可以用「分享 / 备份」生成链接，在别的手机、电脑上打开。· Saved in this browser only."));
+    ol.append(note);
+    // 分享 / 备份 (a link with the code) and 导入 (paste a link or code)
+    const tools = el("li", "tools"), row = el("div", "row"), msg = el("div", "msg"), box = el("div", "row");
+    const share = el("button", "pill", "🔗 分享 / 备份收藏"); share.type = "button";
+    share.title = "生成一个链接：发给自己（换手机/电脑）或朋友 · Make a link with your favourites";
+    share.onclick = () => {
+      const link = favLinkOf(favs), inp = el("input"); inp.readOnly = true; inp.value = link; inp.onfocus = () => inp.select();
+      const cp = el("button", "pill main", "复制"); cp.type = "button";
+      const copy = async () => {
+        try { await navigator.clipboard.writeText(link); msg.textContent = "已复制。发给自己或朋友，在别的手机/电脑上打开这个链接即可。"; }
+        catch (e) { inp.focus(); inp.select(); msg.textContent = "请长按上面的链接，全选后复制。"; }
+      };
+      cp.onclick = copy;
+      box.replaceChildren(inp, cp); copy();
+    };
+    const imp = el("button", "pill", "导入"); imp.type = "button"; imp.title = "粘贴收藏链接 · Paste a favourites link";
+    imp.onclick = () => {
+      const inp = el("input"); inp.placeholder = "粘贴收藏链接 · Paste the link";
+      const go = el("button", "pill main", "导入"); go.type = "button";
+      go.onclick = async () => {
+        const items = parseFavCode(inp.value);
+        if (!items.length) { msg.textContent = "看不懂这个链接，请粘贴完整的收藏链接。· Not a favourites link."; return; }
+        await ensureAllShows();
+        const list = items.map(resolveFav).filter(Boolean);
+        const n = addFavs(list);
+        const m = ol.querySelector(".tools .msg");
+        if (m) m.textContent = n ? `已导入 ${n} 个收藏` + (list.length > n ? `（${list.length - n} 个已经有了）` : "") : list.length ? "这些你都已经收藏了。" : "这个链接里的视频现在都不在网站上了。";
+      };
+      box.replaceChildren(inp, go); msg.textContent = ""; inp.focus();
+    };
+    row.append(share, imp); tools.append(row, box, msg); ol.append(tools);
+  }
+  function setFavView(on) {
+    favView = on;
+    if (!on) favPreview = null;
+    $("songs").hidden = on; $("favs").hidden = !on;
+    if (on) renderFavs();
+    paintFavBtn();
+  }
+  $("favBtn").onclick = e => { e.stopPropagation(); setFavView(!favView); };
+  async function openFav(f) {
+    let at = locate(f);
+    if (f.s !== show.id) { await loadShow(f.s, null, 0, null); at = locate(f); }
+    if (!at) return;
+    go(at.i, at.j, true);
+    chosen[show.id + "|" + show.songs[at.i].n] = f.v;
+    setFavView(false);
+    closeList();
+    const p = document.querySelector(".player");
+    if (p.getBoundingClientRect().top < 0) p.scrollIntoView({ block: "start" });
+  }
+
+  // ---- 收藏 share link / code (2026-11-19) ----
+  // Code "1~<stop>.<id>.<id>~<stop>.<id>": numeric (Douyin) video ids in base 36, any other id (Bilibili / YouTube / R2
+  // link) as "_" + base64url. Only stop ids and video ids, no names; titles / filmers come from the site's data on import.
+  // Link = this page + "?fav=<code>": opening it asks 加入 / 只看看 (never imports by itself).
+  let favPreview = null;                                 // a shared list being looked at (只看看), not saved
+  const favParam = new URLSearchParams(location.search).get("fav");
+  const b64u = t => btoa(unescape(encodeURIComponent(t))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const unb64u = t => decodeURIComponent(escape(atob(t.replace(/-/g, "+").replace(/_/g, "/"))));
+  const hasBig = typeof BigInt === "function";
+  const encId = v => /^\d{1,30}$/.test(v) && hasBig ? BigInt(v).toString(36) : "_" + b64u(v);
+  function decId(x) {
+    if (x[0] === "_") return unb64u(x.slice(1));
+    if (!hasBig || !/^[0-9a-z]+$/.test(x)) throw new Error("bad id");
+    let n = BigInt(0); const b = BigInt(36);
+    for (const ch of x) n = n * b + BigInt(parseInt(ch, 36));
+    return n.toString();
+  }
+  function favCode(list) {
+    const by = new Map();
+    list.forEach(f => { if (!by.has(f.s)) by.set(f.s, []); by.get(f.s).push(encId(f.v)); });
+    return "1~" + [...by].map(([st, ids]) => [st, ...ids].join(".")).join("~");
+  }
+  const favLinkOf = list => location.origin + location.pathname + "?fav=" + favCode(list);
+  function parseFavCode(text) {                          // a whole link or just the code -> [{s, v}]
+    let t = String(text || "").trim();
+    const m = t.match(/[?&#]fav=([^&#\s]+)/);
+    if (m) { try { t = decodeURIComponent(m[1]); } catch (e) { t = m[1]; } }
+    if (!/^1~/.test(t)) return [];
+    const out = [];
+    t.slice(2).split("~").forEach(part => {
+      const [st, ...ids] = part.split(".");
+      if (!/^[a-z0-9-]+$/.test(st || "")) return;
+      ids.forEach(x => { try { if (x) out.push({ s: st, v: decId(x) }); } catch (e) {} });
+    });
+    return out;
+  }
+  function resolveFav(x) {                               // {s, v} -> a full favourite from the site's data, or null
+    const at = locate({ s: x.s, v: x.v, t: "" });
+    if (!at) return null;
+    const song = at.sh.songs[at.i];
+    const c = (at.sh === show ? song.clips : siteOrder(song.clips.filter(k => !k.hidden)))[at.j];
+    return { s: x.s, t: song.title, v: x.v, who: c.cr || c.by || "", note: c.note || "", at: Date.now() };
+  }
+  function addFavs(list) {                               // adds the new ones in front, keeps everything already saved
+    const fresh = list.filter((f, k) => !favs.some(x => x.s === f.s && x.v === f.v) && list.findIndex(y => y.s === f.s && y.v === f.v) === k);
+    favs = [...fresh, ...favs];
+    saveFavs();
+    const song = show.songs[songIdx];
+    paintFav(); if (song) renderVersions(song, song.clips[clipIdx]); paintFavBtn();
+    if (favView) renderFavs();
+    return fresh.length;
+  }
+  function showFavsView() {                              // the setlist panel in 收藏 view, visible on any screen
+    setFavView(true);
+    if (document.querySelector(".grid").classList.contains("wide")) setWide(false);
+    if (narrow.matches) { scrollTo(0, 0); openList(); }
+  }
+  async function offerFavLink(code) {
+    const items = parseFavCode(code);
+    if (!items.length) return;
+    await ensureAllShows();
+    const list = items.map(resolveFav).filter(Boolean);
+    const bar = $("favLink"); bar.replaceChildren();
+    const close = () => { bar.hidden = true; };
+    const x = el("button", "x", "×"); x.type = "button"; x.title = "关闭 · Close"; x.onclick = close;
+    if (!list.length) {
+      bar.append(el("span", "msg", "这个收藏链接里的视频现在都不在网站上了。· None of these videos are on the site any more."), x);
+      bar.hidden = false; return;
+    }
+    const have = list.filter(f => favs.some(y => y.s === f.s && y.v === f.v)).length;
+    const msg = el("span", "msg", `这个链接里有 ${list.length} 个收藏` + (have ? `（${have} 个你已经收藏了）` : "") + "。加入我的收藏？");
+    const look = el("button", "pill", "只看看"); look.type = "button"; look.title = "先看看这个列表，不保存 · Just look, don't save";
+    look.onclick = e => { e.stopPropagation(); close(); favPreview = list; showFavsView(); };   // stop: the page's tap-outside would close the list again
+    const add = el("button", "pill main", "加入"); add.type = "button";
+    add.onclick = () => {
+      const n = addFavs(list);
+      msg.textContent = n ? `已加入 ${n} 个收藏 · Added ${n}` : "这些你都已经收藏了 · Already in your favourites";
+      add.remove(); look.textContent = "看我的收藏";
+      look.onclick = e => { e.stopPropagation(); close(); favPreview = null; showFavsView(); };
+      setTimeout(close, 6000);
+    };
+    if (have === list.length) { msg.textContent = `这个链接里的 ${list.length} 个收藏你都已经有了。`; bar.append(msg, look, x); }
+    else bar.append(msg, add, look, x);
+    bar.hidden = false;
+  }
+
+  // ---- 新功能 bar (2026-11-19) ----
+  // The head's "xz-whatsnew" note, shown once per browser (localStorage "xzTour.seenNote" = the last note shown) for 30 days
+  // from "xz-whatsnew-date". Marked as seen as soon as it shows, so ignoring it doesn't bring it back on the next visit.
+  function showWhatsNew() {
+    const meta = n => (document.querySelector(`meta[name="${n}"]`) || {}).content || "";
+    const note = meta("xz-whatsnew"), since = Date.parse(meta("xz-whatsnew-date"));
+    if (!note || !(since > 0) || Date.now() - since > 30 * 864e5) return;
+    let seen = "";
+    try { seen = localStorage.getItem("xzTour.seenNote") || ""; localStorage.setItem("xzTour.seenNote", note); } catch (e) { return; }   // no storage → can't show it only once
+    if (seen === note) return;
+    const bar = $("whatsNew"); bar.replaceChildren();
+    const close = () => { bar.hidden = true; };
+    const ok = el("button", "pill", "知道了"); ok.type = "button"; ok.onclick = close;
+    const btns = [ok];
+    if (meta("xz-whatsnew-try") === "fav") {
+      const go = el("button", "pill main", "试试看"); go.type = "button";
+      go.onclick = () => {                               // point at the ♡ 收藏 button under the player
+        close();
+        const f = document.querySelector("#credit .fav");
+        if (!f) return;
+        f.scrollIntoView({ block: "center", behavior: "smooth" });
+        f.classList.remove("pulse"); void f.offsetWidth; f.classList.add("pulse");
+      };
+      btns.unshift(go);
+    }
+    const msg = el("span", "msg", note);                 // the note says what's new itself; 知道了 closes (no × needed)
+    bar.append(msg, ...btns);
+    bar.hidden = false;
+  }
+
   async function getJSON(path) {
     const r = await fetch(path, { cache: "no-cache" });
     if (!r.ok) throw new Error(path + " " + r.status);
@@ -765,6 +1113,7 @@
   function renderSetlist() {
     const nVideos = show.songs.reduce((n, s) => n + s.clips.length, 0);   // clips here are the visible ones (hidden removed in loadShow)
     $("showName").textContent = `${showTitle(show)} · ${songCount()} 首 · ${nVideos} 个视频`;
+    paintFavBtn();
     const src = $("setSrc");
     if (show.setlistSource) { src.href = show.setlistSource.url; src.textContent = show.setlistSource.label + " ↗"; }
     const ol = $("songs"); ol.replaceChildren();
@@ -958,6 +1307,7 @@
       // cr (原拍) is shown on every platform, Douyin too: its player shows the posting account, not the filmer
       const credit = [c.cr ? `cr. ${c.cr}` : c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
       const ct = el("span", "ctext", credit); ct.title = credit; cr.append(ct);
+      const fv = el("button", "fav"); fv.type = "button"; fv.onclick = toggleFav; cr.append(fv);   // ♡ 收藏 (paintFav fills it)
       const href = originalUrl(c);
       if (href) {   // the original post as an outlined pill on the right (R2 copies link to where they came from)
         const where = c.platform === "r2" ? sourceSite(href) : PLATFORM[c.platform]?.name || "";
@@ -965,6 +1315,7 @@
         a.href = href; a.target = "_blank"; a.rel = "noopener"; a.title = "在原平台打开，喜欢就点赞、转发 · Open the original";
         cr.append(a);
       }
+      paintFav();
     }
 
     const prev = show.songs[stepFrom(songIdx, -1)], next = show.songs[stepFrom(songIdx, 1)];
@@ -973,6 +1324,7 @@
 
     document.querySelectorAll(".song").forEach(b => b.setAttribute("aria-current", +b.dataset.i === songIdx));
     revealCurrent();
+    if (favView) renderFavs();
     document.title = `${song.title} · 出口·我们 · 现场视频`;   // no city: saved bookmarks/shortcuts shouldn't name one stop
     writeUrl();
   }
@@ -1052,10 +1404,19 @@
   // Footer: "本站共收录 N 站 · M 个现场视频" over every stop with a setlist (visible clips only, talks / VCRs included).
   // The other stops' files are read once in the background (plain fetch, so they don't join the update check); if any
   // can't be read the line stays hidden rather than showing a wrong number.
-  async function renderTotal() {
+  // Every stop's show file in allShows (plain fetch, each read once): for the total and the favourites.
+  async function ensureAllShows() {
     const stops = tour.shows.filter(s => s.file);
-    const lists = await Promise.all(stops.map(s => s.id === show.id ? show :
-      fetch("data/" + s.file, { cache: "no-cache" }).then(r => r.ok ? r.json() : null).catch(() => null)));
+    await Promise.all(stops.map(async s => {
+      if (s.id === show.id || allShows[s.id]) return;
+      try { const r = await fetch("data/" + s.file, { cache: "no-cache" }); if (r.ok) allShows[s.id] = await r.json(); } catch (e) {}
+    }));
+    return stops;
+  }
+  async function renderTotal() {
+    const stops = await ensureAllShows();
+    const lists = stops.map(s => s.id === show.id ? show : allShows[s.id]);
+    paintFavBtn(); if (favView) renderFavs();
     if (lists.some(x => !x)) return;
     const n = lists.reduce((t, sh) => t + sh.songs.reduce((u, s) => u + s.clips.filter(c => !c.hidden).length, 0), 0);
     const p = $("tourTotal");
@@ -1087,6 +1448,8 @@
       if (st) await loadShow(st.show, null, 0, st);
       else await loadShow(q.get("show") || tour.shows[0].id, q.get("song"), +q.get("clip") || 0);
       renderTotal();                                   // after the player is up; never blocks it
+      if (favParam) offerFavLink(favParam);            // ?fav= link: ask 加入 / 只看看
+      else showWhatsNew();                             // the one-time 新功能 bar (not on top of the link prompt)
     } catch (err) {
       $("stage").replaceChildren(Object.assign(el("div", "card"), { textContent: "加载失败 · Could not load the setlist (" + err.message + ")" }));
     }
