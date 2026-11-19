@@ -372,6 +372,8 @@
   /* ---------- footer (shared kit) ---------- */
   .foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
   .foot p { margin: 0 0 8px; }
+  .foot .total b { color: var(--text); font-weight: 600; }   /* tour-wide total (renderTotal), first line of the footer */
+  .foot .total .en { font-size: 11px; opacity: .85; margin-left: 2px; }
   .foot .rights { font-size: 11px; line-height: 1.5; }   /* the video-rights note (moved here from under the player, 2026-11-12) */
   .foot .rights .en { display: block; font-size: 10px; opacity: .85; }
   .foot .more { display: flex; flex-wrap: wrap; gap: 4px 14px; }
@@ -465,6 +467,7 @@
   </div>
 
   <footer class="foot">
+    <p class="total" id="tourTotal" hidden></p>
     <p class="more"><span>更多肖战作品 <span class="en">More Xiao Zhan</span></span>
       <span class="links">
         <a href="https://xzworks.pages.dev/" target="_blank" rel="noopener">肖战银幕艺术 <span class="en">Screen Arts</span> ↗</a>
@@ -760,7 +763,8 @@
   }
 
   function renderSetlist() {
-    $("showName").textContent = `${showTitle(show)} · ${songCount()} 首`;
+    const nVideos = show.songs.reduce((n, s) => n + s.clips.length, 0);   // clips here are the visible ones (hidden removed in loadShow)
+    $("showName").textContent = `${showTitle(show)} · ${songCount()} 首 · ${nVideos} 个视频`;
     const src = $("setSrc");
     if (show.setlistSource) { src.href = show.setlistSource.url; src.textContent = show.setlistSource.label + " ↗"; }
     const ol = $("songs"); ol.replaceChildren();
@@ -1044,6 +1048,21 @@
     go(i < 0 ? 0 : i, clipN ? clipN - 1 : null, false);
   }
 
+  // Footer: "本站共收录 N 站 · M 个现场视频" over every stop with a setlist (visible clips only, talks / VCRs included).
+  // The other stops' files are read once in the background (plain fetch, so they don't join the update check); if any
+  // can't be read the line stays hidden rather than showing a wrong number.
+  async function renderTotal() {
+    const stops = tour.shows.filter(s => s.file);
+    const lists = await Promise.all(stops.map(s => s.id === show.id ? show :
+      fetch("data/" + s.file, { cache: "no-cache" }).then(r => r.ok ? r.json() : null).catch(() => null)));
+    if (lists.some(x => !x)) return;
+    const n = lists.reduce((t, sh) => t + sh.songs.reduce((u, s) => u + s.clips.filter(c => !c.hidden).length, 0), 0);
+    const p = $("tourTotal");
+    p.replaceChildren("本站共收录 ", el("b", null, String(stops.length)), " 站 · ", el("b", null, String(n)), " 个现场视频 ",
+                      el("span", "en", `${stops.length} stops · ${n} live videos`));
+    p.hidden = false;
+  }
+
   $("prev").onclick = () => go(stepFrom(songIdx, -1), null, true);
   $("next").onclick = () => go(stepFrom(songIdx, 1), null, true);
   // 🎲 随机选歌: any other entry with a video (songs, talks / VCRs with video), on its startClip() version
@@ -1066,6 +1085,7 @@
       const st = !q.get("show") && tour.start;
       if (st) await loadShow(st.show, null, 0, st);
       else await loadShow(q.get("show") || tour.shows[0].id, q.get("song"), +q.get("clip") || 0);
+      renderTotal();                                   // after the player is up; never blocks it
     } catch (err) {
       $("stage").replaceChildren(Object.assign(el("div", "card"), { textContent: "加载失败 · Could not load the setlist (" + err.message + ")" }));
     }
