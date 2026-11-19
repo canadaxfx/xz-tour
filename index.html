@@ -311,10 +311,11 @@
     padding: 5px 12px; border: 1px solid rgba(216, 16, 42, .55); border-radius: 999px; background: none; }
   .pill:hover { border-color: var(--red); }
   .pill.main { background: var(--red); border-color: var(--red); color: var(--red-ink); }
-  .favlink { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); max-width: 560px;
-    margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 12px 14px; font-size: 13.5px;
-    color: var(--text); background: var(--panel); border: 1px solid var(--red); border-radius: var(--radius);
-    box-shadow: 0 14px 40px rgba(0, 0, 0, .7); }
+  /* Top of the page, in the flow like the update notice (2026-11-19): pinned to the bottom it hid under the 荣耀/Baidu browser's
+     toolbar, which overlays the page (tested on the user's phone). */
+  .favlink { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: 0 0 10px; padding: 10px 12px; font-size: 13.5px;
+    color: var(--text); background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--red-text);
+    border-radius: 6px; }
   .favlink[hidden] { display: none; }
   .favlink .msg b { color: var(--red-text); font-weight: 700; }
   /* 试试看: the ♡ 收藏 button glows a few times */
@@ -1049,16 +1050,17 @@
 
   // ---- 新功能 bar (2026-11-19) ----
   // The head's "xz-whatsnew" note, shown once per browser (localStorage "xzTour.seenNote" = the last note shown) for 30 days
-  // from "xz-whatsnew-date". Marked as seen as soon as it shows, so ignoring it doesn't bring it back on the next visit.
+  // from "xz-whatsnew-date". Marked as seen only when 试试看 or 知道了 is tapped (a bar that was missed shows again next visit).
   function showWhatsNew() {
     const meta = n => (document.querySelector(`meta[name="${n}"]`) || {}).content || "";
     const note = meta("xz-whatsnew"), since = Date.parse(meta("xz-whatsnew-date"));
     if (!note || !(since > 0) || Date.now() - since > 30 * 864e5) return;
     let seen = "";
-    try { seen = localStorage.getItem("xzTour.seenNote") || ""; localStorage.setItem("xzTour.seenNote", note); } catch (e) { return; }   // no storage → can't show it only once
+    try { seen = localStorage.getItem("xzTour.seenNote") || ""; } catch (e) { return; }   // no storage → can't show it only once
+    const markSeen = () => { try { localStorage.setItem("xzTour.seenNote", note); } catch (e) {} };   // only once 试试看 / 知道了 is tapped
     if (seen === note) return;
     const bar = $("whatsNew"); bar.replaceChildren();
-    const close = () => { bar.hidden = true; };
+    const close = () => { bar.hidden = true; markSeen(); };
     const ok = el("button", "pill", "知道了"); ok.type = "button"; ok.onclick = close;
     const btns = [ok];
     if (meta("xz-whatsnew-try") === "fav") {
