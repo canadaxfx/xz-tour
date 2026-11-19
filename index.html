@@ -277,7 +277,12 @@
   .credit .fav:hover { border-color: var(--red); }
   .credit .fav .h { color: var(--red-text); font-size: 14px; }
   .credit .fav[aria-pressed="true"] { background: rgba(216, 16, 42, .18); border-color: var(--red); }
-  .credit .fav + .olink { margin-left: 0; }
+  .credit .fav + .olink, .credit .favgo + .olink { margin-left: 0; }
+  .credit .favgo { flex: none; display: inline-flex; align-items: center; min-height: 28px; padding: 4px 2px; font: inherit; font-size: 12.5px;
+    font-weight: 500; line-height: 1; white-space: nowrap; color: var(--link); background: none; border: 0; cursor: pointer; }
+  .credit .favgo[hidden] { display: none; }
+  @media (max-width: 380px) { .credit .fav .fl { display: none; } .credit .fav { padding: 4px 9px; } }   /* heart only: room for "cr. …" */
+  .credit .favgo:hover { text-decoration: underline; text-underline-offset: 3px; }
   .vlist .w .fh { flex: none; color: var(--red-text); font-size: 12px; }   /* ♥ on favourited versions */
   .vlist button[aria-current="true"] .w .fh { color: var(--red-ink); }
   .setlist h2 { flex-wrap: wrap; align-items: center; }
@@ -462,6 +467,7 @@
     .credit { font-size: 14px; }
     .credit .fsgo { font-size: 14px; min-height: 34px; padding: 8px 14px; }
     .credit .olink { font-size: 14px; min-height: 34px; padding: 6px 2px 6px 10px; }
+    .credit .favgo, .credit .fav { font-size: 14px; min-height: 34px; }
     .help, .help .fsgo { font-size: 13px; }
     .step { padding: 12px 16px; }
     .step .dir { font-size: 13px; }
@@ -871,8 +877,16 @@
     if (!b) return;
     const on = favAt(show.songs[songIdx].clips[clipIdx]) >= 0;
     b.setAttribute("aria-pressed", on);
-    b.replaceChildren(el("span", "h", on ? "♥" : "♡"), on ? "已收藏" : "收藏");
+    b.replaceChildren(el("span", "h", on ? "♥" : "♡"), el("span", "fl", on ? "已收藏" : "收藏"));   // .fl hidden on very narrow phones
+    b.setAttribute("aria-label", on ? "已收藏" : "收藏");
     b.title = on ? "已收藏，点一下取消 · Saved — tap to remove" : "收藏这个机位（只保存在这个浏览器里）· Save to my favourites";
+    const g = document.querySelector("#credit .favgo");
+    if (g) {
+      const n = favs.filter(f => locate(f) !== false).length;
+      g.hidden = !n;
+      g.textContent = `我的收藏 ${n} ›`;
+      g.title = "打开我的收藏（所有站）· Open my favourites";
+    }
   }
   function paintFavBtn() {                              // "♥ 我的收藏 N" in the setlist heading (only once there is one)
     const b = $("favBtn"), n = favs.filter(f => locate(f) !== false).length;
@@ -1017,7 +1031,16 @@
   function showFavsView() {                              // the setlist panel in 收藏 view, visible on any screen
     setFavView(true);
     if (document.querySelector(".grid").classList.contains("wide")) setWide(false);
-    if (narrow.matches) { scrollTo(0, 0); openList(); }
+    // Phones: the dropdown hangs under the song line at the top, and any page scroll closes it — so jump to the top first
+    // and open it only once that scroll has happened (from 我的收藏 › on the credit line the page is scrolled down).
+    if (narrow.matches) {
+      if (scrollY < 2) { openList(); return; }
+      const isOpen = () => listEl().classList.contains("open");
+      const on = () => { if (scrollY < 2) { removeEventListener("scroll", on); requestAnimationFrame(openList); } };
+      addEventListener("scroll", on, { passive: true });
+      scrollTo(0, 0);
+      setTimeout(() => { removeEventListener("scroll", on); if (!isOpen()) openList(); }, 500);   // in case no scroll event comes
+    }
   }
   async function offerFavLink(code) {
     const items = parseFavCode(code);
@@ -1310,6 +1333,10 @@
       const credit = [c.cr ? `cr. ${c.cr}` : c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
       const ct = el("span", "ctext", credit); ct.title = credit; cr.append(ct);
       const fv = el("button", "fav"); fv.type = "button"; fv.onclick = toggleFav; cr.append(fv);   // ♡ 收藏 (paintFav fills it)
+      // 我的收藏 N › next to the heart: opens the setlist on the favourites view (only once there is a favourite)
+      const fg = el("button", "favgo"); fg.type = "button"; fg.hidden = true;
+      fg.onclick = e => { e.stopPropagation(); favPreview = null; showFavsView(); };   // stop: tap-outside would close the list
+      cr.append(fg);
       const href = originalUrl(c);
       if (href) {   // the original post as an outlined pill on the right (R2 copies link to where they came from)
         const where = c.platform === "r2" ? sourceSite(href) : PLATFORM[c.platform]?.name || "";
