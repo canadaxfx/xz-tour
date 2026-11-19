@@ -468,14 +468,14 @@
 
   <footer class="foot">
     <p class="total" id="tourTotal" hidden></p>
+    <p class="rights">视频版权归原作者 · 观众拍摄的视频均嵌入原平台，本站不存储 · 喜欢就去原视频点赞、转发 ❤
+      <span class="en">All videos belong to their creators · fan-shot videos are embedded, never stored here · like &amp; share the originals</span></p>
     <p class="more"><span>更多肖战作品 <span class="en">More Xiao Zhan</span></span>
       <span class="links">
         <a href="https://xzworks.pages.dev/" target="_blank" rel="noopener">肖战银幕艺术 <span class="en">Screen Arts</span> ↗</a>
         <a href="https://xzyt.pages.dev/" target="_blank" rel="noopener">肖战 YouTube 合集 <span class="en">XZYT</span> ↗</a>
         <a href="https://xz-dance-room.pages.dev/" target="_blank" rel="noopener">舞蹈练习室 <span class="en">Dance Room</span> ↗</a>
       </span></p>
-    <p class="rights">视频版权归原作者 · 观众拍摄的视频均嵌入原平台，本站不存储 · 喜欢就去原视频点赞、转发 ❤
-      <span class="en">All videos belong to their creators · fan-shot videos are embedded, never stored here · like &amp; share the originals</span></p>
     <p class="owner">&copy; 2026 CanadaXFX. All rights reserved. · 背景照片 cr. 肖战工作室 <span class="en">Background photo © XZ Studio</span></p>
     <details class="terms">
       <summary>使用条款 <span class="en">Terms of Use</span></summary>
@@ -620,7 +620,7 @@
     if (n < 2) return;
     // Platform name only when it isn't Douyin (nearly every clip is), so the note (近景直拍…) stays visible.
     const desc = k => [k.platform !== "douyin" && PLATFORM[k.platform]?.name, k.note].filter(Boolean).join(" · ");
-    const nm = k => el("span", "nm", k.by);
+    const nm = k => el("span", "nm", k.cr || k.by);   // cr = 原拍 (real filmer) when "by" is the posting account
     const step = (txt, title, j) => { const b = el("button", "vstep", txt); b.title = title; b.disabled = j < 0 || j >= n; b.onclick = () => { go(songIdx, j, true); remember(); }; return b; };
     const cur = el("button", "vcur");
     cur.setAttribute("aria-haspopup", "listbox"); cur.setAttribute("aria-expanded", "false");
@@ -912,7 +912,7 @@
     if (c.platform === "r2") {
       const v = el("video");
       v.src = c.url; v.controls = true; v.playsInline = true; v.preload = "metadata"; v.autoplay = !!autoplay;
-      v.title = `${show.songs[songIdx].title} · ${c.by}`;
+      v.title = `${show.songs[songIdx].title} · ${c.cr || c.by}`;
       stage.append(v);
     } else if (src) {
       const f = el("iframe");
@@ -920,14 +920,14 @@
       f.allow = "autoplay; fullscreen; encrypted-media; picture-in-picture";
       f.allowFullscreen = true;
       f.referrerPolicy = "strict-origin-when-cross-origin";
-      f.title = `${show.songs[songIdx].title} · ${c.by}`;
+      f.title = `${show.songs[songIdx].title} · ${c.cr || c.by}`;
       stage.append(f);
       fitDouyin();   // now that the frame exists, set its scale
     } else {
       const p = PLATFORM[c.platform] || { name: c.platform, en: "" };
       const card = el("div", "card");
       card.append(el("div", "plat", `${p.name} ${p.en}`.toUpperCase()));
-      card.append(el("div", "who", `cr. ${c.by}`));
+      card.append(el("div", "who", `cr. ${c.cr || c.by}`));
       card.append(el("div", "why", `${p.name}不支持嵌入播放，请到原平台观看，顺手点个赞 · ${p.en} videos can't be embedded — watch (and like) it there.`));
       const a = el("a", "btn", `在${p.name}打开 ↗`);
       a.href = originalUrl(c); a.target = "_blank"; a.rel = "noopener";
@@ -955,7 +955,8 @@
     if (c) {
       // Credit only where the player doesn't show it: Douyin's player always shows "@filmer" (and the 机位 row has
       // the length), so Douyin clips get no credit text; R2 / Bilibili / YouTube / Weibo get a short "cr. filmer".
-      const credit = [c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
+      // cr (原拍) is shown on every platform, Douyin too: its player shows the posting account, not the filmer
+      const credit = [c.cr ? `cr. ${c.cr}` : c.platform !== "douyin" ? `cr. ${c.by}` : "", c.via ? `搬运 ${c.via}` : ""].filter(Boolean).join(" · ");
       const ct = el("span", "ctext", credit); ct.title = credit; cr.append(ct);
       const href = originalUrl(c);
       if (href) {   // the original post as an outlined pill on the right (R2 copies link to where they came from)
